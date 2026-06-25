@@ -9,8 +9,8 @@ generator client {
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
-  // Optional direct connection for migrations (Supabase pooled URL is for runtime).
-  // directUrl = env("DIRECT_URL")
+  // Direct connection for migrations (Supabase pooled URL is for runtime).
+  directUrl = env("DIRECT_URL")
 }
 
 /// Waitlist + paid-interest capture from /waitlist.

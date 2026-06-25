@@ -16,6 +16,8 @@
   "dependencies": {
     "@next/third-parties": "^15.5.19",
     "@prisma/client": "6.2.1",
+    "@supabase/ssr": "^0.12.0",
+    "@supabase/supabase-js": "^2.108.2",
     "lucide-react": "0.468.0",
     "next": "^15.5.19",
     "react": "19.0.0",
