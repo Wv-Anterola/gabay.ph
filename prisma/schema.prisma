@@ -1,0 +1,57 @@
+// Gabay Prisma schema — Supabase Postgres.
+// The app pages run without a database; only the API routes
+// (/api/waitlist, /api/session) require DATABASE_URL.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  // Optional direct connection for migrations (Supabase pooled URL is for runtime).
+  // directUrl = env("DIRECT_URL")
+}
+
+/// Waitlist + paid-interest capture from /waitlist.
+model WaitlistSignup {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  gradeLevel     String? // e.g. "Grade 11", "Grade 12", "Gap year"
+  targetYear     String? // intended UPCAT year, free text
+  paidInterest   Boolean  @default(false) // interested in a future paid plan
+  referralSource String?
+  createdAt      DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+/// A diagnostic attempt for one module (or a combined run).
+/// Answers + computed scores are stored as JSON so the schema
+/// stays stable as the scoring logic evolves.
+model DiagnosticSession {
+  id           String   @id @default(cuid())
+  clientId     String? // anonymous localStorage id, not personally identifying
+  module       String // "language" | "reading" | "math" | "science"
+  answers      Json // { [questionId]: "a" | "b" | "c" | "d" }
+  score        Json // serialized ModuleScore (correct, total, accuracy, topics)
+  durationMs   Int?
+  completedAt  DateTime @default(now())
+
+  @@index([module])
+  @@index([completedAt])
+}
+
+/// Optional first-party mirror of analytics events.
+/// GA4 is the primary analytics sink; this table is for
+/// data ownership / direct querying and is written best-effort.
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  name      String
+  props     Json?
+  clientId  String?
+  createdAt DateTime @default(now())
+
+  @@index([name])
+  @@index([createdAt])
+}

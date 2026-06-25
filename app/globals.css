@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Gabay design tokens — warm academic claymorphism.
+  Semantic CSS variables mirror the Tailwind theme so raw hex
+  never appears in components.
+*/
+@layer base {
+  :root {
+    --brand-berry: #7a1f3d;
+    --brand-oxblood: #5c1730;
+    --brand-teal: #2f6f5e;
+    --brand-mango: #e07b2c;
+
+    --surface-cream: #fbf3e7;
+    --surface-clay: #f6e7d7;
+    --surface-clay-deep: #ead7c4;
+    --border-clay: #e4d2bd;
+
+    --ink: #2e211b;
+    --ink-muted: #6b584c;
+
+    --state-strong: #3e8e63;
+    --state-steady: #c98a2b;
+    --state-weak: #b23a48;
+
+    --ring: #7a1f3d;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--surface-cream);
+    color: var(--ink);
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Warm parchment grain so the background never reads as a flat SaaS gray. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background-image:
+      radial-gradient(circle at 18% 12%, rgba(224, 123, 44, 0.06), transparent 42%),
+      radial-gradient(circle at 82% 8%, rgba(47, 111, 94, 0.06), transparent 40%),
+      radial-gradient(circle at 50% 96%, rgba(122, 31, 61, 0.05), transparent 50%);
+  }
+
+  /* Visible, on-brand focus ring everywhere (a11y). */
+  :focus-visible {
+    outline: 3px solid var(--brand-berry);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: rgba(224, 123, 44, 0.25);
+    color: var(--ink);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-fraunces), Georgia, serif;
+    color: var(--ink);
+  }
+}
+
+@layer components {
+  /* Number-heavy UI (scores, timers) uses tabular figures to avoid jitter. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Tactile press: shadow/opacity only — never shifts layout bounds. */
+  .clay-press {
+    transition: box-shadow 200ms ease, transform 200ms ease, background-color 200ms ease;
+  }
+  .clay-press:active {
+    transform: translateY(1px);
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    z-index: 1000;
+    background: var(--brand-berry);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 0 0 12px 0;
+    font-weight: 600;
+  }
+  .skip-link:focus {
+    left: 0;
+  }
+}
+
+/* Respect reduced-motion: disable float/parallax, keep state clarity. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
