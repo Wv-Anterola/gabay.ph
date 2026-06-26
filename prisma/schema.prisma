@@ -1,16 +1,17 @@
-// Gabay Prisma schema — Supabase Postgres.
+// Gabay Prisma schema (Prisma Postgres).
 // The app pages run without a database; only the API routes
 // (/api/waitlist, /api/session) require DATABASE_URL.
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+  runtime  = "nodejs"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  // Direct connection for migrations (Supabase pooled URL is for runtime).
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+  // Connection URL lives in prisma.config.ts (Prisma 7); the runtime
+  // PrismaClient connects via the @prisma/adapter-pg driver adapter.
 }
 
 /// Waitlist + paid-interest capture from /waitlist.
