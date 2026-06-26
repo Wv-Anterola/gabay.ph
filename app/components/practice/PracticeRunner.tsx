@@ -13,7 +13,7 @@ import type { ChoiceId, ModuleId } from "@/lib/types";
 export default function PracticeRunner({ module }: { module: ModuleId }) {
   const meta = MODULES[module];
 
-  // Weak topics for this module come from the stored diagnostic result, if any.
+  // Weak topics for this module come from the stored mock result, if any.
   const [weakTopics, setWeakTopics] = useState<string[] | null>(null);
   useEffect(() => {
     const r = loadResult();
@@ -48,7 +48,7 @@ export default function PracticeRunner({ module }: { module: ModuleId }) {
         <p className="mt-3 text-ink-muted">This module has no approved practice questions right now.</p>
         <div className="mt-6">
           <ClayButton href="/diagnostic" variant="primary">
-            Back to diagnostic
+            Back to mock exam
           </ClayButton>
         </div>
       </div>
@@ -142,8 +142,8 @@ export default function PracticeRunner({ module }: { module: ModuleId }) {
         <h1 className="font-display text-h2 font-bold text-ink">{meta.name} practice</h1>
         <p className="mt-1 text-sm text-ink-muted">
           {usingWeak
-            ? "Focused on the topics your diagnostic flagged as weak."
-            : "General practice for this module. Take the diagnostic to target your weak topics."}
+            ? "Focused on the topics your mock exam flagged as weak."
+            : "General practice for this module. Take the mock exam to target your weak topics."}
         </p>
       </div>
 

@@ -1,20 +1,20 @@
-# Gabay
+# Tero
 
-**Gabay** ("guide") is an independent, UPCAT-focused diagnostic and study-guide tool for
-Filipino students. Take a free diagnostic, get an honest weak-topic report, and follow a
+**Tero** is an independent, UPCAT-focused mock exam and study-guide tool for Filipino students.
+Take a free online mock exam, get a readiness score, review every missed answer, and follow a
 deterministic 7-day study plan.
 
-> Gabay is an independent UPCAT preparation tool and is not affiliated with the University of
-> the Philippines or the UP Office of Admissions. The diagnostic is not an admissions prediction.
+> Tero is an independent UPCAT preparation tool and is not affiliated with the University of
+> the Philippines or the UP Office of Admissions. The mock exam is not an admissions prediction.
 > Results are study guidance only. Questions are original practice questions.
 
 ## Tech stack
 
 - **Next.js (App Router) + TypeScript**
 - **Tailwind CSS** (warm-academic claymorphism theme)
-- **Prisma + Supabase Postgres** (waitlist, diagnostic sessions, optional analytics mirror)
+- **Prisma + Supabase/Postgres** (waitlist, mock attempts, question responses, analytics mirror)
 - **Google Analytics 4** via `@next/third-parties`, loaded only after cookie consent
-- **Vitest** for deterministic scoring/study-plan tests
+- **Vitest** for deterministic scoring, import, storage, and study-plan tests
 - **Lucide** icons (no emoji icons)
 
 ## Getting started
@@ -26,9 +26,9 @@ npx prisma generate
 npm run dev                  # http://localhost:3000
 ```
 
-The landing page, diagnostic, results, and practice flows all work **without a database**
-(results live in `localStorage`). A database is only needed for the waitlist and to persist
-diagnostic sessions.
+The landing page, mock exam, results, review, dashboard, and practice flows all work **without a
+database** (attempts/results live in `localStorage`). A database is only needed for the waitlist and
+to persist mock attempts/question responses.
 
 ### Scripts
 
@@ -37,34 +37,36 @@ diagnostic sessions.
 | `npm run dev` | Start the dev server |
 | `npm run build` | Production build (also type-checks) |
 | `npm run lint` | ESLint (next/core-web-vitals) |
-| `npm test` | Run Vitest (scoring + study plan) |
+| `npm test` | Run Vitest |
+| `npm run questions:import` | Validate Markdown questions and generate versioned source |
 | `npx prisma migrate dev` | Apply the schema to your database |
 
 ## Environment variables
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `DATABASE_URL` | For waitlist / session saving | Supabase Postgres connection string (pooled, port 6543) |
+| `DATABASE_URL` | For waitlist / attempt saving | Postgres connection string |
 | `DIRECT_URL` | For migrations | Direct Postgres connection (port 5432) |
 | `NEXT_PUBLIC_GA_ID` | For analytics | GA4 measurement id (e.g. `G-XXXXXXXXXX`); leave empty to disable analytics |
 
-If `DATABASE_URL` is missing, app pages still run; the `/api/waitlist` and `/api/session`
-routes return clear, non-crashing messages instead of failing.
+If `DATABASE_URL` is missing, app pages still run; persistence routes return clear, non-crashing
+messages instead of failing.
 
 ## Database setup notes
 
 1. Create a Supabase project and copy the Postgres connection strings into `.env.local`
    (`DATABASE_URL` = pooled URL on port 6543; `DIRECT_URL` = direct URL on port 5432).
 2. Run `npx prisma generate` to build the client, then `npx prisma migrate dev` to create the
-   `WaitlistSignup`, `DiagnosticSession`, and `AnalyticsEvent` tables.
+   `WaitlistSignup`, `DiagnosticSession`, `MockAttempt`, `MockQuestionResponse`, and
+   `AnalyticsEvent` tables.
 3. On Vercel, set the same env vars in the project settings. The pooled URL is required for
    serverless functions; the direct URL is only used by migrations.
 
 ## Adding or editing UPCAT questions
 
-All questions live in `lib/questions/` as typed data (`lib/types.ts` defines the `Question`
-schema). One file per module: `language.ts`, `reading.ts`, `math.ts`, `science.ts`, plus
-`passages.ts` for reading passages.
+Runtime questions live in versioned source under `lib/questions/` as typed data
+(`lib/types.ts` defines the `Question` schema). Draft reviewer Markdown belongs in
+`question-bank/`; run `npm run questions:import` to validate and generate source files.
 
 To add a question:
 
@@ -81,7 +83,8 @@ reviewer items, choices, passages, diagrams, answer keys, or explanations.
 
 Deterministic, no AI, no randomness:
 
-- Per module: `accuracy = correct / total` (unanswered counts as not correct).
+- Per section: `accuracy = correct / total` (unanswered counts as not correct).
+- Weighted score uses difficulty weights: easy `1`, medium `1.25`, hard `1.5`.
 - Per topic: accuracy across that topic's items.
 - **Weak topic** = below 60% **or** below the module's own average (surfaces relative gaps).
 - **Readiness labels:** Strong ≥ 80%, Steady 60–79%, Needs work < 60%. Always shown with an
@@ -104,11 +107,12 @@ uses pass, fail, chance of admission, or guaranteed-improvement wording.
 ```
 app/
   page.tsx                 # landing
-  diagnostic/              # intro + /[module] mini-test
-  results/                 # readiness dashboard + 7-day plan
+  diagnostic/              # mock start + full exam runner
+  results/                 # readiness results + answer review
+  dashboard/               # previous attempts + retake
   practice/[module]/       # weak-area practice
   waitlist/  privacy/      # capture + disclosure
-  api/waitlist  api/session
+  api/waitlist  api/session  api/mock-attempt
   components/{ui,brand,landing,diagnostic,results,practice,waitlist,shared}
 lib/
   questions/  scoring.ts  studyPlan.ts  analytics.ts  storage.ts  db.ts  types.ts
@@ -118,24 +122,17 @@ design-system/gabay/       # UI UX Pro Max design tokens (source of truth)
 
 ## Brand & independence
 
-Gabay uses a brand-owned warm-academic palette (deep berry, botanical teal, mango, parchment,
+Tero uses a brand-owned warm-academic palette (deep berry, botanical teal, mango, parchment,
 espresso) that is deliberately not the official UP colors, and uses no UP logo, seal, Oblation
 imagery, or official marks. We use only "independent UPCAT preparation tool," "UPCAT-focused,"
-and "for UPCAT prep." The required disclaimer appears on the homepage footer, diagnostic intro,
+and "for UPCAT prep." The required disclaimer appears on the homepage footer, mock start,
 results page, and privacy page.
 
 ## Security / audit status
 
-`npm audit` and `npm audit --omit=dev` both report **0 vulnerabilities** (last hardened on the
-Next 15.5.19 line). Notes on how this is kept clean:
-
-- `postcss` is pinned to `^8.5.15` and also pinned tree-wide via an `overrides` block so Next's
-  nested copy cannot fall back to a vulnerable version (clears the postcss XSS advisory and the
-  related `next` / `@next/third-parties` flags).
-- `vitest` is on `^4` (dev-only test tooling); this clears the earlier critical/high advisories
-  in the `vitest` → `vite` → `esbuild` chain.
-- Re-run `npm audit` after any dependency bump. If you later upgrade Next, you may drop the
-  `postcss` override if Next's bundled version is already patched.
+Run `npm audit` after dependency changes. The current tree may include moderate advisories from
+transitive tooling dependencies; evaluate fixes separately so the MVP does not absorb unrelated
+breaking upgrades.
 
 ## Question review workflow
 
@@ -147,11 +144,11 @@ Questions in `lib/questions/*` carry a `reviewStatus` (`needs_review` | `approve
 ## Known limitations
 
 - **Git:** this folder currently lives inside an unrelated parent git repository. Do **not** commit
-  Gabay into that parent. Initialize a separate repo here (`git init` in this directory) before
+  Tero into that parent. Initialize a separate repo here (`git init` in this directory) before
   committing, or move the project out first.
 - DB persistence is best-effort: without `DATABASE_URL`, `/api/waitlist` returns a clear `503` and
-  `/api/session` returns a non-crashing "not persisted" response; the diagnostic still works fully
-  via `localStorage`.
+  exam/session persistence returns non-crashing "not persisted" responses; the mock still works
+  fully via `localStorage`.
 - Light mode only (no dark theme). Desktop-first; responsive down to mobile but tuned for desktop.
 - Question accuracy and difficulty calibration still need a subject-matter-expert review pass
   before public launch.

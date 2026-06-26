@@ -2,13 +2,13 @@ import { Quote } from "lucide-react";
 
 /**
  * Illustrative sample stories. These are written examples of the experience
- * Gabay aims to provide, not real student endorsements, and are clearly
+ * Tero aims to provide, not real student endorsements, and are clearly
  * labeled as such for honesty and brand safety.
  */
 const STORIES = [
   {
     quote:
-      "I always avoided math and just kept re-reading my language notes. The diagnostic showed me my algebra was the real problem. Finally knew where to start.",
+      "I always avoided math and just kept re-reading my language notes. The mock showed me my algebra was the real problem. Finally knew where to start.",
     name: "Sample story",
     role: "Grade 12, NCR",
     initials: "JR",
@@ -44,7 +44,7 @@ export default function Testimonials() {
       <div className="mx-auto max-w-wide px-5 lg:px-8">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-wide text-mango-deep">
-            What studying with Gabay feels like
+            What studying with Tero feels like
           </p>
           <h2 className="mt-2 font-display text-h1 font-bold text-ink">
             Built to feel like a calm, honest guide.
@@ -78,7 +78,7 @@ export default function Testimonials() {
         </div>
 
         <p className="mt-6 text-xs text-ink-faint">
-          Stories shown are illustrative examples of the Gabay experience, not real student
+          Stories shown are illustrative examples of the Tero experience, not real student
           endorsements. We will only feature real testimonials with explicit consent.
         </p>
       </div>

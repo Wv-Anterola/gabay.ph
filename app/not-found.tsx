@@ -16,7 +16,7 @@ export default function NotFound() {
           Back to home
         </ClayButton>
         <ClayButton href="/diagnostic" variant="secondary">
-          Take the diagnostic
+          Take the mock exam
         </ClayButton>
       </div>
     </div>

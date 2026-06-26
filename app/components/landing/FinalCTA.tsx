@@ -17,10 +17,10 @@ export default function FinalCTA() {
           className="pointer-events-none absolute -bottom-12 -left-8 h-48 w-48 rounded-full bg-teal/25 blur-2xl"
         />
         <h2 className="relative font-display text-h1 font-bold text-white">
-          Stop guessing. Start with a free UPCAT diagnostic.
+          Stop guessing. Start with a free UPCAT mock exam.
         </h2>
         <p className="relative mx-auto mt-4 max-w-xl text-lg leading-relaxed text-cream/90">
-          Take the diagnostic, see your weak topics, and get a 7-day study plan in minutes. No
+          Take the mock, review every miss, and get a 7-day study plan in minutes. No
           payment, no pressure.
         </p>
         <div className="relative mt-8 flex flex-wrap items-center justify-center gap-4">
@@ -30,7 +30,7 @@ export default function FinalCTA() {
             variant="primary"
             onClick={() => trackEvent("cta_click", { location: "final_cta", cta: "diagnostic" })}
           >
-            Take the free UPCAT diagnostic
+            Take the free UPCAT mock
             <ArrowRight aria-hidden className="h-5 w-5" strokeWidth={2} />
           </ClayButton>
           <ClayButton

@@ -20,7 +20,8 @@ export default function Hero() {
           </h1>
 
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
-            Gabay gives you a free diagnostic, weak-topic report, and 7-day study plan in minutes.
+            Tero gives you a free UPCAT mock exam, readiness score, answer review, weak-topic report,
+            and 7-day study plan.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -30,7 +31,7 @@ export default function Hero() {
               variant="primary"
               onClick={() => trackEvent("cta_click", { location: "hero", cta: "diagnostic" })}
             >
-              Take the free UPCAT diagnostic
+              Take the free UPCAT mock
               <ArrowRight aria-hidden className="h-5 w-5" strokeWidth={2} />
             </ClayButton>
 
@@ -41,14 +42,14 @@ export default function Hero() {
               onClick={() => trackEvent("cta_click", { location: "hero", cta: "how_it_works" })}
             >
               <PlayCircle aria-hidden className="h-5 w-5" strokeWidth={2} />
-              See how Gabay works
+              See how Tero works
             </ClayButton>
           </div>
 
           <dl className="mt-10 grid max-w-md grid-cols-3 gap-4">
             {[
               { k: "4", v: "UPCAT modules" },
-              { k: "63", v: "Practice items" },
+              { k: "63", v: "Mock items" },
               { k: "7-day", v: "Study plan" },
             ].map((s) => (
               <div key={s.v} className="rounded-clay border-2 border-clay-line bg-clay px-4 py-3 shadow-clay-sm">

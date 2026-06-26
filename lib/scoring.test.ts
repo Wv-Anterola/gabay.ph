@@ -69,6 +69,20 @@ describe("scoreModule", () => {
     expect(s.accuracy).toBe(40);
   });
 
+  it("calculates difficulty-weighted accuracy", () => {
+    const qs: Question[] = [
+      { ...q("easy", "Algebra", "a"), difficulty: "easy" },
+      { ...q("medium", "Algebra", "a"), difficulty: "medium" },
+      { ...q("hard", "Algebra", "a"), difficulty: "hard" },
+    ];
+    const s = scoreModule("math", qs, { easy: "a", medium: "b", hard: "a" });
+    expect(s.correct).toBe(2);
+    expect(s.accuracy).toBe(67);
+    expect(s.weightedCorrect).toBe(2.5);
+    expect(s.weightedTotal).toBe(3.75);
+    expect(s.weightedAccuracy).toBe(67);
+  });
+
   it("orders topic scores weakest first", () => {
     // Algebra 2/2 (100%), Geometry 0/2 (0%), Number Sense 1/1 (100%)
     const answers: AnswerMap = { m1: "a", m2: "b", m3: "a", m4: "a", m5: "a" };

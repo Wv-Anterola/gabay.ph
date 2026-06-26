@@ -6,13 +6,13 @@ import TrackView from "@/app/components/shared/TrackView";
 export const metadata: Metadata = {
   title: "Join the waitlist",
   description:
-    "Join the Gabay waitlist for new UPCAT practice sets and features. Tell us if you'd be interested in a future paid plan.",
+    "Join the Tero waitlist for new UPCAT practice sets and features. Tell us if you'd be interested in a future paid plan.",
 };
 
 const PERKS = [
   "Be first to get new UPCAT practice sets",
   "Early access to deeper weak-topic reports",
-  "Help shape what Gabay builds next",
+  "Help shape what Tero builds next",
 ];
 
 export default function WaitlistPage() {
@@ -25,10 +25,10 @@ export default function WaitlistPage() {
             Waitlist
           </span>
           <h1 className="mt-4 font-display text-h1 font-bold text-ink">
-            Want more UPCAT practice from Gabay?
+            Want more UPCAT practice from Tero?
           </h1>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink-muted">
-            The diagnostic and 7-day plan are free today. Join the waitlist to hear first when we add
+            The mock exam and 7-day plan are free today. Join the waitlist to hear first when we add
             more practice sets, deeper reports, and new features.
           </p>
 

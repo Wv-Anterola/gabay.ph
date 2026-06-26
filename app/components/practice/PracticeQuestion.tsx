@@ -2,6 +2,7 @@
 
 import { Check, X } from "lucide-react";
 import Tag from "@/app/components/ui/Tag";
+import MathText from "@/app/components/shared/MathText";
 import PracticeFeedback from "./PracticeFeedback";
 import { getPassage } from "@/lib/questions";
 import { cn } from "@/lib/cn";
@@ -33,17 +34,34 @@ export default function PracticeQuestion({
         </span>
         <Tag>{question.topic}</Tag>
         {question.subtopic ? <Tag>{question.subtopic}</Tag> : null}
+        <Tag>{question.difficulty}</Tag>
       </div>
 
       {passage ? (
         <div className="mt-4 rounded-clay border-2 border-clay-line bg-cream px-5 py-4">
           <p className="text-xs font-bold uppercase tracking-wide text-mango-deep">{passage.title}</p>
-          <p className="mt-2 text-sm leading-relaxed text-ink">{passage.body}</p>
+          <p className="mt-2 text-sm leading-relaxed text-ink">
+            <MathText text={passage.body} />
+          </p>
         </div>
       ) : null}
 
+      {question.image ? (
+        <figure className="mt-4 rounded-clay border-2 border-clay-line bg-cream px-4 py-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={question.image.src}
+            alt={question.image.alt}
+            className="max-h-80 w-full rounded-xl object-contain"
+          />
+          {question.image.caption ? (
+            <figcaption className="mt-2 text-xs text-ink-muted">{question.image.caption}</figcaption>
+          ) : null}
+        </figure>
+      ) : null}
+
       <h2 className="mt-5 text-lg font-semibold leading-relaxed text-ink lg:text-xl">
-        {question.stem}
+        <MathText text={question.stem} />
       </h2>
 
       <fieldset className="mt-5" disabled={revealed}>
@@ -95,7 +113,9 @@ export default function PracticeQuestion({
                     c.id
                   )}
                 </span>
-                <span className="pt-0.5 text-sm leading-relaxed text-ink">{c.text}</span>
+                <span className="pt-0.5 text-sm leading-relaxed text-ink">
+                  <MathText text={c.text} />
+                </span>
               </label>
             );
           })}

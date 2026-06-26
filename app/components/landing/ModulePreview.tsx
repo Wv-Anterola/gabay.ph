@@ -17,20 +17,21 @@ export default function ModulePreview() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-wide text-mango-deep">
-            UPCAT module preview
+            UPCAT section preview
           </p>
           <h2 className="mt-2 font-display text-h1 font-bold text-ink">
-            Four modules, one focused diagnostic.
+            Four sections, one focused mock exam.
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-ink-muted">
-            Gabay covers the four UPCAT subtests as short mini-tests you can take one at a time.
+            Tero covers the four UPCAT subtests in one timed flow, then breaks down your results by
+            section and topic.
           </p>
         </div>
         <Link
           href="/diagnostic"
           className="inline-flex items-center gap-2 text-sm font-semibold text-berry hover:text-berry-deep"
         >
-          Start with any module
+          Start the mock exam
           <ArrowRight aria-hidden className="h-4 w-4" strokeWidth={2} />
         </Link>
       </div>
@@ -42,7 +43,7 @@ export default function ModulePreview() {
           return (
             <Link
               key={id}
-              href={`/diagnostic/${id}`}
+              href="/diagnostic"
               className="clay-press group rounded-clay-lg border-2 border-clay-line bg-cream p-6 shadow-clay hover:shadow-clay-lg"
             >
               <span

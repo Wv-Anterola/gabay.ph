@@ -49,7 +49,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ["var(--font-fraunces)", "Georgia", "serif"],
+        display: ['"Helvetica Neue"', "Helvetica", "sans-serif"],
         sans: ["var(--font-jakarta)", "system-ui", "sans-serif"],
       },
       borderRadius: {

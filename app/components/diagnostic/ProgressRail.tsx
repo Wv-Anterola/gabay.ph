@@ -12,6 +12,7 @@ export default function ProgressRail({
   total,
   current,
   answeredIds,
+  flaggedIds = new Set<string>(),
   questionIds,
   onJump,
   elapsedLabel,
@@ -19,6 +20,7 @@ export default function ProgressRail({
   total: number;
   current: number;
   answeredIds: Set<string>;
+  flaggedIds?: Set<string>;
   questionIds: string[];
   onJump: (index: number) => void;
   elapsedLabel?: string;
@@ -26,7 +28,7 @@ export default function ProgressRail({
   const answeredCount = answeredIds.size;
 
   return (
-    <aside className="rounded-clay-lg border-2 border-clay-line bg-cream p-5 shadow-clay">
+    <aside className="rounded-clay-lg border-2 border-clay-line bg-cream p-5">
       <div className="flex items-center justify-between">
         <p className="text-sm font-bold text-ink">Your progress</p>
         {elapsedLabel ? (
@@ -51,6 +53,7 @@ export default function ProgressRail({
       <div className="mt-5 grid grid-cols-5 gap-2" role="group" aria-label="Jump to question">
         {questionIds.map((id, i) => {
           const answered = answeredIds.has(id);
+          const flagged = flaggedIds.has(id);
           const isCurrent = i === current;
           return (
             <button
@@ -63,9 +66,11 @@ export default function ProgressRail({
                 "tabular flex h-10 items-center justify-center rounded-xl border-2 text-sm font-bold transition-colors",
                 isCurrent
                   ? "border-berry bg-berry text-white"
-                  : answered
-                    ? "border-teal-soft/40 bg-teal-tint text-teal-deep"
-                    : "border-clay-line bg-clay text-ink-muted hover:bg-clay-deep",
+                  : flagged
+                      ? "border-mango bg-mango-tint text-mango-deep"
+                    : answered
+                      ? "border-teal-soft/40 bg-teal-tint text-teal-deep"
+                      : "border-clay-line bg-clay text-ink-muted hover:bg-clay-deep",
               )}
             >
               {i + 1}
@@ -82,6 +87,10 @@ export default function ProgressRail({
         <p className="flex items-center gap-2">
           <span className="inline-block h-3 w-3 rounded border-2 border-clay-line bg-clay" />
           Not yet answered
+        </p>
+        <p className="flex items-center gap-2">
+          <span className="inline-block h-3 w-3 rounded border-2 border-mango bg-mango-tint" />
+          Flagged
         </p>
       </div>
     </aside>

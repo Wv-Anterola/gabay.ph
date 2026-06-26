@@ -14,7 +14,7 @@ import { PrismaClient } from "../generated/prisma/client";
 
 declare global {
   // eslint-disable-next-line no-var
-  var __gabayPrisma: PrismaClient | null | undefined;
+  var __teroPrisma: PrismaClient | null | undefined;
 }
 
 function createClient(): PrismaClient | null {
@@ -29,10 +29,10 @@ function createClient(): PrismaClient | null {
 }
 
 export const prisma: PrismaClient | null =
-  globalThis.__gabayPrisma ?? createClient();
+  globalThis.__teroPrisma ?? createClient();
 
 if (process.env.NODE_ENV !== "production") {
-  globalThis.__gabayPrisma = prisma;
+  globalThis.__teroPrisma = prisma;
 }
 
 export function isDbConfigured(): boolean {

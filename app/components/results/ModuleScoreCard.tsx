@@ -19,6 +19,9 @@ export default function ModuleScoreCard({ score }: { score: ModuleScore }) {
             <p className="tabular text-xs text-ink-muted">
               {score.correct}/{score.total} correct
             </p>
+            <p className="tabular text-xs text-ink-faint">
+              {score.weightedAccuracy}% weighted
+            </p>
           </div>
         </div>
         <ProgressRing

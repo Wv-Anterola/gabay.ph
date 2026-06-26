@@ -1,6 +1,9 @@
 import type {
   AnswerMap,
   DiagnosticResult,
+  MockExamAttempt,
+  MockExamResult,
+  MockQuestionReview,
   ModuleId,
   ModuleScore,
   Question,
@@ -21,6 +24,12 @@ export const READINESS_THRESHOLDS = {
   steady: 60, // 60-79%
   // below 60% -> needs_work
 } as const;
+
+export const DIFFICULTY_WEIGHT: Record<Question["difficulty"], number> = {
+  easy: 1,
+  medium: 1.25,
+  hard: 1.5,
+};
 
 export function readinessLevel(accuracyPct: number): ReadinessLevel {
   if (accuracyPct >= READINESS_THRESHOLDS.strong) return "strong";
@@ -46,6 +55,10 @@ function pct(correct: number, total: number): number {
   return Math.round((correct / total) * 100);
 }
 
+function roundScore(value: number): number {
+  return Math.round(value * 100) / 100;
+}
+
 /** Score a single module's answers against its question set. */
 export function scoreModule(
   module: ModuleId,
@@ -55,6 +68,8 @@ export function scoreModule(
   const total = questions.length;
   let correct = 0;
   let answered = 0;
+  let weightedCorrect = 0;
+  let weightedTotal = 0;
 
   // topic -> { correct, total }
   const topicTally = new Map<string, { correct: number; total: number }>();
@@ -62,8 +77,11 @@ export function scoreModule(
   for (const q of questions) {
     const given = answers[q.id];
     const isCorrect = given === q.answer;
+    const weight = DIFFICULTY_WEIGHT[q.difficulty];
     if (given !== undefined) answered += 1;
     if (isCorrect) correct += 1;
+    if (isCorrect) weightedCorrect += weight;
+    weightedTotal += weight;
 
     const t = topicTally.get(q.topic) ?? { correct: 0, total: 0 };
     t.total += 1;
@@ -86,6 +104,7 @@ export function scoreModule(
     .sort((a, b) => a.accuracy - b.accuracy || a.topic.localeCompare(b.topic));
 
   const accuracy = pct(correct, total);
+  const weightedAccuracy = pct(weightedCorrect, weightedTotal);
 
   return {
     module,
@@ -95,6 +114,9 @@ export function scoreModule(
     answered,
     unanswered: total - answered,
     accuracy,
+    weightedCorrect: roundScore(weightedCorrect),
+    weightedTotal: roundScore(weightedTotal),
+    weightedAccuracy,
     level: readinessLevel(accuracy),
     topics,
   };
@@ -118,6 +140,9 @@ export function buildResult(moduleScores: ModuleScore[]): DiagnosticResult {
   const total = moduleScores.reduce((s, m) => s + m.total, 0);
   const answered = moduleScores.reduce((s, m) => s + m.answered, 0);
   const accuracy = pct(correct, total);
+  const weightedCorrect = moduleScores.reduce((s, m) => s + m.weightedCorrect, 0);
+  const weightedTotal = moduleScores.reduce((s, m) => s + m.weightedTotal, 0);
+  const weightedAccuracy = pct(weightedCorrect, weightedTotal);
 
   const allTopics: TopicScore[] = moduleScores.flatMap((m) => m.topics);
 
@@ -148,9 +173,52 @@ export function buildResult(moduleScores: ModuleScore[]): DiagnosticResult {
       answered,
       unanswered: total - answered,
       accuracy,
-      level: readinessLevel(accuracy),
+      weightedCorrect: roundScore(weightedCorrect),
+      weightedTotal: roundScore(weightedTotal),
+      weightedAccuracy,
+      readinessScore: weightedAccuracy,
+      level: readinessLevel(weightedAccuracy),
     },
     weakTopics,
     strengths,
+  };
+}
+
+export function buildMockExamResult(
+  attempt: MockExamAttempt,
+  questionsByModule: Record<ModuleId, Question[]>,
+): MockExamResult {
+  const modules = attempt.sectionOrder.map((module) =>
+    scoreModule(module, questionsByModule[module] ?? [], attempt.answers),
+  );
+  const result = buildResult(modules);
+  const submittedAt = attempt.submittedAt ?? Date.now();
+  const questionReviews: MockQuestionReview[] = attempt.sectionOrder.flatMap((module) =>
+    (questionsByModule[module] ?? []).map((q) => {
+      const selectedAnswer = attempt.answers[q.id];
+      return {
+        questionId: q.id,
+        module,
+        topic: q.topic,
+        subtopic: q.subtopic,
+        difficulty: q.difficulty,
+        selectedAnswer,
+        correctAnswer: q.answer,
+        isAnswered: selectedAnswer !== undefined,
+        isCorrect: selectedAnswer === q.answer,
+        isFlagged: attempt.flaggedQuestionIds.includes(q.id),
+        timeSpentSeconds: attempt.questionTimeSpentSeconds[q.id] ?? 0,
+      };
+    }),
+  );
+
+  return {
+    ...result,
+    attemptId: attempt.attemptId,
+    startedAt: attempt.startedAt,
+    submittedAt,
+    durationSeconds: Math.max(0, Math.round((submittedAt - attempt.startedAt) / 1000)),
+    remainingSeconds: attempt.remainingSeconds,
+    questionReviews,
   };
 }

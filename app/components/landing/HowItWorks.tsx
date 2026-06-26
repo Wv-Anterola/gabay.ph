@@ -4,20 +4,20 @@ const STEPS = [
   {
     n: 1,
     icon: ClipboardCheck,
-    title: "Take a free diagnostic",
-    body: "Answer short mini-tests across the four UPCAT modules. No login needed to start, and your progress is saved as you go.",
+    title: "Take a free mock exam",
+    body: "Answer one full mock across the four UPCAT modules. No login needed to start, and your progress is saved as you go.",
   },
   {
     n: 2,
     icon: BarChart3,
-    title: "See your weak-topic report",
-    body: "Get an honest readiness signal per module and per topic, with your weakest areas surfaced first, plainly and without hype.",
+    title: "Review your results",
+    body: "Get a readiness score, section breakdown, and explanations for the questions you missed.",
   },
   {
     n: 3,
     icon: CalendarDays,
     title: "Follow a 7-day study plan",
-    body: "Gabay turns your weak topics into a simple day-by-day plan you can actually start tonight, with practice built in.",
+    body: "Tero turns your weak topics into a simple day-by-day plan you can actually start tonight, with practice built in.",
   },
 ];
 
@@ -28,7 +28,7 @@ export default function HowItWorks() {
         <div className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-wide text-mango-deep">How it works</p>
           <h2 className="mt-2 font-display text-h1 font-bold text-ink">
-            From scattered to a clear plan in three steps.
+            From mock exam to review in three steps.
           </h2>
         </div>
 

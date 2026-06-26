@@ -6,7 +6,7 @@
 
 ---
 
-**Project:** Gabay
+**Project:** Tero
 **Generated:** 2026-06-24 23:39:08
 **Category:** Knowledge Base/Documentation
 
@@ -14,9 +14,9 @@
 
 ## Global Rules
 
-### Color Palette — Gabay warm-academic (OVERRIDES skill default)
+### Color Palette — Tero warm-academic (OVERRIDES skill default)
 
-> The generator's default indigo/quiz-blue palette is discarded. Gabay uses a
+> The generator's default indigo/quiz-blue palette is discarded. Tero uses a
 > brand-owned warm-academic palette: deep berry primary, botanical teal contrast,
 > mango accent, parchment/cream surfaces, espresso ink. Deliberately NOT official UP colors.
 
@@ -38,7 +38,7 @@
 
 **Color Notes:** Readiness states are never color-only — always paired with an icon + text label.
 
-### Typography — Gabay (OVERRIDES skill default)
+### Typography — Tero (OVERRIDES skill default)
 
 - **Display / headings:** Fraunces (warm academic soft serif — credible, study-guide character)
 - **UI / body:** Plus Jakarta Sans (friendly humanist sans, rounded but grown-up)

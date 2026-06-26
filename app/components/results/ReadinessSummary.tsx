@@ -6,11 +6,12 @@ import type { DiagnosticResult } from "@/lib/types";
 
 export default function ReadinessSummary({ result }: { result: DiagnosticResult }) {
   const { overall } = result;
+  const readinessScore = overall.readinessScore ?? overall.weightedAccuracy ?? overall.accuracy;
   return (
     <section className="rounded-clay-xl border-2 border-clay-line bg-clay p-7 shadow-clay-lg lg:p-9">
       <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
         <ProgressRing
-          value={overall.accuracy}
+          value={readinessScore}
           tone={READINESS_RING_TONE[overall.level]}
           size={120}
           stroke={13}
@@ -24,8 +25,12 @@ export default function ReadinessSummary({ result }: { result: DiagnosticResult 
             <ReadinessPill level={overall.level} />
           </div>
           <h1 className="mt-2 font-display text-h1 font-bold text-ink">
-            You answered {overall.correct} of {overall.total} correctly.
+            Readiness Score: {readinessScore}/100
           </h1>
+          <p className="tabular mt-2 text-sm font-semibold text-ink">
+            {overall.correct} of {overall.total} correct
+            {overall.weightedAccuracy !== undefined ? ` · ${overall.weightedAccuracy}% weighted` : ""}
+          </p>
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-ink-muted">
             {READINESS_BLURB[overall.level]}
           </p>

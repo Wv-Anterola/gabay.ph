@@ -24,12 +24,12 @@ export default function WeakTopicList({
           <h2 className="text-lg font-bold text-ink">Top weak areas</h2>
         </div>
         <p className="mt-1 text-sm text-ink-muted">
-          Your diagnostic suggests you should prioritize these UPCAT topics first.
+          Your mock exam suggests you should prioritize these UPCAT topics first.
         </p>
 
         {top3.length === 0 ? (
           <p className="mt-5 rounded-clay border-2 border-clay-line bg-clay px-4 py-3 text-sm text-ink-muted">
-            No clear weak spots in what you took. Try another module to sharpen your picture.
+            No clear weak spots in what you took. Retake the mock later to sharpen your picture.
           </p>
         ) : (
           <ol className="mt-5 space-y-3">

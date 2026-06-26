@@ -103,7 +103,7 @@ export default function WaitlistForm() {
           onChange={(e) => setEmail(e.target.value)}
           onBlur={(e) => validateEmail(e.target.value)}
           error={emailError}
-          hint="We'll only email you about Gabay updates."
+          hint="We'll only email you about Tero updates."
           trailing={<Mail aria-hidden className="h-5 w-5" strokeWidth={1.75} />}
         />
 
@@ -168,7 +168,7 @@ export default function WaitlistForm() {
       </button>
 
       <p className="mt-4 text-xs leading-relaxed text-ink-faint">
-        By joining, you agree to receive occasional emails from Gabay. We never sell your data. See
+        By joining, you agree to receive occasional emails from Tero. We never sell your data. See
         our{" "}
         <a href="/privacy" className="font-semibold text-berry underline underline-offset-2">
           Privacy &amp; Disclaimer

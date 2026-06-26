@@ -1,4 +1,5 @@
 import { CheckCircle2, XCircle } from "lucide-react";
+import MathText from "@/app/components/shared/MathText";
 import type { Question } from "@/lib/types";
 
 /** Immediate, deterministic explanation shown after a practice answer. */
@@ -31,10 +32,13 @@ export default function PracticeFeedback({
       {!correct ? (
         <p className="mt-2 text-sm text-ink">
           The correct answer is{" "}
-          <span className="font-bold uppercase">{question.answer}</span>: {answerText}
+          <span className="font-bold uppercase">{question.answer}</span>:{" "}
+          <MathText text={answerText} />
         </p>
       ) : null}
-      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{question.explanation}</p>
+      <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+        <MathText text={question.explanation} />
+      </p>
     </div>
   );
 }

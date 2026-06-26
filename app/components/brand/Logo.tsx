@@ -2,7 +2,7 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 
 /**
- * Gabay wordmark. Custom compass-style glyph (a "guide" mark) — original,
+ * Tero wordmark. Custom compass-style glyph (a "guide" mark) — original,
  * not based on any university seal or official mark.
  */
 export default function Logo({
@@ -15,7 +15,7 @@ export default function Logo({
   return (
     <Link
       href="/"
-      aria-label="Gabay home"
+      aria-label="Tero home"
       className={cn("inline-flex items-center gap-2.5", className)}
     >
       <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-berry text-white shadow-clay-berry">
@@ -32,7 +32,7 @@ export default function Logo({
         </svg>
       </span>
       {withWordmark ? (
-        <span className="font-display text-xl font-bold tracking-tight text-ink">Gabay</span>
+        <span className="font-display text-xl font-bold tracking-tight text-ink">Tero</span>
       ) : null}
     </Link>
   );

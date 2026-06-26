@@ -1,6 +1,6 @@
 # Results Page Overrides
 
-> **PROJECT:** Gabay
+> **PROJECT:** Tero
 > **Generated:** 2026-06-24 23:39:07
 > **Page Type:** Dashboard / Data View
 

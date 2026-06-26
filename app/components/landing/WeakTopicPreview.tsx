@@ -24,7 +24,7 @@ export default function WeakTopicPreview() {
           Your weakest topics, surfaced first.
         </h2>
         <p className="mt-4 text-lg leading-relaxed text-ink-muted">
-          Gabay does not just give a score. It tells you which topics to start with and turns them
+          Tero does not just give a score. It tells you which topics to start with and turns them
           into a plan you can begin tonight.
         </p>
       </div>

@@ -1,6 +1,6 @@
 # Diagnostic Page Overrides
 
-> **PROJECT:** Gabay
+> **PROJECT:** Tero
 > **Generated:** 2026-06-24 23:39:08
 > **Page Type:** General
 

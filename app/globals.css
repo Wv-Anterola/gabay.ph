@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /*
-  Gabay design tokens — warm academic claymorphism.
+  Tero design tokens — warm academic claymorphism.
   Semantic CSS variables mirror the Tailwind theme so raw hex
   never appears in components.
 */
@@ -67,7 +67,7 @@
   }
 
   h1, h2, h3, h4 {
-    font-family: var(--font-fraunces), Georgia, serif;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
     color: var(--ink);
   }
 }

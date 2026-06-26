@@ -2,11 +2,11 @@ import { Info } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 export const DISCLAIMER_TEXT =
-  "Gabay is an independent UPCAT preparation tool and is not affiliated with the University of the Philippines or the UP Office of Admissions. This diagnostic is not an admissions prediction. Results are study guidance only. Questions are original practice questions.";
+  "Tero is an independent UPCAT preparation tool and is not affiliated with the University of the Philippines or the UP Office of Admissions. This mock exam is not an admissions prediction. Results are study guidance only. Questions are original practice questions.";
 
 /**
  * The required independence disclaimer. Rendered on the homepage footer,
- * diagnostic intro, results page, and privacy page.
+ * mock exam start, results page, and privacy page.
  */
 export default function Disclaimer({
   variant = "card",

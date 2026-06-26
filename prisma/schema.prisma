@@ -1,4 +1,4 @@
-// Gabay Prisma schema (Prisma Postgres).
+// Tero Prisma schema (Prisma Postgres).
 // The app pages run without a database; only the API routes
 // (/api/waitlist, /api/session) require DATABASE_URL.
 
@@ -41,6 +41,61 @@ model DiagnosticSession {
 
   @@index([module])
   @@index([completedAt])
+}
+
+/// One submitted or in-progress full UPCAT mock exam attempt.
+/// The app can run without this table; it is the durable analytics sink when
+/// DATABASE_URL is configured.
+model MockAttempt {
+  id              String   @id
+  clientId        String?
+  status          String
+  startedAt       DateTime
+  submittedAt     DateTime?
+  durationSeconds Int?
+  remainingSeconds Int
+  rawScore        Int?
+  rawTotal        Int?
+  weightedScore   Float?
+  weightedTotal   Float?
+  readinessScore  Int?
+  sectionScores   Json?
+  overallScore    Json?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  responses MockQuestionResponse[]
+
+  @@index([clientId])
+  @@index([submittedAt])
+  @@index([status])
+}
+
+/// Per-question response data for a mock attempt. This is the dataset used for
+/// future recommendations and AI explanations.
+model MockQuestionResponse {
+  id               String   @id @default(cuid())
+  attemptId        String
+  questionId       String
+  section          String
+  topic            String
+  difficulty       String
+  selectedAnswer   String?
+  correctAnswer    String
+  isAnswered       Boolean
+  isCorrect        Boolean
+  isFlagged        Boolean
+  timeSpentSeconds Int
+  createdAt        DateTime @default(now())
+
+  attempt MockAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+
+  @@unique([attemptId, questionId])
+  @@index([questionId])
+  @@index([section])
+  @@index([topic])
+  @@index([difficulty])
+  @@index([isCorrect])
 }
 
 /// Optional first-party mirror of analytics events.

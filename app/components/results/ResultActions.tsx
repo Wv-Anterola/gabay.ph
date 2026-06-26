@@ -43,7 +43,7 @@ export default function ResultActions({ weakestModule }: { weakestModule: Module
           className="!text-cream/80 hover:!bg-berry-deep"
         >
           <RotateCcw aria-hidden className="h-4 w-4" strokeWidth={2} />
-          Take another module
+          Take another mock
         </ClayButton>
       </div>
     </section>

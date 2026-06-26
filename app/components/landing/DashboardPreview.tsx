@@ -27,7 +27,7 @@ export default function DashboardPreview() {
             <p className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
               Your readiness signal
             </p>
-            <p className="font-display text-2xl font-bold text-ink">Diagnostic complete</p>
+            <p className="font-display text-2xl font-bold text-ink">Mock complete</p>
           </div>
           <ProgressRing value={66} tone="berry" size={72} stroke={9} label="Overall readiness" />
         </div>

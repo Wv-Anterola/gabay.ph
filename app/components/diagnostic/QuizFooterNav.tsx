@@ -10,12 +10,14 @@ export default function QuizFooterNav({
   onPrev,
   onNext,
   onSubmit,
+  submitLabel = "Review & submit",
 }: {
   canPrev: boolean;
   isLast: boolean;
   onPrev: () => void;
   onNext: () => void;
   onSubmit: () => void;
+  submitLabel?: string;
 }) {
   return (
     <div className="sticky bottom-0 z-30 mt-6 border-t-2 border-clay-line bg-cream/90 px-1 py-4 backdrop-blur-md">
@@ -25,7 +27,7 @@ export default function QuizFooterNav({
           onClick={onPrev}
           disabled={!canPrev}
           className={cn(
-            "clay-press inline-flex min-h-[48px] items-center gap-2 rounded-2xl border-2 px-5 text-sm font-semibold",
+            "inline-flex min-h-[48px] items-center gap-2 rounded-2xl border-2 px-5 text-sm font-semibold transition-colors",
             canPrev
               ? "border-clay-line bg-clay text-ink hover:bg-clay-deep"
               : "cursor-not-allowed border-clay-line bg-clay text-ink-faint opacity-50",
@@ -39,16 +41,16 @@ export default function QuizFooterNav({
           <button
             type="button"
             onClick={onSubmit}
-            className="clay-press inline-flex min-h-[48px] items-center gap-2 rounded-2xl bg-mango px-6 text-sm font-bold text-ink shadow-clay-mango hover:bg-mango-deep hover:text-white"
+            className="inline-flex min-h-[48px] items-center gap-2 rounded-2xl bg-mango px-6 text-sm font-bold text-ink transition-colors hover:bg-mango-deep hover:text-white"
           >
             <Flag aria-hidden className="h-4 w-4" strokeWidth={2} />
-            Review &amp; submit
+            {submitLabel}
           </button>
         ) : (
           <button
             type="button"
             onClick={onNext}
-            className="clay-press inline-flex min-h-[48px] items-center gap-2 rounded-2xl bg-berry px-6 text-sm font-bold text-white shadow-clay-berry hover:bg-berry-deep"
+            className="inline-flex min-h-[48px] items-center gap-2 rounded-2xl bg-berry px-6 text-sm font-bold text-white transition-colors hover:bg-berry-deep"
           >
             Next
             <ArrowRight aria-hidden className="h-4 w-4" strokeWidth={2} />

@@ -27,7 +27,7 @@ export default function ProblemSection() {
           Self-study for UPCAT often feels like guessing.
         </h2>
         <p className="mt-4 text-lg leading-relaxed text-ink-muted">
-          Most students do not lack effort. They lack a clear sense of what to study first. Gabay
+          Most students do not lack effort. They lack a clear sense of what to study first. Tero
           replaces the scramble with a clear starting point.
         </p>
       </div>
@@ -47,7 +47,7 @@ export default function ProblemSection() {
       <div className="mt-8 inline-flex items-center gap-2 rounded-clay border-2 border-teal-soft/30 bg-teal-tint px-5 py-3">
         <ArrowRight aria-hidden className="h-5 w-5 text-teal-deep" strokeWidth={2} />
         <p className="text-sm font-semibold text-teal-deep">
-          Gabay turns &ldquo;study everything&rdquo; into &ldquo;study this first.&rdquo;
+          Tero turns &ldquo;study everything&rdquo; into &ldquo;study this first.&rdquo;
         </p>
       </div>
     </section>

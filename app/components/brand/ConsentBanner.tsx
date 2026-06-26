@@ -24,8 +24,8 @@ export default function ConsentBanner() {
       const detail = (e as CustomEvent).detail as "accepted" | "declined";
       setChoice(detail);
     };
-    window.addEventListener("gabay-consent-change", onChange);
-    return () => window.removeEventListener("gabay-consent-change", onChange);
+    window.addEventListener("tero-consent-change", onChange);
+    return () => window.removeEventListener("tero-consent-change", onChange);
   }, []);
 
   function decide(value: "accepted" | "declined") {
@@ -50,8 +50,8 @@ export default function ConsentBanner() {
                 <Cookie aria-hidden className="h-5 w-5" strokeWidth={1.75} />
               </span>
               <p className="text-sm leading-relaxed text-ink">
-                Gabay uses privacy-respecting analytics to understand how students use the
-                diagnostic. We only load Google Analytics if you accept. Read more in our{" "}
+                Tero uses privacy-respecting analytics to understand how students use the
+                mock exam. We only load Google Analytics if you accept. Read more in our{" "}
                 <Link href="/privacy" className="font-semibold text-berry underline underline-offset-2">
                   Privacy &amp; Disclaimer
                 </Link>

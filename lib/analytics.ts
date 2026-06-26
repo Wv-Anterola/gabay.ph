@@ -1,5 +1,5 @@
 /**
- * Typed analytics wrapper for Gabay.
+ * Typed analytics wrapper for Tero.
  *
  * GA4 is loaded (via @next/third-parties GoogleAnalytics) ONLY after the
  * visitor accepts the cookie consent banner. Until then `window.gtag` does
@@ -37,11 +37,18 @@ declare global {
   }
 }
 
-const CONSENT_KEY = "gabay-consent";
+const LEGACY_CONSENT_KEY = "gabay-consent";
+const CONSENT_KEY = "tero-consent";
 
 /** Returns "accepted" | "declined" | null (undecided). */
 export function getConsent(): "accepted" | "declined" | null {
   if (typeof window === "undefined") return null;
+  if (window.localStorage.getItem(CONSENT_KEY) === null) {
+    const legacy = window.localStorage.getItem(LEGACY_CONSENT_KEY);
+    if (legacy === "accepted" || legacy === "declined") {
+      window.localStorage.setItem(CONSENT_KEY, legacy);
+    }
+  }
   const v = window.localStorage.getItem(CONSENT_KEY);
   return v === "accepted" || v === "declined" ? v : null;
 }
@@ -49,7 +56,7 @@ export function getConsent(): "accepted" | "declined" | null {
 export function setConsent(value: "accepted" | "declined"): void {
   if (typeof window === "undefined") return;
   window.localStorage.setItem(CONSENT_KEY, value);
-  window.dispatchEvent(new CustomEvent("gabay-consent-change", { detail: value }));
+  window.dispatchEvent(new CustomEvent("tero-consent-change", { detail: value }));
 }
 
 /**

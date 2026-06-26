@@ -2,7 +2,7 @@ import type { Passage } from "@/lib/types";
 
 /**
  * Original reading passages for the Reading Comprehension module.
- * All passages are written from scratch for Gabay (sourceType original).
+ * All passages are written from scratch for Tero (sourceType original).
  */
 export const passages: Passage[] = [
   {

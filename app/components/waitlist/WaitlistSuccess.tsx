@@ -15,7 +15,7 @@ export default function WaitlistSuccess({ email }: { email: string }) {
       </p>
       <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
         <ClayButton href="/diagnostic" variant="primary">
-          Take the free diagnostic
+          Take the free mock
           <ArrowRight aria-hidden className="h-4 w-4" strokeWidth={2} />
         </ClayButton>
         <ClayButton href="/" variant="secondary">

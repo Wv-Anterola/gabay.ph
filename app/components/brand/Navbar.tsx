@@ -11,7 +11,8 @@ import { trackEvent } from "@/lib/analytics";
 const LINKS = [
   { href: "/#how-it-works", label: "How it works" },
   { href: "/#modules", label: "UPCAT modules" },
-  { href: "/diagnostic", label: "Diagnostic" },
+  { href: "/diagnostic", label: "Mock exam" },
+  { href: "/dashboard", label: "Dashboard" },
   { href: "/waitlist", label: "Waitlist" },
 ];
 
@@ -29,7 +30,9 @@ export default function Navbar() {
             const active =
               link.href === "/diagnostic"
                 ? pathname.startsWith("/diagnostic")
-                : link.href === "/waitlist"
+                : link.href === "/dashboard"
+                  ? pathname.startsWith("/dashboard")
+                  : link.href === "/waitlist"
                   ? pathname.startsWith("/waitlist")
                   : false;
             return (
@@ -55,7 +58,7 @@ export default function Navbar() {
             onClick={() => trackEvent("cta_click", { location: "navbar", cta: "diagnostic" })}
             className="clay-press hidden items-center gap-2 rounded-2xl bg-mango px-5 py-2.5 text-sm font-semibold text-ink shadow-clay-mango hover:bg-mango-deep hover:text-white sm:inline-flex"
           >
-            Take the free diagnostic
+            Take the free mock
             <ArrowRight aria-hidden className="h-4 w-4" strokeWidth={2} />
           </Link>
         </div>
@@ -91,7 +94,7 @@ export default function Navbar() {
                 onClick={() => setOpen(false)}
                 className="mt-2 block rounded-2xl bg-mango px-4 py-3 text-center text-sm font-semibold text-ink"
               >
-                Take the free UPCAT diagnostic
+                Take the free UPCAT mock
               </Link>
             </li>
           </ul>

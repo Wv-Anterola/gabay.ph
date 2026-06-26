@@ -6,7 +6,8 @@ const COLS = [
   {
     title: "Product",
     links: [
-      { href: "/diagnostic", label: "Free UPCAT diagnostic" },
+      { href: "/diagnostic", label: "Free UPCAT mock exam" },
+      { href: "/dashboard", label: "Dashboard" },
       { href: "/#modules", label: "UPCAT modules" },
       { href: "/#how-it-works", label: "How it works" },
       { href: "/waitlist", label: "Join the waitlist" },
@@ -29,8 +30,8 @@ export default function Footer() {
           <div className="max-w-sm">
             <Logo />
             <p className="mt-4 text-sm leading-relaxed text-ink-muted">
-              Gabay (&ldquo;guide&rdquo;) helps Filipino students stop guessing what to study for
-              UPCAT. Free diagnostic, weak-topic report, and a 7-day study plan.
+              Tero (&ldquo;guide&rdquo;) helps Filipino students stop guessing what to study for
+              UPCAT. Free mock exam, answer review, weak-topic report, and a 7-day study plan.
             </p>
             <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-ink-faint">
               Built for UPCAT first. More CETs coming later.
@@ -61,8 +62,8 @@ export default function Footer() {
         </div>
 
         <p className="mt-8 text-xs text-ink-faint">
-          © {new Date().getFullYear()} Gabay. An independent UPCAT preparation tool. UPCAT is the
-          admission test of the University of the Philippines; Gabay is not affiliated with or
+          © {new Date().getFullYear()} Tero. An independent UPCAT preparation tool. UPCAT is the
+          admission test of the University of the Philippines; Tero is not affiliated with or
           endorsed by UP.
         </p>
       </div>
