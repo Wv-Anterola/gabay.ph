@@ -29,6 +29,8 @@ next-env.d.ts
 
 # prisma
 /prisma/migrations/dev.db*
+# Generated Prisma Client (recreated by `prisma generate` on install/build).
+/generated
 
 # vercel
 .vercel
