@@ -36,10 +36,10 @@ export default function HowItWorks() {
           {STEPS.map((s) => (
             <li
               key={s.n}
-              className="relative rounded-clay-lg border-2 border-clay-line bg-cream p-7 shadow-clay"
+              className="relative rounded-clay-lg border-2 border-clay-line bg-cream p-7"
             >
               <div className="flex items-center gap-3">
-                <span className="tabular flex h-11 w-11 items-center justify-center rounded-2xl bg-berry font-display text-lg font-bold text-white shadow-clay-berry">
+                <span className="tabular flex h-11 w-11 items-center justify-center rounded-2xl bg-berry font-display text-lg font-bold text-white">
                   {s.n}
                 </span>
                 <s.icon aria-hidden className="h-7 w-7 text-teal" strokeWidth={1.75} />

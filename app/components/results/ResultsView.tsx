@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ClipboardList, Eye, History, RotateCcw } from "lucide-react";
-import ReadinessSummary from "./ReadinessSummary";
+import UpgHero from "./UpgHero";
 import ModuleScoreCard from "./ModuleScoreCard";
 import WeakTopicList from "./WeakTopicList";
 import ReadinessChart from "./ReadinessChart";
@@ -12,6 +12,11 @@ import StudyPlan7Day from "./StudyPlan7Day";
 import ResultActions from "./ResultActions";
 import Disclaimer from "@/app/components/brand/Disclaimer";
 import ClayButton from "@/app/components/ui/ClayButton";
+import Reveal from "@/app/components/shared/Reveal";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import {
   createMockExamAttempt,
   loadLatestMockResult,
@@ -21,6 +26,7 @@ import {
   setCurrentMockAttemptId,
 } from "@/lib/storage";
 import { generateStudyPlan } from "@/lib/studyPlan";
+import { ensureUpg, sectionUpgImpact } from "@/lib/upg";
 import {
   formatDuration,
   getMockExamTotalSeconds,
@@ -84,6 +90,7 @@ export default function ResultsView() {
   const weakestModule: ModuleId =
     [...result.modules].sort((a, b) => a.accuracy - b.accuracy)[0]?.module ?? "math";
   const mockResult = isMockResult(result) ? result : null;
+  const upg = mockResult ? ensureUpg(mockResult) : null;
 
   function retake() {
     const next = createMockExamAttempt(getMockQuestionIdsBySection(), getMockExamTotalSeconds());
@@ -95,77 +102,118 @@ export default function ResultsView() {
   return (
     <div className="mx-auto max-w-wide space-y-8 px-5 py-12 lg:px-8 lg:py-16">
       <div className="flex items-center justify-between">
-        <Link href="/diagnostic" className="text-sm font-semibold text-ink-muted hover:text-berry">
+        <Link
+          href="/diagnostic"
+          className="text-sm font-semibold text-muted-foreground hover:text-primary"
+        >
           ← Back to mock exam
         </Link>
-        <span className="tabular rounded-full border-2 border-clay-line bg-clay px-3 py-1 text-xs font-bold text-ink">
+        <Badge variant="secondary" className="tabular">
           {result.modules.length} section{result.modules.length === 1 ? "" : "s"} scored
-        </span>
+        </Badge>
       </div>
 
-      <ReadinessSummary result={result} />
-
-      {mockResult ? (
-        <section className="rounded-clay-lg border-2 border-clay-line bg-cream p-6 shadow-clay">
-          <div className="grid gap-4 md:grid-cols-4">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-wide text-ink-faint">Time taken</p>
-              <p className="tabular mt-1 text-lg font-bold text-ink">
-                {formatDuration(mockResult.durationSeconds)}
-              </p>
-            </div>
-            <div>
-              <p className="text-xs font-bold uppercase tracking-wide text-ink-faint">Correct</p>
-              <p className="tabular mt-1 text-lg font-bold text-ink">{mockResult.overall.correct}</p>
-            </div>
-            <div>
-              <p className="text-xs font-bold uppercase tracking-wide text-ink-faint">Incorrect</p>
-              <p className="tabular mt-1 text-lg font-bold text-ink">
-                {mockResult.overall.total - mockResult.overall.correct - mockResult.overall.unanswered}
-              </p>
-            </div>
-            <div>
-              <p className="text-xs font-bold uppercase tracking-wide text-ink-faint">Unanswered</p>
-              <p className="tabular mt-1 text-lg font-bold text-ink">
-                {mockResult.overall.unanswered}
-              </p>
-            </div>
-          </div>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <ClayButton href={`/results/${mockResult.attemptId}/review`} variant="primary">
-              <Eye aria-hidden className="h-4 w-4" strokeWidth={2} />
-              Review answers
-            </ClayButton>
-            <ClayButton onClick={retake} variant="secondary">
-              <RotateCcw aria-hidden className="h-4 w-4" strokeWidth={2} />
-              Retake mock exam
-            </ClayButton>
-            <ClayButton href="/dashboard" variant="ghost">
-              <History aria-hidden className="h-4 w-4" strokeWidth={2} />
-              Dashboard
-            </ClayButton>
-          </div>
-        </section>
+      {upg ? (
+        <Reveal>
+          <UpgHero estimate={upg.estimate} result={result} hsAverage={mockResult?.hsAverage} />
+        </Reveal>
       ) : null}
 
-      <section>
-        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-mango-deep">
+      {mockResult ? (
+        <Reveal delay={upg ? 80 : 0}>
+          <Card>
+            <CardContent className="p-6">
+              <div className="grid gap-4 md:grid-cols-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                    Time taken
+                  </p>
+                  <p className="tabular mt-1 text-lg font-bold text-foreground">
+                    {formatDuration(mockResult.durationSeconds)}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                    Correct
+                  </p>
+                  <p className="tabular mt-1 text-lg font-bold text-foreground">
+                    {mockResult.overall.correct}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                    Incorrect
+                  </p>
+                  <p className="tabular mt-1 text-lg font-bold text-foreground">
+                    {mockResult.overall.total -
+                      mockResult.overall.correct -
+                      mockResult.overall.unanswered}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                    Unanswered
+                  </p>
+                  <p className="tabular mt-1 text-lg font-bold text-foreground">
+                    {mockResult.overall.unanswered}
+                  </p>
+                </div>
+              </div>
+              <Separator className="my-5" />
+              <div className="flex flex-wrap gap-3">
+                <Button asChild>
+                  <Link href={`/results/${mockResult.attemptId}/review`}>
+                    <Eye strokeWidth={2} />
+                    Review answers
+                  </Link>
+                </Button>
+                <Button variant="secondary" onClick={retake}>
+                  <RotateCcw strokeWidth={2} />
+                  Retake mock exam
+                </Button>
+                <Button asChild variant="ghost">
+                  <Link href="/dashboard">
+                    <History strokeWidth={2} />
+                    Dashboard
+                  </Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </Reveal>
+      ) : null}
+
+      <section id="section-scores" className="scroll-mt-24">
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
           Section scores
         </h2>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {result.modules.map((m) => (
-            <ModuleScoreCard key={m.module} score={m} />
+          {result.modules.map((m, i) => (
+            <Reveal key={m.module} delay={i * 90} className="h-full">
+              <ModuleScoreCard
+                score={m}
+                upgImpact={mockResult ? sectionUpgImpact(m, result.modules) : undefined}
+              />
+            </Reveal>
           ))}
         </div>
       </section>
 
-      <WeakTopicList weakTopics={result.weakTopics} strengths={result.strengths} />
+      <Reveal>
+        <WeakTopicList weakTopics={result.weakTopics} strengths={result.strengths} />
+      </Reveal>
 
-      <ReadinessChart modules={result.modules} />
+      <Reveal>
+        <ReadinessChart modules={result.modules} />
+      </Reveal>
 
-      <StudyPlan7Day plan={plan} />
+      <Reveal>
+        <StudyPlan7Day plan={plan} />
+      </Reveal>
 
-      <ResultActions weakestModule={weakestModule} />
+      <Reveal>
+        <ResultActions weakestModule={weakestModule} />
+      </Reveal>
 
       <Disclaimer />
     </div>

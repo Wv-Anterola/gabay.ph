@@ -1,5 +1,6 @@
 "use client";
 
+import { Check } from "lucide-react";
 import MathText from "@/app/components/shared/MathText";
 import { cn } from "@/lib/cn";
 import type { ChoiceId } from "@/lib/types";
@@ -53,6 +54,13 @@ export default function ChoiceOption({
       <span className="pt-0.5 text-sm leading-relaxed text-ink">
         <MathText text={text} />
       </span>
+      {selected ? (
+        <Check
+          aria-hidden
+          className="ml-auto h-5 w-5 shrink-0 animate-pop-check self-center text-berry"
+          strokeWidth={3}
+        />
+      ) : null}
     </label>
   );
 }

@@ -55,7 +55,7 @@ export default function Testimonials() {
           {STORIES.map((s, i) => (
             <figure
               key={i}
-              className="flex flex-col rounded-clay-lg border-2 border-clay-line bg-cream p-7 shadow-clay"
+              className="flex flex-col rounded-clay-lg border-2 border-clay-line bg-cream p-7"
             >
               <Quote aria-hidden className="h-8 w-8 text-mango" strokeWidth={1.5} />
               <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-ink">
@@ -63,7 +63,7 @@ export default function Testimonials() {
               </blockquote>
               <figcaption className="mt-6 flex items-center gap-3">
                 <span
-                  className={`tabular flex h-11 w-11 items-center justify-center rounded-2xl text-sm font-bold shadow-clay-sm ${TONE_BG[s.tone]}`}
+                  className={`tabular flex h-11 w-11 items-center justify-center rounded-2xl text-sm font-bold ${TONE_BG[s.tone]}`}
                   aria-hidden
                 >
                   {s.initials}

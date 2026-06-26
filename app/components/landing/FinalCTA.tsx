@@ -7,7 +7,7 @@ import { trackEvent } from "@/lib/analytics";
 export default function FinalCTA() {
   return (
     <section className="mx-auto max-w-wide px-5 py-16 lg:px-8 lg:py-24">
-      <div className="relative overflow-hidden rounded-clay-xl border-2 border-berry-deep bg-berry px-8 py-14 text-center shadow-clay-lg lg:px-16">
+      <div className="relative overflow-hidden rounded-clay-xl border-2 border-berry-deep bg-berry px-8 py-14 text-center lg:px-16">
         <div
           aria-hidden
           className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-mango/20 blur-2xl"
@@ -28,6 +28,7 @@ export default function FinalCTA() {
             href="/diagnostic"
             size="lg"
             variant="primary"
+            className="!shadow-none"
             onClick={() => trackEvent("cta_click", { location: "final_cta", cta: "diagnostic" })}
           >
             Take the free UPCAT mock
@@ -37,7 +38,7 @@ export default function FinalCTA() {
             href="/waitlist"
             size="lg"
             variant="secondary"
-            className="!bg-cream"
+            className="!bg-cream !shadow-none"
             onClick={() => trackEvent("cta_click", { location: "final_cta", cta: "waitlist" })}
           >
             Join the waitlist

@@ -58,12 +58,13 @@ export default function MockExamStart() {
             Free UPCAT mock exam
           </p>
           <h1 className="mt-3 font-display text-h1 font-bold text-ink">
-            Complete one full mock, then review every miss.
+            Complete one full mock, then get your estimated UPG.
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted">
             Tero uses the current 63-question bank across Language, Reading, Math, and Science.
-            Your progress saves automatically, including answers, flags, section, question, and
-            remaining time.
+            When you finish, see your readiness score, weak topics, and an estimated UPG range.
+            Your progress saves automatically — answers, flags, section, question, and remaining
+            time.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
@@ -79,15 +80,20 @@ export default function MockExamStart() {
               ) : (
                 <ArrowRight aria-hidden className="h-5 w-5" strokeWidth={2} />
               )}
-              {attempt ? "Start over" : "Start mock exam"}
+              {attempt ? "Start over" : "Start mock exam & estimate my UPG"}
             </ClayButton>
             {latestResult ? (
               <ClayButton href={`/results?attemptId=${latestResult.attemptId}`} size="lg" variant="secondary">
                 <BarChart3 aria-hidden className="h-5 w-5" strokeWidth={2} />
-                View latest results
+                View latest results & UPG
               </ClayButton>
             ) : null}
           </div>
+
+          <p className="mt-4 max-w-2xl text-xs leading-relaxed text-ink-faint">
+            Estimated UPG is based on your mock exam performance and is not an official UP
+            calculation.
+          </p>
         </div>
 
         <aside className="rounded-clay-lg border-2 border-clay-line bg-cream p-6 shadow-clay">

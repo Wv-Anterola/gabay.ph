@@ -44,10 +44,10 @@ export default function ModulePreview() {
             <Link
               key={id}
               href="/diagnostic"
-              className="clay-press group rounded-clay-lg border-2 border-clay-line bg-cream p-6 shadow-clay hover:shadow-clay-lg"
+              className="group rounded-clay-lg border-2 border-clay-line bg-cream p-6 transition-colors hover:border-berry-soft hover:bg-clay"
             >
               <span
-                className={`flex h-14 w-14 items-center justify-center rounded-2xl shadow-clay-sm ${MODULE_ACCENT[id]}`}
+                className={`flex h-14 w-14 items-center justify-center rounded-2xl ${MODULE_ACCENT[id]}`}
               >
                 <Icon aria-hidden className="h-7 w-7" strokeWidth={1.75} />
               </span>

@@ -134,6 +134,8 @@ export interface MockExamAttempt {
   questionTimeSpentSeconds: Record<string, number>;
   sectionOrder: ModuleId[];
   questionIdsBySection: Record<ModuleId, string[]>;
+  /** Self-reported HS average (avg of G8–G11), 0–100. Feeds the UPG blend. */
+  hsAverage?: number;
 }
 
 export interface MockQuestionReview {
@@ -150,6 +152,47 @@ export interface MockQuestionReview {
   timeSpentSeconds: number;
 }
 
+export type UpgConfidence = "low" | "medium" | "high";
+
+/** Official UP Grade Point Equivalence descriptions. */
+export type UpgReadinessBand =
+  | "excellent"
+  | "very_good"
+  | "satisfactory"
+  | "fair"
+  | "failed";
+
+/**
+ * Admission standing relative to the ~2.8 appeal line (a separate axis from the
+ * grade description). UP admits roughly 10–15% of applicants.
+ */
+export type UpgAdmissionStanding = "competitive" | "appeal_range" | "below_threshold";
+
+/**
+ * Estimated University Predicted Grade. This is a readiness estimate derived
+ * from weighted mock performance — NOT an official UP computation. Lower is
+ * better (UP grades run 1.00 best to 3.00+). Always presented as a range.
+ */
+export interface UpgEstimate {
+  pointEstimate: number; // e.g. 2.14
+  lowerBound: number; // e.g. 2.08
+  upperBound: number; // e.g. 2.20
+  confidence: UpgConfidence;
+  readinessBand: UpgReadinessBand;
+  /** Standing relative to the ~2.8 appeal line, derived from the interval. */
+  admissionStanding: UpgAdmissionStanding;
+  explanation: string;
+}
+
+/** Human-readable factors behind the estimate, for results-page framing. */
+export interface UpgDrivers {
+  strongestPositiveSection: string;
+  largestDragSection: string;
+  highestImpactTopics: string[];
+  timePenaltyApplied: boolean;
+  completionPenaltyApplied: boolean;
+}
+
 export interface MockExamResult extends DiagnosticResult {
   attemptId: string;
   startedAt: number;
@@ -157,4 +200,8 @@ export interface MockExamResult extends DiagnosticResult {
   durationSeconds: number;
   remainingSeconds: number;
   questionReviews: MockQuestionReview[];
+  upgEstimate: UpgEstimate;
+  upgDrivers: UpgDrivers;
+  /** Self-reported HS average used in the UPG blend, if provided. */
+  hsAverage?: number;
 }

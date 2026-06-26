@@ -47,7 +47,7 @@ export default function ClayModal({
       aria-hidden={false}
     >
       <div
-        className="absolute inset-0 bg-ink/50 backdrop-blur-sm"
+        className="absolute inset-0 animate-fade-in bg-ink/50 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden
       />
@@ -57,7 +57,7 @@ export default function ClayModal({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="relative w-full max-w-lg rounded-clay-lg border-2 border-clay-line bg-cream p-7 shadow-clay-lg outline-none"
+        className="relative w-full max-w-lg animate-scale-in rounded-clay-lg border-2 border-clay-line bg-cream p-7 shadow-clay-lg outline-none"
       >
         <div className="mb-4 flex items-start justify-between gap-4">
           <h2 className="text-xl font-bold text-ink">{title}</h2>

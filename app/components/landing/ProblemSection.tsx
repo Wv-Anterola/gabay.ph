@@ -35,7 +35,7 @@ export default function ProblemSection() {
       <div className="mt-10 grid gap-5 md:grid-cols-3">
         {PAINS.map((p) => (
           <ClayCard key={p.title} tone="cream" className="p-6">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-berry-tint text-berry shadow-clay-sm">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-berry-tint text-berry">
               <p.icon aria-hidden className="h-6 w-6" strokeWidth={1.75} />
             </span>
             <h3 className="mt-4 text-lg font-bold text-ink">{p.title}</h3>

@@ -16,12 +16,12 @@ export default function DashboardPreview() {
   return (
     <div className="relative">
       {/* Floating accent card behind */}
-      <div className="absolute -right-4 -top-6 hidden rotate-3 rounded-clay border-2 border-clay-line bg-mango-tint px-4 py-3 shadow-clay-sm md:block">
+      <div className="absolute -right-4 -top-6 hidden rotate-3 rounded-clay border-2 border-clay-line bg-mango-tint px-4 py-3 md:block">
         <p className="text-xs font-semibold uppercase tracking-wide text-mango-deep">7-day plan</p>
         <p className="text-sm font-bold text-ink">Ready in minutes</p>
       </div>
 
-      <div className="rounded-clay-lg border-2 border-clay-line bg-cream p-6 shadow-clay-lg">
+      <div className="rounded-clay-lg border-2 border-clay-line bg-cream p-6">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
@@ -36,7 +36,7 @@ export default function DashboardPreview() {
           {modules.map((m) => (
             <div
               key={m.name}
-              className="rounded-clay border-2 border-clay-line bg-clay px-4 py-3 shadow-clay-sm"
+              className="rounded-clay border-2 border-clay-line bg-clay px-4 py-3"
             >
               <div className="flex items-center justify-between">
                 <span className="text-sm font-semibold text-ink">{m.name}</span>

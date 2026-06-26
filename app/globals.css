@@ -14,7 +14,7 @@
     --brand-teal: #2f6f5e;
     --brand-mango: #e07b2c;
 
-    --surface-cream: #fbf3e7;
+    --surface-cream: #fbf8f4;
     --surface-clay: #f6e7d7;
     --surface-clay-deep: #ead7c4;
     --border-clay: #e4d2bd;
@@ -27,6 +27,32 @@
     --state-weak: #b23a48;
 
     --ring: #7a1f3d;
+
+    /*
+      shadcn/ui semantic tokens. Cleaner, whiter surfaces for the reworked
+      results UI, but accents stay on-brand (berry primary, warm borders).
+      These only take effect where shadcn components / `bg-background` etc. are
+      used — the Clay pages keep their cream/clay tokens above.
+    */
+    --background: #ffffff;
+    --foreground: #2e211b;
+    --card: #ffffff;
+    --card-foreground: #2e211b;
+    --popover: #ffffff;
+    --popover-foreground: #2e211b;
+    --primary: #7a1f3d;
+    --primary-foreground: #ffffff;
+    --secondary: #f7f4f0;
+    --secondary-foreground: #2e211b;
+    --muted: #f5f2ee;
+    --muted-foreground: #574539;
+    --accent: #f3dce3;
+    --accent-foreground: #5c1730;
+    --destructive: #b23a48;
+    --destructive-foreground: #ffffff;
+    --border: #d8c7ae;
+    --input: #d8c7ae;
+    --radius: 1rem;
   }
 
   html {

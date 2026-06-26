@@ -1,4 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/cn";
+import { useCountUp } from "@/app/components/shared/useCountUp";
 
 type Tone = "berry" | "teal" | "mango" | "strong" | "steady" | "weak";
 
@@ -31,9 +34,10 @@ export default function ProgressRing({
   className?: string;
 }) {
   const clamped = Math.max(0, Math.min(100, Math.round(value)));
+  const animated = useCountUp(clamped, 1300);
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
-  const offset = c - (clamped / 100) * c;
+  const offset = c - (animated / 100) * c;
 
   return (
     <div
@@ -54,10 +58,9 @@ export default function ProgressRing({
           strokeLinecap="round"
           strokeDasharray={c}
           strokeDashoffset={offset}
-          style={{ transition: "stroke-dashoffset 600ms ease" }}
         />
       </svg>
-      <span className="tabular absolute text-lg font-bold text-ink">{clamped}%</span>
+      <span className="tabular absolute text-lg font-bold text-ink">{Math.round(animated)}%</span>
     </div>
   );
 }

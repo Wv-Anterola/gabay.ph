@@ -31,7 +31,7 @@ export default function WeakTopicPreview() {
 
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
         {/* Weak topics card */}
-        <div className="rounded-clay-lg border-2 border-clay-line bg-cream p-7 shadow-clay">
+        <div className="rounded-clay-lg border-2 border-clay-line bg-cream p-7">
           <div className="flex items-center gap-2">
             <Target aria-hidden className="h-5 w-5 text-berry" strokeWidth={2} />
             <h3 className="text-lg font-bold text-ink">Prioritize these UPCAT topics first</h3>
@@ -57,12 +57,12 @@ export default function WeakTopicPreview() {
         </div>
 
         {/* 7-day plan card */}
-        <div className="rounded-clay-lg border-2 border-clay-line bg-clay p-7 shadow-clay">
+        <div className="rounded-clay-lg border-2 border-clay-line bg-clay p-7">
           <h3 className="text-lg font-bold text-ink">Your 7-day study plan (preview)</h3>
           <ol className="mt-5 space-y-3">
             {PLAN.map((p) => (
               <li key={p.day} className="flex gap-3">
-                <span className="tabular flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-teal font-bold text-white shadow-clay-sm">
+                <span className="tabular flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-teal font-bold text-white">
                   {p.day}
                 </span>
                 <p className="text-sm leading-relaxed text-ink">{p.text}</p>

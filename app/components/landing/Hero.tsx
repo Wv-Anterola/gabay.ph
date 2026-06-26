@@ -10,7 +10,7 @@ export default function Hero() {
     <section className="relative overflow-hidden">
       <div className="mx-auto grid max-w-wide items-center gap-12 px-5 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:px-8 lg:py-24">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full border-2 border-clay-line bg-clay px-4 py-1.5 text-xs font-semibold text-ink-muted shadow-clay-sm">
+          <span className="inline-flex items-center gap-2 rounded-full border-2 border-clay-line bg-clay px-4 py-1.5 text-xs font-semibold text-ink-muted">
             <Sparkles aria-hidden className="h-4 w-4 text-mango-deep" strokeWidth={2} />
             Independent UPCAT preparation tool
           </span>
@@ -52,7 +52,7 @@ export default function Hero() {
               { k: "63", v: "Mock items" },
               { k: "7-day", v: "Study plan" },
             ].map((s) => (
-              <div key={s.v} className="rounded-clay border-2 border-clay-line bg-clay px-4 py-3 shadow-clay-sm">
+              <div key={s.v} className="rounded-clay border-2 border-clay-line bg-clay px-4 py-3">
                 <dt className="tabular font-display text-xl font-bold text-berry">{s.k}</dt>
                 <dd className="text-xs font-medium text-ink-muted">{s.v}</dd>
               </div>

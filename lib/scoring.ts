@@ -11,6 +11,7 @@ import type {
   TopicScore,
 } from "@/lib/types";
 import { MODULES } from "@/lib/questions";
+import { deriveUpgDrivers, estimateUpg } from "@/lib/upg";
 
 /**
  * Deterministic scoring for the UPCAT diagnostic.
@@ -212,6 +213,14 @@ export function buildMockExamResult(
     }),
   );
 
+  const upgDrivers = deriveUpgDrivers(result.modules);
+  const upgEstimate = estimateUpg({
+    weightedScore: (result.overall.weightedAccuracy ?? result.overall.accuracy) / 100,
+    completionRate: result.overall.total > 0 ? result.overall.answered / result.overall.total : 0,
+    hsAverage: attempt.hsAverage,
+    dragSectionName: upgDrivers.largestDragSection || undefined,
+  });
+
   return {
     ...result,
     attemptId: attempt.attemptId,
@@ -220,5 +229,8 @@ export function buildMockExamResult(
     durationSeconds: Math.max(0, Math.round((submittedAt - attempt.startedAt) / 1000)),
     remainingSeconds: attempt.remainingSeconds,
     questionReviews,
+    upgEstimate,
+    upgDrivers,
+    hsAverage: attempt.hsAverage,
   };
 }

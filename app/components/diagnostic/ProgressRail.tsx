@@ -26,6 +26,7 @@ export default function ProgressRail({
   elapsedLabel?: string;
 }) {
   const answeredCount = answeredIds.size;
+  const isComplete = total > 0 && answeredCount === total;
 
   return (
     <aside className="rounded-clay-lg border-2 border-clay-line bg-cream p-5">
@@ -43,9 +44,14 @@ export default function ProgressRail({
         {answeredCount} of {total} answered
       </p>
 
-      <div className="mt-4 h-2 w-full overflow-hidden rounded-full bg-clay-deep">
+      <div
+        className={cn(
+          "mt-4 h-2 w-full overflow-hidden rounded-full bg-clay-deep",
+          isComplete && "animate-complete-glow",
+        )}
+      >
         <div
-          className="h-full rounded-full bg-teal transition-[width] duration-300"
+          className="h-full rounded-full bg-teal transition-[width] duration-700 ease-out"
           style={{ width: `${(answeredCount / total) * 100}%` }}
         />
       </div>

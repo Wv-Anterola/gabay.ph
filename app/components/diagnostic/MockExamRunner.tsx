@@ -9,6 +9,7 @@ import ClayModal from "@/app/components/ui/ClayModal";
 import QuestionCard from "./QuestionCard";
 import ProgressRail from "./ProgressRail";
 import QuizFooterNav from "./QuizFooterNav";
+import { cn } from "@/lib/cn";
 import { MODULES } from "@/lib/questions";
 import {
   MOCK_EXAM_SECTION_ORDER,
@@ -37,12 +38,34 @@ function currentQuestionId(attempt: MockExamAttempt): string | undefined {
     : undefined;
 }
 
+const HS_YEARS = [
+  { key: "g8", label: "G8" },
+  { key: "g9", label: "G9" },
+  { key: "g10", label: "G10" },
+  { key: "g11", label: "G11" },
+] as const;
+
+type HsGrades = Record<(typeof HS_YEARS)[number]["key"], string>;
+
+const EMPTY_HS_GRADES: HsGrades = { g8: "", g9: "", g10: "", g11: "" };
+
+/** Average the valid (60–100) HS grade entries; undefined if none are usable. */
+function averageHsGrades(grades: HsGrades): number | undefined {
+  const nums = Object.values(grades)
+    .map((v) => Number.parseFloat(v))
+    .filter((n) => Number.isFinite(n) && n >= 60 && n <= 100);
+  if (nums.length === 0) return undefined;
+  return Math.round((nums.reduce((a, b) => a + b, 0) / nums.length) * 100) / 100;
+}
+
 export default function MockExamRunner({ sections }: { sections: Section[] }) {
   const router = useRouter();
   const [attempt, setAttempt] = useState<MockExamAttempt | null>(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [transitionOpen, setTransitionOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [navDir, setNavDir] = useState<"next" | "prev">("next");
+  const [hsGrades, setHsGrades] = useState<HsGrades>(EMPTY_HS_GRADES);
 
   const sectionsByModule = useMemo(
     () => Object.fromEntries(sections.map((s) => [s.module, s])) as Record<ModuleId, Section>,
@@ -146,6 +169,7 @@ export default function MockExamRunner({ sections }: { sections: Section[] }) {
   }
 
   function goPrev() {
+    setNavDir("prev");
     updateAttempt((current) => {
       if (current.currentQuestionIndex > 0) {
         return {
@@ -166,6 +190,7 @@ export default function MockExamRunner({ sections }: { sections: Section[] }) {
   }
 
   function goNext() {
+    setNavDir("next");
     if (!isLastQuestion) {
       updateAttempt((current) => ({
         ...current,
@@ -192,6 +217,7 @@ export default function MockExamRunner({ sections }: { sections: Section[] }) {
   }
 
   function jumpToQuestion(index: number) {
+    setNavDir(index >= attempt!.currentQuestionIndex ? "next" : "prev");
     updateAttempt((current) => ({
       ...current,
       currentQuestionIndex: index,
@@ -204,12 +230,15 @@ export default function MockExamRunner({ sections }: { sections: Section[] }) {
     if (submitting || !currentAttempt) return;
     setSubmitting(true);
     const submittedAt = Date.now();
+    const hsAverage =
+      reason === "timer" ? currentAttempt.hsAverage : averageHsGrades(hsGrades);
     const submitted: MockExamAttempt = {
       ...currentAttempt,
       status: "submitted",
       submittedAt,
       lastSavedAt: submittedAt,
       remainingSeconds: reason === "timer" ? 0 : currentAttempt.remainingSeconds,
+      hsAverage,
     };
     const result = buildMockExamResult(submitted, getMockQuestionsByModule());
     persist(submitted);
@@ -253,7 +282,16 @@ export default function MockExamRunner({ sections }: { sections: Section[] }) {
           Exam start
         </Link>
         <div className="flex flex-wrap items-center gap-2">
-          <span className="tabular inline-flex items-center gap-1.5 rounded-xl border-2 border-clay-line bg-clay px-3 py-1 text-xs font-bold text-ink">
+          <span
+            className={cn(
+              "tabular inline-flex items-center gap-1.5 rounded-xl border-2 px-3 py-1 text-xs font-bold transition-colors",
+              attempt.remainingSeconds <= 60
+                ? "animate-pulse-soft border-berry bg-berry text-white"
+                : attempt.remainingSeconds <= 300
+                  ? "border-mango bg-mango-tint text-mango-deep"
+                  : "border-clay-line bg-clay text-ink",
+            )}
+          >
             <Clock aria-hidden className="h-3.5 w-3.5" strokeWidth={2} />
             {formatDuration(attempt.remainingSeconds)}
           </span>
@@ -263,7 +301,10 @@ export default function MockExamRunner({ sections }: { sections: Section[] }) {
         </div>
       </div>
 
-      <div className="mt-5 rounded-clay border-2 border-clay-line bg-cream px-5 py-4">
+      <div
+        key={sectionModule}
+        className="mt-5 animate-fade-up rounded-clay border-2 border-clay-line bg-cream px-5 py-4"
+      >
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-xs font-bold uppercase tracking-wide text-mango-deep">
@@ -280,6 +321,8 @@ export default function MockExamRunner({ sections }: { sections: Section[] }) {
       <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_300px]">
         <div>
           <QuestionCard
+            key={question.id}
+            className={navDir === "next" ? "animate-slide-in-right" : "animate-slide-in-left"}
             question={question}
             index={attempt.currentQuestionIndex}
             total={section.questions.length}
@@ -347,18 +390,47 @@ export default function MockExamRunner({ sections }: { sections: Section[] }) {
             </ClayButton>
             <ClayButton variant="berry" onClick={() => submitAttempt("manual")} disabled={submitting}>
               <Send aria-hidden className="h-4 w-4" strokeWidth={2} />
-              {submitting ? "Submitting..." : "Submit exam"}
+              {submitting ? "Submitting..." : "Submit & get estimated UPG"}
             </ClayButton>
           </>
         }
       >
-        <div className="flex items-start gap-3">
-          <Flag aria-hidden className="mt-0.5 h-5 w-5 shrink-0 text-state-steady" />
-          <p>
-            {unansweredCount === 0
-              ? "All questions have an answer. Submit to see your score and review."
-              : `${unansweredCount} question${unansweredCount === 1 ? "" : "s"} are unanswered and will count as incorrect.`}
-          </p>
+        <div className="space-y-4">
+          <div className="flex items-start gap-3">
+            <Flag aria-hidden className="mt-0.5 h-5 w-5 shrink-0 text-state-steady" />
+            <p>
+              {unansweredCount === 0
+                ? "All questions have an answer. Once submitted, we'll generate your readiness score, topic breakdown, and estimated UPG."
+                : `You have ${unansweredCount} unanswered question${unansweredCount === 1 ? "" : "s"}. These will count as incorrect and may raise (worsen) your estimated UPG.`}
+            </p>
+          </div>
+
+          <div className="rounded-clay border-2 border-clay-line bg-clay px-4 py-3">
+            <p className="text-sm font-bold text-ink">High school grades (optional)</p>
+            <p className="mt-0.5 text-xs text-ink-muted">
+              Your UPG estimate blends 40% of your HS average with 60% of your mock score. Enter
+              your general average per year for a closer estimate.
+            </p>
+            <div className="mt-3 grid grid-cols-4 gap-2">
+              {HS_YEARS.map(({ key, label }) => (
+                <label key={key} className="flex flex-col gap-1">
+                  <span className="text-xs font-semibold text-ink-muted">{label}</span>
+                  <input
+                    type="number"
+                    inputMode="decimal"
+                    min={60}
+                    max={100}
+                    placeholder="90"
+                    value={hsGrades[key]}
+                    onChange={(e) =>
+                      setHsGrades((prev) => ({ ...prev, [key]: e.target.value }))
+                    }
+                    className="tabular w-full rounded-xl border-2 border-clay-line bg-cream px-2.5 py-1.5 text-sm font-semibold text-ink outline-none focus:border-berry-soft"
+                  />
+                </label>
+              ))}
+            </div>
+          </div>
         </div>
       </ClayModal>
     </div>

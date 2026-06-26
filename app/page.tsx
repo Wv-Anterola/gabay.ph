@@ -7,19 +7,34 @@ import WeakTopicPreview from "@/app/components/landing/WeakTopicPreview";
 import Testimonials from "@/app/components/landing/Testimonials";
 import FinalCTA from "@/app/components/landing/FinalCTA";
 import TrackView from "@/app/components/shared/TrackView";
+import Reveal from "@/app/components/shared/Reveal";
 
 export default function HomePage() {
   return (
     <>
       <TrackView event="landing_page_viewed" />
       <Hero />
-      <ProblemSection />
-      <HowItWorks />
-      <ModulePreview />
-      <ProgressDemo />
-      <WeakTopicPreview />
-      <Testimonials />
-      <FinalCTA />
+      <Reveal>
+        <ProblemSection />
+      </Reveal>
+      <Reveal>
+        <HowItWorks />
+      </Reveal>
+      <Reveal>
+        <ModulePreview />
+      </Reveal>
+      <Reveal>
+        <ProgressDemo />
+      </Reveal>
+      <Reveal>
+        <WeakTopicPreview />
+      </Reveal>
+      <Reveal>
+        <Testimonials />
+      </Reveal>
+      <Reveal>
+        <FinalCTA />
+      </Reveal>
     </>
   );
 }

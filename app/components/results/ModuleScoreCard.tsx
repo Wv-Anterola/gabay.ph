@@ -1,41 +1,68 @@
-import ProgressRing from "@/app/components/ui/ProgressRing";
-import ReadinessPill from "@/app/components/shared/ReadinessPill";
-import { MODULE_ICON, MODULE_ACCENT, READINESS_RING_TONE } from "@/app/components/shared/moduleVisuals";
-import type { ModuleScore } from "@/lib/types";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { MODULE_ICON, MODULE_ACCENT } from "@/app/components/shared/moduleVisuals";
+import { READINESS_LABEL } from "@/lib/scoring";
+import { UPG_SECTION_IMPACT_LABEL, UPG_SECTION_IMPACT_TONE } from "@/lib/upg";
+import type { UpgSectionImpact } from "@/lib/upg";
+import type { ModuleScore, ReadinessLevel } from "@/lib/types";
 
-export default function ModuleScoreCard({ score }: { score: ModuleScore }) {
+const LEVEL_BADGE: Record<ReadinessLevel, "teal" | "mango" | "berry"> = {
+  strong: "teal",
+  steady: "mango",
+  needs_work: "berry",
+};
+
+const LEVEL_BAR: Record<ReadinessLevel, string> = {
+  strong: "bg-teal",
+  steady: "bg-mango",
+  needs_work: "bg-berry",
+};
+
+export default function ModuleScoreCard({
+  score,
+  upgImpact,
+}: {
+  score: ModuleScore;
+  upgImpact?: UpgSectionImpact;
+}) {
   const Icon = MODULE_ICON[score.module];
   return (
-    <div className="rounded-clay-lg border-2 border-clay-line bg-cream p-6 shadow-clay">
-      <div className="flex items-center justify-between gap-4">
+    <Card className="h-full">
+      <CardContent className="p-5">
         <div className="flex items-center gap-3">
           <span
-            className={`flex h-12 w-12 items-center justify-center rounded-2xl shadow-clay-sm ${MODULE_ACCENT[score.module]}`}
+            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${MODULE_ACCENT[score.module]}`}
           >
-            <Icon aria-hidden className="h-6 w-6" strokeWidth={1.75} />
+            <Icon aria-hidden className="h-5 w-5" strokeWidth={1.75} />
           </span>
-          <div>
-            <h3 className="text-base font-bold text-ink">{score.name}</h3>
-            <p className="tabular text-xs text-ink-muted">
+          <div className="min-w-0">
+            <h3 className="truncate text-sm font-bold text-foreground">{score.name}</h3>
+            <p className="tabular text-xs text-muted-foreground">
               {score.correct}/{score.total} correct
-            </p>
-            <p className="tabular text-xs text-ink-faint">
-              {score.weightedAccuracy}% weighted
             </p>
           </div>
         </div>
-        <ProgressRing
-          value={score.accuracy}
-          tone={READINESS_RING_TONE[score.level]}
-          size={64}
-          stroke={8}
-          label={`${score.name} readiness`}
-        />
-      </div>
 
-      <div className="mt-4">
-        <ReadinessPill level={score.level} />
-      </div>
-    </div>
+        <p className="tabular mt-4 text-3xl font-bold text-foreground">
+          {score.accuracy}
+          <span className="text-base font-semibold text-muted-foreground">%</span>
+        </p>
+        <Progress
+          value={score.accuracy}
+          className="mt-2"
+          indicatorClassName={LEVEL_BAR[score.level]}
+        />
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Badge variant={LEVEL_BADGE[score.level]}>{READINESS_LABEL[score.level]}</Badge>
+          {upgImpact ? (
+            <Badge variant={UPG_SECTION_IMPACT_TONE[upgImpact]}>
+              {UPG_SECTION_IMPACT_LABEL[upgImpact]}
+            </Badge>
+          ) : null}
+        </div>
+      </CardContent>
+    </Card>
   );
 }

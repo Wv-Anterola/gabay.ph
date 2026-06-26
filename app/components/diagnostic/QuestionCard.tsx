@@ -4,6 +4,7 @@ import { Flag } from "lucide-react";
 import ChoiceOption from "./ChoiceOption";
 import Tag from "@/app/components/ui/Tag";
 import MathText from "@/app/components/shared/MathText";
+import { cn } from "@/lib/cn";
 import { getPassage } from "@/lib/questions";
 import type { ChoiceId, Question } from "@/lib/types";
 
@@ -15,6 +16,7 @@ export default function QuestionCard({
   flagged = false,
   onSelect,
   onToggleFlag,
+  className,
 }: {
   question: Question;
   index: number;
@@ -23,11 +25,12 @@ export default function QuestionCard({
   flagged?: boolean;
   onSelect: (id: ChoiceId) => void;
   onToggleFlag?: () => void;
+  className?: string;
 }) {
   const passage = getPassage(question.passageId);
 
   return (
-    <div className="rounded-clay-lg border-2 border-clay-line bg-cream p-6 lg:p-8">
+    <div className={cn("rounded-clay-lg border-2 border-clay-line bg-cream p-6 lg:p-8", className)}>
       <div className="flex flex-wrap items-center gap-2">
         <span className="tabular text-xs font-bold uppercase tracking-wide text-ink-faint">
           Question {index + 1} of {total}

@@ -34,7 +34,7 @@ export default function ProgressDemo() {
           </p>
         </div>
 
-        <div className="rounded-clay-xl border-2 border-clay-line bg-cream p-7 shadow-clay-lg">
+        <div className="rounded-clay-xl border-2 border-clay-line bg-cream p-7">
           <div className="flex items-center justify-between border-b-2 border-clay-line pb-5">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
@@ -51,7 +51,7 @@ export default function ProgressDemo() {
               return (
                 <li
                   key={r.label}
-                  className="flex items-center gap-4 rounded-clay border-2 border-clay-line bg-clay px-4 py-3 shadow-clay-sm"
+                  className="flex items-center gap-4 rounded-clay border-2 border-clay-line bg-clay px-4 py-3"
                 >
                   <span className={`flex h-9 w-9 items-center justify-center rounded-xl ${meta.tint}`}>
                     <meta.icon aria-hidden className={`h-5 w-5 ${meta.tone}`} strokeWidth={2.5} />
