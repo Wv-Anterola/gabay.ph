@@ -3,14 +3,21 @@ import { cn } from "@/lib/cn";
 
 type Tone = "neutral" | "berry" | "teal" | "mango" | "strong" | "steady" | "weak";
 
+/*
+  Strength is encoded by VALUE/emphasis, never hue (DESIGN.md: convey state
+  through maroon tints, weight, and tone). A 3-step ramp: filled deep-maroon
+  (strong) → soft maroon-mist (steady) → quiet outline (weak). Always paired
+  with a written label + icon at the call site, so it never relies on color.
+  Legacy hue aliases (teal/mango/berry) map onto the same ramp.
+*/
 const tones: Record<Tone, string> = {
-  neutral: "bg-cream text-ink border-clay-line",
-  berry: "bg-berry-tint text-berry-deep border-berry-soft/40",
-  teal: "bg-teal-tint text-teal-deep border-teal-soft/40",
-  mango: "bg-mango-tint text-mango-deep border-mango/40",
-  strong: "bg-teal-tint text-teal-deep border-teal-soft/40",
-  steady: "bg-mango-tint text-mango-deep border-mango/40",
-  weak: "bg-berry-tint text-berry-deep border-berry-soft/40",
+  neutral: "bg-porcelain text-rosewood border-rose-border",
+  strong: "bg-deep-maroon text-white border-transparent",
+  steady: "bg-maroon-mist text-deep-maroon border-rose-border",
+  weak: "bg-white text-rosewood border-rose-border",
+  teal: "bg-deep-maroon text-white border-transparent",
+  mango: "bg-maroon-mist text-deep-maroon border-rose-border",
+  berry: "bg-white text-rosewood border-rose-border",
 };
 
 export default function ClayBadge({

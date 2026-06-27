@@ -26,7 +26,7 @@ export default function ChoiceOption({
   return (
     <label
       className={cn(
-        "flex cursor-pointer items-start gap-3 rounded-clay border-2 bg-clay px-4 py-3.5 transition-colors",
+        "flex cursor-pointer items-start gap-3 rounded-clay border bg-clay px-4 py-3.5 transition-colors",
         selected
           ? "border-berry bg-berry-tint"
           : "border-clay-line hover:border-berry-soft hover:bg-clay-deep",
@@ -43,7 +43,7 @@ export default function ChoiceOption({
       <span
         aria-hidden
         className={cn(
-          "tabular flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border-2 text-sm font-bold uppercase",
+          "tabular flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border text-sm font-bold uppercase",
           selected
             ? "border-berry bg-berry text-white"
             : "border-clay-line bg-cream text-ink-muted",

@@ -21,7 +21,7 @@ export default function WaitlistPage() {
       <TrackView event="waitlist_clicked" props={{ source: "waitlist_page" }} />
       <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full border-2 border-clay-line bg-clay px-4 py-1.5 text-xs font-semibold text-ink-muted">
+          <span className="inline-flex items-center gap-2 rounded-full border border-clay-line bg-clay px-4 py-1.5 text-xs font-semibold text-ink-muted">
             Waitlist
           </span>
           <h1 className="mt-4 font-display text-h1 font-bold text-ink">

@@ -15,38 +15,61 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        /*
+          ElevenLabs-derived white + maroon system (the new primary identity).
+          Deep Maroon (#5c0a14) is the system ink — text + filled primary
+          buttons. Bright Maroon / Wine are DECORATIVE accents only (orbs,
+          gradient washes), never UI affordances. Sourced from DESIGN.md.
+        */
+        "pure-white": "#ffffff",
+        porcelain: "#fbf7f7",
+        "maroon-mist": "#f3e6e8",
+        "rose-border": "#e7d3d5",
+        "deep-maroon": "#5c0a14",
+        maroon: "#800020",
+        wine: "#9e2b25",
+        rosewood: "#8c5a60",
+        "dusty-rose": "#b89aa0",
+        /*
+          Legacy gabay token names retained, but their VALUES now point at the
+          ElevenLabs maroon system so every inner page (diagnostic, dashboard,
+          results, practice) reskins without touching each component. berry /
+          mango / teal all collapse onto Deep Maroon ink — the system has a
+          single accent. state.* is a monochrome light→dark maroon ramp
+          (strength encoded by value, never hue — see DESIGN.md).
+        */
         berry: {
-          DEFAULT: "#7A1F3D",
-          deep: "#5C1730",
-          soft: "#9C3454",
-          tint: "#F3DCE3",
+          DEFAULT: "#5c0a14",
+          deep: "#470810",
+          soft: "#800020",
+          tint: "#f3e6e8",
         },
         teal: {
-          DEFAULT: "#2F6F5E",
-          deep: "#214F43",
-          soft: "#4A8C7A",
-          tint: "#D9EAE4",
+          DEFAULT: "#5c0a14",
+          deep: "#470810",
+          soft: "#8c5a60",
+          tint: "#f3e6e8",
         },
         mango: {
-          DEFAULT: "#E07B2C",
-          deep: "#C2641A",
-          tint: "#FBE4CC",
+          DEFAULT: "#5c0a14",
+          deep: "#470810",
+          tint: "#f3e6e8",
         },
-        cream: "#FBF8F4",
+        cream: "#ffffff",
         clay: {
-          DEFAULT: "#F6E7D7",
-          deep: "#EAD7C4",
-          line: "#E4D2BD",
+          DEFAULT: "#fbf7f7",
+          deep: "#f3e6e8",
+          line: "#e7d3d5",
         },
         ink: {
-          DEFAULT: "#2E211B",
-          muted: "#6B584C",
-          faint: "#8A7A6E",
+          DEFAULT: "#5c0a14",
+          muted: "#8c5a60",
+          faint: "#b89aa0",
         },
         state: {
-          strong: "#3E8E63",
-          steady: "#C98A2B",
-          weak: "#B23A48",
+          strong: "#5c0a14",
+          steady: "#9e2b25",
+          weak: "#b89aa0",
         },
         // shadcn/ui semantic tokens (driven by CSS vars in globals.css).
         // Mapped to the gabay palette on whiter surfaces for the results UI.
@@ -85,25 +108,32 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ['"Helvetica Neue"', "Helvetica", "sans-serif"],
-        sans: ["var(--font-jakarta)", "system-ui", "sans-serif"],
+        // Display = Figtree (weight 300, the Waldenburg "whisper authority" role),
+        // body/UI = Inter. Both wired to next/font CSS vars in layout.tsx.
+        display: ["var(--font-figtree)", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       borderRadius: {
+        // Capped at the landing's scale: 20px cards, 24px large panels.
+        // (Was 28/36px — softer/bubblier than the landing system.)
         clay: "20px",
-        "clay-lg": "28px",
-        "clay-xl": "36px",
+        "clay-lg": "24px",
+        "clay-xl": "24px",
         // shadcn radius tokens
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      // Maroon-tinted hairline elevation (replaces the old claymorphic shadows).
+      // Surface contrast + sub-pixel maroon rings do the separation work — no
+      // soft blurs, matching the ElevenLabs system in DESIGN.md.
       boxShadow: {
-        clay: "8px 8px 18px rgba(92,23,48,0.12), -6px -6px 16px rgba(255,255,255,0.75), inset 1px 1px 2px rgba(255,255,255,0.55)",
-        "clay-sm": "4px 4px 10px rgba(92,23,48,0.10), -3px -3px 9px rgba(255,255,255,0.7)",
-        "clay-lg": "14px 16px 30px rgba(92,23,48,0.16), -8px -8px 20px rgba(255,255,255,0.7), inset 1px 1px 2px rgba(255,255,255,0.5)",
-        "clay-pressed": "inset 4px 4px 9px rgba(92,23,48,0.16), inset -3px -3px 8px rgba(255,255,255,0.6)",
-        "clay-mango": "6px 6px 14px rgba(194,100,26,0.28), -4px -4px 12px rgba(255,255,255,0.5)",
-        "clay-berry": "6px 6px 14px rgba(92,23,48,0.30), -4px -4px 12px rgba(255,255,255,0.35)",
+        clay: "rgba(92,10,20,0.06) 0px 0px 0px 1px, rgba(92,10,20,0.04) 0px 1px 2px 0px, rgba(92,10,20,0.04) 0px 2px 4px 0px",
+        "clay-sm": "rgba(92,10,20,0.05) 0px 0px 0px 1px, rgba(92,10,20,0.04) 0px 1px 1px 0px",
+        "clay-lg": "rgba(92,10,20,0.06) 0px 0px 0px 1px, rgba(92,10,20,0.06) 0px 4px 12px 0px",
+        "clay-pressed": "rgba(92,10,20,0.1) 0px 0px 0px 1px inset",
+        "clay-mango": "rgba(92,10,20,0.08) 0px 0px 0px 1px, rgba(92,10,20,0.05) 0px 1px 2px 0px",
+        "clay-berry": "rgba(92,10,20,0.08) 0px 0px 0px 1px, rgba(92,10,20,0.05) 0px 1px 2px 0px",
       },
       maxWidth: {
         content: "1180px",

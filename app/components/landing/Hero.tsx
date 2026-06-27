@@ -1,68 +1,54 @@
-"use client";
-
-import { ArrowRight, PlayCircle, Sparkles } from "lucide-react";
-import ClayButton from "@/app/components/ui/ClayButton";
-import DashboardPreview from "./DashboardPreview";
-import { trackEvent } from "@/lib/analytics";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import Reveal from "@/app/components/shared/Reveal";
+import ReadinessReport from "./ReadinessReport";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="mx-auto grid max-w-wide items-center gap-12 px-5 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10 lg:px-8 lg:py-24">
-        <div>
-          <span className="inline-flex items-center gap-2 rounded-full border-2 border-clay-line bg-clay px-4 py-1.5 text-xs font-semibold text-ink-muted">
-            <Sparkles aria-hidden className="h-4 w-4 text-mango-deep" strokeWidth={2} />
-            Independent UPCAT preparation tool
-          </span>
+    <section id="top" className="relative overflow-hidden">
+      {/* Decorative warmth — soft maroon-mist wash, never an affordance. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-40 -top-40 size-[640px] rounded-full opacity-70 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(243,230,232,0.9) 0%, rgba(243,230,232,0) 70%)",
+        }}
+      />
 
-          <h1 className="mt-5 font-display text-display font-bold text-ink">
-            Stop guessing what to study for UPCAT.
-          </h1>
+      <div className="relative mx-auto grid max-w-content items-center gap-12 px-5 pb-20 pt-16 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-28 lg:pt-24">
+        <div className="max-w-xl">
+          <Reveal>
+            <h1 className="font-display text-[2.5rem] leading-[1.05] text-deep-maroon sm:text-[3.25rem] lg:text-[3.75rem]">
+              Stop{" "}
+              <em className="italic leading-[1.1] [padding-bottom:0.06em]">guessing</em> what to
+              study for the UPCAT.
+            </h1>
+          </Reveal>
 
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-muted">
-            Tero gives you a free UPCAT mock exam, readiness score, answer review, weak-topic report,
-            and 7-day study plan.
-          </p>
+          <Reveal delay={80}>
+            <p className="mt-6 max-w-[44ch] text-[1.05rem] leading-relaxed text-rosewood">
+              One free, no-login mock that mirrors the real UPCAT. In under an hour, know exactly
+              where you stand.
+            </p>
+          </Reveal>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <ClayButton
-              href="/diagnostic"
-              size="lg"
-              variant="primary"
-              onClick={() => trackEvent("cta_click", { location: "hero", cta: "diagnostic" })}
-            >
-              Take the free UPCAT mock
-              <ArrowRight aria-hidden className="h-5 w-5" strokeWidth={2} />
-            </ClayButton>
-
-            <ClayButton
-              href="/#how-it-works"
-              size="lg"
-              variant="secondary"
-              onClick={() => trackEvent("cta_click", { location: "hero", cta: "how_it_works" })}
-            >
-              <PlayCircle aria-hidden className="h-5 w-5" strokeWidth={2} />
-              See how Tero works
-            </ClayButton>
-          </div>
-
-          <dl className="mt-10 grid max-w-md grid-cols-3 gap-4">
-            {[
-              { k: "4", v: "UPCAT modules" },
-              { k: "63", v: "Mock items" },
-              { k: "7-day", v: "Study plan" },
-            ].map((s) => (
-              <div key={s.v} className="rounded-clay border-2 border-clay-line bg-clay px-4 py-3">
-                <dt className="tabular font-display text-xl font-bold text-berry">{s.k}</dt>
-                <dd className="text-xs font-medium text-ink-muted">{s.v}</dd>
-              </div>
-            ))}
-          </dl>
+          <Reveal delay={160}>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link href="/diagnostic" className="btn-primary">
+                Start the free mock
+                <ArrowRight size={18} strokeWidth={2.25} />
+              </Link>
+              <a href="#diagnostic" className="btn-secondary">
+                See a sample report
+              </a>
+            </div>
+          </Reveal>
         </div>
 
-        <div className="lg:animate-float-soft">
-          <DashboardPreview />
-        </div>
+        <Reveal delay={120} className="relative">
+          <ReadinessReport />
+        </Reveal>
       </div>
     </section>
   );

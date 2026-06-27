@@ -284,7 +284,7 @@ export default function MockExamRunner({ sections }: { sections: Section[] }) {
         <div className="flex flex-wrap items-center gap-2">
           <span
             className={cn(
-              "tabular inline-flex items-center gap-1.5 rounded-xl border-2 px-3 py-1 text-xs font-bold transition-colors",
+              "tabular inline-flex items-center gap-1.5 rounded-xl border px-3 py-1 text-xs font-bold transition-colors",
               attempt.remainingSeconds <= 60
                 ? "animate-pulse-soft border-berry bg-berry text-white"
                 : attempt.remainingSeconds <= 300
@@ -295,7 +295,7 @@ export default function MockExamRunner({ sections }: { sections: Section[] }) {
             <Clock aria-hidden className="h-3.5 w-3.5" strokeWidth={2} />
             {formatDuration(attempt.remainingSeconds)}
           </span>
-          <span className="tabular rounded-xl border-2 border-clay-line bg-clay px-3 py-1 text-xs font-bold text-ink">
+          <span className="tabular rounded-xl border border-clay-line bg-clay px-3 py-1 text-xs font-bold text-ink">
             {overallAnswered}/{allQuestionIds.length} answered
           </span>
         </div>
@@ -303,7 +303,7 @@ export default function MockExamRunner({ sections }: { sections: Section[] }) {
 
       <div
         key={sectionModule}
-        className="mt-5 animate-fade-up rounded-clay border-2 border-clay-line bg-cream px-5 py-4"
+        className="mt-5 animate-fade-up rounded-clay border border-clay-line bg-cream px-5 py-4"
       >
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
@@ -405,7 +405,7 @@ export default function MockExamRunner({ sections }: { sections: Section[] }) {
             </p>
           </div>
 
-          <div className="rounded-clay border-2 border-clay-line bg-clay px-4 py-3">
+          <div className="rounded-clay border border-clay-line bg-clay px-4 py-3">
             <p className="text-sm font-bold text-ink">High school grades (optional)</p>
             <p className="mt-0.5 text-xs text-ink-muted">
               Your UPG estimate blends 40% of your HS average with 60% of your mock score. Enter
@@ -425,7 +425,7 @@ export default function MockExamRunner({ sections }: { sections: Section[] }) {
                     onChange={(e) =>
                       setHsGrades((prev) => ({ ...prev, [key]: e.target.value }))
                     }
-                    className="tabular w-full rounded-xl border-2 border-clay-line bg-cream px-2.5 py-1.5 text-sm font-semibold text-ink outline-none focus:border-berry-soft"
+                    className="tabular w-full rounded-xl border border-clay-line bg-cream px-2.5 py-1.5 text-sm font-semibold text-ink outline-none focus:border-berry-soft"
                   />
                 </label>
               ))}

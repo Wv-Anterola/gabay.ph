@@ -4,7 +4,7 @@ import { Compass } from "lucide-react";
 export default function NotFound() {
   return (
     <div className="mx-auto max-w-content px-5 py-24 text-center lg:py-32">
-      <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-clay border-2 border-clay-line bg-clay text-berry shadow-clay">
+      <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-clay border border-clay-line bg-clay text-berry shadow-clay">
         <Compass aria-hidden className="h-8 w-8" strokeWidth={1.75} />
       </span>
       <h1 className="mt-6 font-display text-h1 font-bold text-ink">Page not found</h1>

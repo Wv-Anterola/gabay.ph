@@ -57,7 +57,7 @@ export default function ClayModal({
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="relative w-full max-w-lg animate-scale-in rounded-clay-lg border-2 border-clay-line bg-cream p-7 shadow-clay-lg outline-none"
+        className="relative w-full max-w-lg animate-scale-in rounded-clay-lg border border-clay-line bg-cream p-7 shadow-clay-lg outline-none"
       >
         <div className="mb-4 flex items-start justify-between gap-4">
           <h2 className="text-xl font-bold text-ink">{title}</h2>
@@ -65,7 +65,7 @@ export default function ClayModal({
             type="button"
             onClick={onClose}
             aria-label="Close dialog"
-            className="clay-press flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border-2 border-clay-line bg-clay text-ink hover:bg-clay-deep"
+            className="clay-press flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-clay-line bg-clay text-ink hover:bg-clay-deep"
           >
             <X aria-hidden className="h-5 w-5" strokeWidth={2} />
           </button>

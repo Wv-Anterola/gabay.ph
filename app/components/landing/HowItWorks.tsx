@@ -1,55 +1,68 @@
-import { ClipboardCheck, BarChart3, CalendarDays } from "lucide-react";
+import { PenLine, BarChart3, CalendarCheck } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import Reveal from "@/app/components/shared/Reveal";
 
-const STEPS = [
+type Step = {
+  n: string;
+  title: string;
+  body: string;
+  Icon: LucideIcon;
+};
+
+const STEPS: Step[] = [
   {
-    n: 1,
-    icon: ClipboardCheck,
-    title: "Take a free mock exam",
-    body: "Answer one full mock across the four UPCAT modules. No login needed to start, and your progress is saved as you go.",
+    n: "1",
+    title: "Sit one 50-minute mock",
+    body: "A single timed sitting that mirrors the real test across all four areas. No account, no payment, start in seconds.",
+    Icon: PenLine,
   },
   {
-    n: 2,
-    icon: BarChart3,
-    title: "Review your results",
-    body: "Get a readiness score, section breakdown, and explanations for the questions you missed.",
+    n: "2",
+    title: "Get an honest readiness signal",
+    body: "The moment you finish, your answers become an overall score and a per-subject breakdown that flags where you're strong, steady, or genuinely behind.",
+    Icon: BarChart3,
   },
   {
-    n: 3,
-    icon: CalendarDays,
-    title: "Follow a 7-day study plan",
-    body: "Tero turns your weak topics into a simple day-by-day plan you can actually start tonight, with practice built in.",
+    n: "3",
+    title: "Follow a focused 7-day plan",
+    body: "Your weak spots turn into a prioritized week, pointing you at the exact topics and daily actions that move your score the most.",
+    Icon: CalendarCheck,
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="scroll-mt-24 bg-clay/50 py-16 lg:py-24">
-      <div className="mx-auto max-w-wide px-5 lg:px-8">
-        <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wide text-mango-deep">How it works</p>
-          <h2 className="mt-2 font-display text-h1 font-bold text-ink">
-            From mock exam to review in three steps.
-          </h2>
-        </div>
+    <section
+      id="how-it-works"
+      className="mx-auto max-w-content scroll-mt-24 px-5 py-24 sm:px-8 lg:py-32"
+    >
+      <Reveal>
+        <h2 className="max-w-[16ch] font-display text-[2rem] leading-[1.1] text-deep-maroon sm:text-[2.5rem]">
+          Under an hour from anxious to certain.
+        </h2>
+      </Reveal>
 
-        <ol className="mt-12 grid gap-6 md:grid-cols-3">
-          {STEPS.map((s) => (
-            <li
-              key={s.n}
-              className="relative rounded-clay-lg border-2 border-clay-line bg-cream p-7"
-            >
+      <ol className="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-3">
+        {STEPS.map((step, i) => {
+          const { Icon } = step;
+          return (
+            <Reveal as="li" key={step.n} delay={i * 80}>
               <div className="flex items-center gap-3">
-                <span className="tabular flex h-11 w-11 items-center justify-center rounded-2xl bg-berry font-display text-lg font-bold text-white">
-                  {s.n}
+                <span className="grid size-11 place-items-center rounded-[14px] bg-deep-maroon text-white">
+                  <Icon size={20} strokeWidth={2.25} />
                 </span>
-                <s.icon aria-hidden className="h-7 w-7 text-teal" strokeWidth={1.75} />
+                <span className="font-display text-[1.75rem] leading-none text-dusty-rose">
+                  {step.n}
+                </span>
               </div>
-              <h3 className="mt-5 text-xl font-bold text-ink">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{s.body}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
+              <h3 className="mt-5 text-[1.2rem] font-medium text-deep-maroon">{step.title}</h3>
+              <p className="mt-2.5 max-w-[34ch] text-[0.98rem] leading-relaxed text-rosewood">
+                {step.body}
+              </p>
+            </Reveal>
+          );
+        })}
+      </ol>
     </section>
   );
 }

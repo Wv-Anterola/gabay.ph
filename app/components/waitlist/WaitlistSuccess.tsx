@@ -3,7 +3,7 @@ import ClayButton from "@/app/components/ui/ClayButton";
 
 export default function WaitlistSuccess({ email }: { email: string }) {
   return (
-    <div className="rounded-clay-xl border-2 border-clay-line bg-clay p-8 text-center shadow-clay-lg">
+    <div className="rounded-clay-xl border border-clay-line bg-clay p-8 text-center shadow-clay-lg">
       <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-clay bg-teal text-white shadow-clay">
         <PartyPopper aria-hidden className="h-8 w-8" strokeWidth={1.75} />
       </span>

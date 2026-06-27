@@ -54,10 +54,10 @@ export default function DashboardView() {
         </ClayButton>
       </div>
 
-      <section className="mt-8 rounded-clay-lg border-2 border-clay-line bg-cream p-6 shadow-clay">
+      <section className="mt-8 rounded-clay-lg border border-clay-line bg-cream p-6 shadow-clay">
         <h2 className="text-lg font-bold text-ink">Previous attempts</h2>
         {rows.length === 0 ? (
-          <div className="mt-5 rounded-clay border-2 border-clay-line bg-clay px-5 py-4">
+          <div className="mt-5 rounded-clay border border-clay-line bg-clay px-5 py-4">
             <p className="text-sm text-ink-muted">No attempts yet.</p>
             <div className="mt-4">
               <ClayButton href="/diagnostic" variant="secondary">

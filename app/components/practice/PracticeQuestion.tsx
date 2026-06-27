@@ -27,7 +27,7 @@ export default function PracticeQuestion({
   const isCorrect = selected === question.answer;
 
   return (
-    <div className="rounded-clay-lg border-2 border-clay-line bg-clay p-6 shadow-clay lg:p-8">
+    <div className="rounded-clay-lg border border-clay-line bg-clay p-6 shadow-clay lg:p-8">
       <div className="flex flex-wrap items-center gap-2">
         <span className="tabular text-xs font-bold uppercase tracking-wide text-ink-faint">
           {index + 1} of {total}
@@ -38,7 +38,7 @@ export default function PracticeQuestion({
       </div>
 
       {passage ? (
-        <div className="mt-4 rounded-clay border-2 border-clay-line bg-cream px-5 py-4">
+        <div className="mt-4 rounded-clay border border-clay-line bg-cream px-5 py-4">
           <p className="text-xs font-bold uppercase tracking-wide text-mango-deep">{passage.title}</p>
           <p className="mt-2 text-sm leading-relaxed text-ink">
             <MathText text={passage.body} />
@@ -47,7 +47,7 @@ export default function PracticeQuestion({
       ) : null}
 
       {question.image ? (
-        <figure className="mt-4 rounded-clay border-2 border-clay-line bg-cream px-4 py-4">
+        <figure className="mt-4 rounded-clay border border-clay-line bg-cream px-4 py-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={question.image.src}
@@ -76,7 +76,7 @@ export default function PracticeQuestion({
               <label
                 key={c.id}
                 className={cn(
-                  "flex items-start gap-3 rounded-clay border-2 bg-cream px-4 py-3.5 shadow-clay-sm transition-colors",
+                  "flex items-start gap-3 rounded-clay border bg-cream px-4 py-3.5 shadow-clay-sm transition-colors",
                   revealed ? "cursor-default" : "clay-press cursor-pointer hover:border-berry-soft hover:bg-clay",
                   showCorrect && "border-state-strong bg-teal-tint",
                   showWrong && "border-state-weak bg-berry-tint",
@@ -95,7 +95,7 @@ export default function PracticeQuestion({
                 <span
                   aria-hidden
                   className={cn(
-                    "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border-2 text-sm font-bold uppercase",
+                    "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border text-sm font-bold uppercase",
                     showCorrect
                       ? "border-state-strong bg-state-strong text-white"
                       : showWrong

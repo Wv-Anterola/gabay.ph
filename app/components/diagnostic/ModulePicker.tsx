@@ -26,7 +26,7 @@ export default function ModulePicker() {
           <Link
             key={id}
             href={`/diagnostic/${id}`}
-            className="clay-press group flex items-start gap-4 rounded-clay-lg border-2 border-clay-line bg-cream p-6 shadow-clay hover:shadow-clay-lg"
+            className="clay-press group flex items-start gap-4 rounded-clay-lg border border-clay-line bg-cream p-6 shadow-clay hover:shadow-clay-lg"
           >
             <span
               className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-clay-sm ${MODULE_ACCENT[id]}`}

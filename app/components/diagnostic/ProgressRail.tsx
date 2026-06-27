@@ -29,7 +29,7 @@ export default function ProgressRail({
   const isComplete = total > 0 && answeredCount === total;
 
   return (
-    <aside className="rounded-clay-lg border-2 border-clay-line bg-cream p-5">
+    <aside className="rounded-clay-lg border border-clay-line bg-cream p-5">
       <div className="flex items-center justify-between">
         <p className="text-sm font-bold text-ink">Your progress</p>
         {elapsedLabel ? (
@@ -69,7 +69,7 @@ export default function ProgressRail({
               aria-label={`Question ${i + 1}${answered ? ", answered" : ", not answered"}${isCurrent ? ", current" : ""}`}
               aria-current={isCurrent ? "true" : undefined}
               className={cn(
-                "tabular flex h-10 items-center justify-center rounded-xl border-2 text-sm font-bold transition-colors",
+                "tabular flex h-10 items-center justify-center rounded-xl border text-sm font-bold transition-colors",
                 isCurrent
                   ? "border-berry bg-berry text-white"
                   : flagged
@@ -87,15 +87,15 @@ export default function ProgressRail({
 
       <div className="mt-5 space-y-1.5 text-xs text-ink-muted">
         <p className="flex items-center gap-2">
-          <span className="inline-block h-3 w-3 rounded border-2 border-teal-soft/40 bg-teal-tint" />
+          <span className="inline-block h-3 w-3 rounded border border-teal-soft/40 bg-teal-tint" />
           Answered
         </p>
         <p className="flex items-center gap-2">
-          <span className="inline-block h-3 w-3 rounded border-2 border-clay-line bg-clay" />
+          <span className="inline-block h-3 w-3 rounded border border-clay-line bg-clay" />
           Not yet answered
         </p>
         <p className="flex items-center gap-2">
-          <span className="inline-block h-3 w-3 rounded border-2 border-mango bg-mango-tint" />
+          <span className="inline-block h-3 w-3 rounded border border-mango bg-mango-tint" />
           Flagged
         </p>
       </div>

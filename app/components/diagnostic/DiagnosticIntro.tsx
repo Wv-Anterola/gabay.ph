@@ -14,7 +14,7 @@ const FACTS = [
 export default function DiagnosticIntro() {
   return (
     <div>
-      <span className="inline-flex items-center gap-2 rounded-full border-2 border-clay-line bg-clay px-4 py-1.5 text-xs font-semibold text-ink-muted">
+      <span className="inline-flex items-center gap-2 rounded-full border border-clay-line bg-clay px-4 py-1.5 text-xs font-semibold text-ink-muted">
         Free UPCAT mock exam
       </span>
       <h1 className="mt-4 font-display text-h1 font-bold text-ink">
@@ -29,7 +29,7 @@ export default function DiagnosticIntro() {
         {FACTS.map((f) => (
           <div
             key={f.label}
-            className="rounded-clay border-2 border-clay-line bg-cream px-5 py-4 shadow-clay-sm"
+            className="rounded-clay border border-clay-line bg-cream px-5 py-4 shadow-clay-sm"
           >
             <f.icon aria-hidden className="h-6 w-6 text-teal" strokeWidth={1.75} />
             <dt className="mt-3 text-sm font-bold text-ink">{f.label}</dt>

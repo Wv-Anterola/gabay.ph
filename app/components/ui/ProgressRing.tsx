@@ -5,13 +5,15 @@ import { useCountUp } from "@/app/components/shared/useCountUp";
 
 type Tone = "berry" | "teal" | "mango" | "strong" | "steady" | "weak";
 
+// Maroon system: accents collapse to Deep Maroon ink; strength is a monochrome
+// value ramp (deep maroon → wine → dusty rose).
 const strokes: Record<Tone, string> = {
-  berry: "#7A1F3D",
-  teal: "#2F6F5E",
-  mango: "#E07B2C",
-  strong: "#3E8E63",
-  steady: "#C98A2B",
-  weak: "#B23A48",
+  berry: "#5c0a14",
+  teal: "#5c0a14",
+  mango: "#5c0a14",
+  strong: "#5c0a14",
+  steady: "#9e2b25",
+  weak: "#b89aa0",
 };
 
 /**
@@ -47,7 +49,7 @@ export default function ProgressRing({
       aria-label={`${label ? label + ": " : ""}${clamped} percent`}
     >
       <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#EAD7C4" strokeWidth={stroke} />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="#f3e6e8" strokeWidth={stroke} />
         <circle
           cx={size / 2}
           cy={size / 2}
