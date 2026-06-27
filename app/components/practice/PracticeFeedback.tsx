@@ -15,7 +15,7 @@ export default function PracticeFeedback({
     <div
       role="status"
       aria-live="polite"
-      className={`mt-5 animate-fade-up rounded-clay border-2 px-5 py-4 ${
+      className={`mt-5 animate-fade-up rounded-clay border px-5 py-4 ${
         correct ? "border-teal-soft/40 bg-teal-tint" : "border-berry-soft/30 bg-berry-tint"
       }`}
     >

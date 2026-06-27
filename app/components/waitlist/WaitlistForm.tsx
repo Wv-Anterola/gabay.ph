@@ -79,12 +79,12 @@ export default function WaitlistForm() {
     <form
       onSubmit={onSubmit}
       noValidate
-      className="rounded-clay-xl border-2 border-clay-line bg-clay p-7 shadow-clay-lg lg:p-8"
+      className="rounded-clay-xl border border-clay-line bg-clay p-7 shadow-clay-lg lg:p-8"
     >
       {formError ? (
         <div
           role="alert"
-          className="mb-5 flex items-start gap-3 rounded-clay border-2 border-state-weak bg-berry-tint px-4 py-3"
+          className="mb-5 flex items-start gap-3 rounded-clay border border-state-weak bg-berry-tint px-4 py-3"
         >
           <AlertTriangle aria-hidden className="mt-0.5 h-5 w-5 shrink-0 text-state-weak" strokeWidth={2} />
           <p className="text-sm font-medium text-berry-deep">{formError}</p>
@@ -115,7 +115,7 @@ export default function WaitlistForm() {
             id="grade"
             value={gradeLevel}
             onChange={(e) => setGradeLevel(e.target.value)}
-            className="min-h-[48px] w-full rounded-2xl border-2 border-clay-line bg-cream px-4 text-base text-ink focus:border-berry focus:outline-none focus-visible:outline-3 focus-visible:outline-berry focus-visible:outline-offset-2"
+            className="min-h-[48px] w-full rounded-2xl border border-clay-line bg-cream px-4 text-base text-ink focus:border-berry focus:outline-none focus-visible:outline-3 focus-visible:outline-berry focus-visible:outline-offset-2"
           >
             <option value="">Prefer not to say</option>
             {GRADE_OPTIONS.map((g) => (
@@ -135,7 +135,7 @@ export default function WaitlistForm() {
           hint="When are you planning to take UPCAT? (optional)"
         />
 
-        <label className="flex cursor-pointer items-start gap-3 rounded-clay border-2 border-clay-line bg-cream px-4 py-3.5">
+        <label className="flex cursor-pointer items-start gap-3 rounded-clay border border-clay-line bg-cream px-4 py-3.5">
           <input
             type="checkbox"
             checked={paidInterest}
@@ -143,7 +143,7 @@ export default function WaitlistForm() {
               setPaidInterest(e.target.checked);
               if (e.target.checked) trackEvent("paid_interest_clicked", { source: "checkbox" });
             }}
-            className="mt-1 h-5 w-5 shrink-0 rounded border-2 border-clay-line accent-berry"
+            className="mt-1 h-5 w-5 shrink-0 rounded border border-clay-line accent-berry"
           />
           <span className="text-sm leading-relaxed text-ink">
             I&rsquo;d be interested in a future <span className="font-semibold">paid plan</span> with
@@ -155,7 +155,7 @@ export default function WaitlistForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="clay-press mt-6 inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-2xl bg-mango px-6 text-base font-bold text-ink shadow-clay-mango hover:bg-mango-deep hover:text-white disabled:opacity-60"
+        className="clay-press mt-6 inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-mango px-6 text-base font-bold text-white shadow-clay-mango hover:bg-mango-deep disabled:opacity-60"
       >
         {submitting ? (
           <>

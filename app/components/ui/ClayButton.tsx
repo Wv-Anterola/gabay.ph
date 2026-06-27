@@ -6,7 +6,7 @@ type Variant = "primary" | "secondary" | "ghost" | "berry";
 type Size = "md" | "lg";
 
 const base =
-  "clay-press inline-flex items-center justify-center gap-2 rounded-2xl font-semibold tracking-tight " +
+  "clay-press inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight " +
   "focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none cursor-pointer";
 
 const sizes: Record<Size, string> = {
@@ -15,10 +15,10 @@ const sizes: Record<Size, string> = {
 };
 
 const variants: Record<Variant, string> = {
-  // Mango is reserved for the single primary action per screen.
-  primary: "bg-mango text-ink shadow-clay-mango hover:bg-mango-deep hover:text-white",
+  // Primary action — Deep Maroon ink filled pill (the single primary per screen).
+  primary: "bg-mango text-white shadow-clay-mango hover:bg-mango-deep",
   berry: "bg-berry text-white shadow-clay-berry hover:bg-berry-deep",
-  secondary: "border-2 border-clay-line bg-clay text-ink shadow-clay-sm hover:bg-clay-deep",
+  secondary: "border border-clay-line bg-cream text-ink shadow-clay-sm hover:bg-clay",
   ghost: "text-berry hover:bg-clay",
 };
 

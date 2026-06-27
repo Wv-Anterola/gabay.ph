@@ -62,7 +62,7 @@ export default function AnswerReviewView({ attemptId }: { attemptId: string }) {
             Review explanations, topics, difficulty, and time spent for every question.
           </p>
         </div>
-        <span className="tabular rounded-xl border-2 border-clay-line bg-clay px-3 py-1 text-xs font-bold text-ink">
+        <span className="tabular rounded-xl border border-clay-line bg-clay px-3 py-1 text-xs font-bold text-ink">
           {result.overall.correct}/{result.overall.total} correct
         </span>
       </div>
@@ -77,7 +77,7 @@ export default function AnswerReviewView({ attemptId }: { attemptId: string }) {
             key={value}
             type="button"
             onClick={() => setFilter(value as Filter)}
-            className={`rounded-xl border-2 px-4 py-2 text-sm font-semibold ${
+            className={`rounded-xl border px-4 py-2 text-sm font-semibold ${
               filter === value
                 ? "border-berry bg-berry text-white"
                 : "border-clay-line bg-cream text-ink-muted hover:bg-clay"
@@ -101,7 +101,7 @@ export default function AnswerReviewView({ attemptId }: { attemptId: string }) {
           return (
             <li
               key={review.questionId}
-              className="rounded-clay-lg border-2 border-clay-line bg-cream p-6 shadow-clay"
+              className="rounded-clay-lg border border-clay-line bg-cream p-6 shadow-clay"
             >
               <div className="flex flex-wrap items-center gap-2">
                 <span className="tabular text-xs font-bold uppercase tracking-wide text-ink-faint">
@@ -119,7 +119,7 @@ export default function AnswerReviewView({ attemptId }: { attemptId: string }) {
               </div>
 
               {passage ? (
-                <div className="mt-4 rounded-clay border-2 border-clay-line bg-clay px-5 py-4">
+                <div className="mt-4 rounded-clay border border-clay-line bg-clay px-5 py-4">
                   <p className="text-xs font-bold uppercase tracking-wide text-mango-deep">
                     {passage.title}
                   </p>
@@ -130,7 +130,7 @@ export default function AnswerReviewView({ attemptId }: { attemptId: string }) {
               ) : null}
 
               {question.image ? (
-                <figure className="mt-4 rounded-clay border-2 border-clay-line bg-clay px-4 py-4">
+                <figure className="mt-4 rounded-clay border border-clay-line bg-clay px-4 py-4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={question.image.src}
@@ -151,7 +151,7 @@ export default function AnswerReviewView({ attemptId }: { attemptId: string }) {
 
               <div className="mt-5 grid gap-3 md:grid-cols-2">
                 <div
-                  className={`rounded-clay border-2 px-4 py-3 ${
+                  className={`rounded-clay border px-4 py-3 ${
                     review.isCorrect
                       ? "border-teal-soft/40 bg-teal-tint"
                       : "border-berry-soft/30 bg-berry-tint"
@@ -176,7 +176,7 @@ export default function AnswerReviewView({ attemptId }: { attemptId: string }) {
                     )}
                   </p>
                 </div>
-                <div className="rounded-clay border-2 border-teal-soft/40 bg-teal-tint px-4 py-3">
+                <div className="rounded-clay border border-teal-soft/40 bg-teal-tint px-4 py-3">
                   <p className="text-sm font-bold text-ink">Correct answer</p>
                   <p className="mt-2 text-sm text-ink-muted">
                     {correct ? (
@@ -189,7 +189,7 @@ export default function AnswerReviewView({ attemptId }: { attemptId: string }) {
                 </div>
               </div>
 
-              <div className="mt-5 rounded-clay border-2 border-clay-line bg-clay px-4 py-3">
+              <div className="mt-5 rounded-clay border border-clay-line bg-clay px-4 py-3">
                 <p className="text-sm font-bold text-ink">Explanation</p>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">
                   <MathText text={question.explanation} />

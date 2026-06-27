@@ -39,7 +39,7 @@ const ClayInput = forwardRef<HTMLInputElement, Props>(function ClayInput(
           aria-invalid={error ? true : undefined}
           aria-describedby={cn(hint ? hintId : "", error ? errorId : "") || undefined}
           className={cn(
-            "min-h-[48px] w-full rounded-2xl border-2 bg-cream px-4 text-base text-ink placeholder:text-ink-faint",
+            "min-h-[48px] w-full rounded-2xl border bg-cream px-4 text-base text-ink placeholder:text-ink-faint",
             "transition-colors duration-200 focus:outline-none focus-visible:outline-3 focus-visible:outline-berry focus-visible:outline-offset-2",
             error ? "border-state-weak" : "border-clay-line focus:border-berry",
             trailing ? "pr-12" : "",

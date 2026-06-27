@@ -8,7 +8,7 @@ export default function ReadinessSummary({ result }: { result: DiagnosticResult 
   const { overall } = result;
   const readinessScore = overall.readinessScore ?? overall.weightedAccuracy ?? overall.accuracy;
   return (
-    <section className="rounded-clay-xl border-2 border-clay-line bg-clay p-7 shadow-clay-lg lg:p-9">
+    <section className="rounded-clay-xl border border-clay-line bg-clay p-7 shadow-clay-lg lg:p-9">
       <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
         <ProgressRing
           value={readinessScore}
@@ -43,7 +43,7 @@ export default function ReadinessSummary({ result }: { result: DiagnosticResult 
         </div>
       </div>
 
-      <p className="mt-6 rounded-clay border-2 border-clay-line bg-cream px-5 py-3 text-sm font-medium text-ink">
+      <p className="mt-6 rounded-clay border border-clay-line bg-cream px-5 py-3 text-sm font-medium text-ink">
         This is not an admissions prediction. It is a study guide based on your answers.
       </p>
     </section>

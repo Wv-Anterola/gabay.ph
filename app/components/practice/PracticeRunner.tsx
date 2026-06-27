@@ -92,8 +92,8 @@ export default function PracticeRunner({ module }: { module: ModuleId }) {
     const pct = Math.round((correctCount / questions.length) * 100);
     return (
       <div className="mx-auto max-w-content px-5 py-16 lg:py-20">
-        <div className="rounded-clay-xl border-2 border-clay-line bg-clay p-8 text-center shadow-clay-lg">
-          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-clay bg-mango text-ink shadow-clay-mango">
+        <div className="rounded-clay-xl border border-clay-line bg-clay p-8 text-center shadow-clay-lg">
+          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-clay bg-mango text-white shadow-clay-mango">
             <Trophy aria-hidden className="h-8 w-8" strokeWidth={1.75} />
           </span>
           <h1 className="mt-5 font-display text-h1 font-bold text-ink">Practice complete</h1>
@@ -132,7 +132,7 @@ export default function PracticeRunner({ module }: { module: ModuleId }) {
           <ArrowLeft aria-hidden className="h-4 w-4" strokeWidth={2} />
           My results
         </Link>
-        <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-clay-line bg-clay px-3 py-1 text-xs font-bold text-ink">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-clay-line bg-clay px-3 py-1 text-xs font-bold text-ink">
           <Target aria-hidden className="h-3.5 w-3.5 text-berry" strokeWidth={2} />
           {usingWeak ? "Weak-area practice" : "Module practice"}
         </span>
@@ -171,7 +171,7 @@ export default function PracticeRunner({ module }: { module: ModuleId }) {
             type="button"
             onClick={check}
             disabled={selected === undefined}
-            className="clay-press inline-flex min-h-[48px] items-center gap-2 rounded-2xl bg-berry px-6 text-sm font-bold text-white shadow-clay-berry hover:bg-berry-deep disabled:opacity-50"
+            className="clay-press inline-flex min-h-[48px] items-center gap-2 rounded-full bg-berry px-6 text-sm font-bold text-white shadow-clay-berry hover:bg-berry-deep disabled:opacity-50"
           >
             Check answer
           </button>
@@ -179,7 +179,7 @@ export default function PracticeRunner({ module }: { module: ModuleId }) {
           <button
             type="button"
             onClick={next}
-            className="clay-press inline-flex min-h-[48px] items-center gap-2 rounded-2xl bg-mango px-6 text-sm font-bold text-ink shadow-clay-mango hover:bg-mango-deep hover:text-white"
+            className="clay-press inline-flex min-h-[48px] items-center gap-2 rounded-full bg-mango px-6 text-sm font-bold text-white shadow-clay-mango hover:bg-mango-deep"
           >
             {index + 1 >= questions.length ? "Finish" : "Next question"}
             <ArrowRight aria-hidden className="h-4 w-4" strokeWidth={2} />

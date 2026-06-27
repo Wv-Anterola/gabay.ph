@@ -30,7 +30,7 @@ export default function QuestionCard({
   const passage = getPassage(question.passageId);
 
   return (
-    <div className={cn("rounded-clay-lg border-2 border-clay-line bg-cream p-6 lg:p-8", className)}>
+    <div className={cn("rounded-clay-lg border border-clay-line bg-cream p-6 lg:p-8", className)}>
       <div className="flex flex-wrap items-center gap-2">
         <span className="tabular text-xs font-bold uppercase tracking-wide text-ink-faint">
           Question {index + 1} of {total}
@@ -42,7 +42,7 @@ export default function QuestionCard({
           <button
             type="button"
             onClick={onToggleFlag}
-            className={`ml-auto inline-flex items-center gap-1.5 rounded-xl border-2 px-3 py-1 text-xs font-bold ${
+            className={`ml-auto inline-flex items-center gap-1.5 rounded-xl border px-3 py-1 text-xs font-bold ${
               flagged
                 ? "border-mango bg-mango-tint text-mango-deep"
                 : "border-clay-line bg-clay text-ink-muted hover:bg-clay-deep"
@@ -55,7 +55,7 @@ export default function QuestionCard({
       </div>
 
       {passage ? (
-        <div className="mt-4 rounded-clay border-2 border-clay-line bg-clay px-5 py-4">
+        <div className="mt-4 rounded-clay border border-clay-line bg-clay px-5 py-4">
           <p className="text-xs font-bold uppercase tracking-wide text-mango-deep">{passage.title}</p>
           <p className="mt-2 text-sm leading-relaxed text-ink">
             <MathText text={passage.body} />
@@ -64,7 +64,7 @@ export default function QuestionCard({
       ) : null}
 
       {question.image ? (
-        <figure className="mt-4 rounded-clay border-2 border-clay-line bg-clay px-4 py-4">
+        <figure className="mt-4 rounded-clay border border-clay-line bg-clay px-4 py-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={question.image.src}

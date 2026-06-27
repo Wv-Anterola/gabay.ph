@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Figtree, Inter } from "next/font/google";
 import "katex/dist/katex.min.css";
 import "./globals.css";
 import Navbar from "@/app/components/brand/Navbar";
 import Footer from "@/app/components/brand/Footer";
 import ConsentBanner from "@/app/components/brand/ConsentBanner";
 
-const jakarta = Plus_Jakarta_Sans({
+// Display face — Figtree at light weights (the Waldenburg role).
+const figtree = Figtree({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-jakarta",
+  weight: ["300", "400", "500"],
+  variable: "--font-figtree",
+  display: "swap",
+});
+
+// Functional UI/body text — Inter.
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -33,7 +42,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={jakarta.variable}>
+    <html lang="en" className={`${figtree.variable} ${inter.variable}`}>
       <body className="font-sans antialiased">
         <a href="#main" className="skip-link">
           Skip to main content

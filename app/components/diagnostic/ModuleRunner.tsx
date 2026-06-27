@@ -151,7 +151,7 @@ export default function ModuleRunner({
           <ArrowLeft aria-hidden className="h-4 w-4" strokeWidth={2} />
           All modules
         </Link>
-        <span className="rounded-full border-2 border-clay-line bg-clay px-3 py-1 text-xs font-bold text-ink">
+        <span className="rounded-full border border-clay-line bg-clay px-3 py-1 text-xs font-bold text-ink">
           {meta.name}
         </span>
       </div>

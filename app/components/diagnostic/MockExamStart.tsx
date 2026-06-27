@@ -96,7 +96,7 @@ export default function MockExamStart() {
           </p>
         </div>
 
-        <aside className="rounded-clay-lg border-2 border-clay-line bg-cream p-6 shadow-clay">
+        <aside className="rounded-clay-lg border border-clay-line bg-cream p-6 shadow-clay">
           <div className="flex items-center justify-between gap-4">
             <p className="text-sm font-bold text-ink">Mock exam format</p>
             <span className="tabular inline-flex items-center gap-1.5 rounded-xl bg-clay px-2.5 py-1 text-xs font-bold text-ink-muted">
@@ -108,7 +108,7 @@ export default function MockExamStart() {
             {MOCK_EXAM_SECTION_ORDER.map((module, index) => (
               <li
                 key={module}
-                className="flex items-center justify-between rounded-clay border-2 border-clay-line bg-clay px-4 py-3"
+                className="flex items-center justify-between rounded-clay border border-clay-line bg-clay px-4 py-3"
               >
                 <div>
                   <p className="text-sm font-bold text-ink">

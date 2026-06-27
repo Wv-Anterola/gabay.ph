@@ -1,52 +1,42 @@
-"use client";
-
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import ClayButton from "@/app/components/ui/ClayButton";
-import { trackEvent } from "@/lib/analytics";
+import Reveal from "@/app/components/shared/Reveal";
 
 export default function FinalCTA() {
   return (
-    <section className="mx-auto max-w-wide px-5 py-16 lg:px-8 lg:py-24">
-      <div className="relative overflow-hidden rounded-clay-xl border-2 border-berry-deep bg-berry px-8 py-14 text-center lg:px-16">
+    <section id="start" className="mx-auto max-w-content scroll-mt-24 px-5 py-24 sm:px-8 lg:py-32">
+      <div className="relative overflow-hidden rounded-[24px] bg-deep-maroon px-6 py-16 text-center sm:px-12 lg:py-24">
+        {/* Decorative accent orb — the one bright-maroon flourish. */}
         <div
-          aria-hidden
-          className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-mango/20 blur-2xl"
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-0 size-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-50 blur-3xl"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(158,43,37,0.9) 0%, rgba(128,0,32,0) 70%)",
+          }}
         />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-12 -left-8 h-48 w-48 rounded-full bg-teal/25 blur-2xl"
-        />
-        <h2 className="relative font-display text-h1 font-bold text-white">
-          Stop guessing. Start with a free UPCAT mock exam.
-        </h2>
-        <p className="relative mx-auto mt-4 max-w-xl text-lg leading-relaxed text-cream/90">
-          Take the mock, review every miss, and get a 7-day study plan in minutes. No
-          payment, no pressure.
-        </p>
-        <div className="relative mt-8 flex flex-wrap items-center justify-center gap-4">
-          <ClayButton
-            href="/diagnostic"
-            size="lg"
-            variant="primary"
-            className="!shadow-none"
-            onClick={() => trackEvent("cta_click", { location: "final_cta", cta: "diagnostic" })}
-          >
-            Take the free UPCAT mock
-            <ArrowRight aria-hidden className="h-5 w-5" strokeWidth={2} />
-          </ClayButton>
-          <ClayButton
-            href="/waitlist"
-            size="lg"
-            variant="secondary"
-            className="!bg-cream !shadow-none"
-            onClick={() => trackEvent("cta_click", { location: "final_cta", cta: "waitlist" })}
-          >
-            Join the waitlist
-          </ClayButton>
+
+        <div className="relative mx-auto max-w-[34ch]">
+          <Reveal>
+            <h2 className="font-display text-[2.25rem] leading-[1.08] text-white sm:text-[3rem]">
+              Spend the next hour finding out, not worrying.
+            </h2>
+          </Reveal>
+          <Reveal delay={80}>
+            <p className="mx-auto mt-5 max-w-[46ch] text-[1.05rem] leading-relaxed text-white/75">
+              Take the free mock and walk away knowing exactly where you stand and what to do next.
+            </p>
+          </Reveal>
+          <Reveal delay={160}>
+            <Link
+              href="/diagnostic"
+              className="mt-9 inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 font-medium text-deep-maroon transition-transform duration-200 ease-out hover:bg-porcelain active:scale-[0.97]"
+            >
+              Start the free mock
+              <ArrowRight size={18} strokeWidth={2.25} />
+            </Link>
+          </Reveal>
         </div>
-        <p className="relative mt-6 text-xs font-semibold uppercase tracking-wide text-cream/70">
-          Built for UPCAT first. More CETs coming later.
-        </p>
       </div>
     </section>
   );

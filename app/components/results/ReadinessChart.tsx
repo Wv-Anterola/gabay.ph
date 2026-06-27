@@ -16,10 +16,11 @@ const LEVEL_BADGE: Record<ReadinessLevel, "teal" | "mango" | "berry"> = {
   needs_work: "berry",
 };
 
+// Monochrome strength ramp: deep maroon → wine → dusty rose (value, not hue).
 const LEVEL_BAR: Record<ReadinessLevel, string> = {
-  strong: "bg-teal",
-  steady: "bg-mango",
-  needs_work: "bg-berry",
+  strong: "bg-state-strong",
+  steady: "bg-state-steady",
+  needs_work: "bg-state-weak",
 };
 
 /**

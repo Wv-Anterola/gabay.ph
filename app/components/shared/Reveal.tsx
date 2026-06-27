@@ -6,9 +6,14 @@ import { cn } from "@/lib/cn";
 import { useReducedMotion } from "./useReducedMotion";
 
 /**
- * Reveals its children with a fade-up the first time they scroll into view.
- * - Respects prefers-reduced-motion: reduced-motion users see content
- *   immediately, never hidden.
+ * Reveals its children with a fade-up as they scroll into view.
+ *
+ * Default-visible by design: content always renders visible for SSR, crawlers,
+ * and no-JS clients. Only AFTER hydration does JS hide elements that are still
+ * off-screen, then fade them in on scroll. Elements already in the viewport on
+ * load (e.g. the hero / LCP) are never hidden — they show immediately.
+ *
+ * - Respects prefers-reduced-motion: reduced-motion users see content immediately.
  * - Falls back to visible if IntersectionObserver is unavailable.
  * - `delay` (ms) staggers siblings; `as` swaps the wrapper element.
  */
@@ -27,23 +32,31 @@ export default function Reveal({
 }) {
   const ref = useRef<HTMLElement | null>(null);
   const reduced = useReducedMotion();
-  const [visible, setVisible] = useState(false);
+  // "visible" is the SSR/no-JS default — content is never gated behind JS.
+  const [state, setState] = useState<"visible" | "hidden" | "revealed">("visible");
 
   useEffect(() => {
-    if (reduced || typeof IntersectionObserver === "undefined") {
-      setVisible(true);
-      return;
-    }
+    if (reduced || typeof IntersectionObserver === "undefined") return; // stay visible
     const el = ref.current;
     if (!el) return;
+
+    // Already on-screen (hero/LCP, or anything above the fold)? Leave it visible
+    // immediately — no hide, no entrance animation, nothing to block paint.
+    const rect = el.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (inView) return;
+
+    // Off-screen: safe to hide now (the user can't see it) and fade it in when
+    // it scrolls into view.
+    setState("hidden");
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            setVisible(true);
+            setState("revealed");
             if (once) observer.disconnect();
           } else if (!once) {
-            setVisible(false);
+            setState("hidden");
           }
         }
       },
@@ -56,8 +69,12 @@ export default function Reveal({
   return (
     <Tag
       ref={ref}
-      className={cn(visible ? "animate-fade-up" : "opacity-0", className)}
-      style={visible && delay ? { animationDelay: `${delay}ms` } : undefined}
+      className={cn(
+        state === "hidden" && "opacity-0",
+        state === "revealed" && "animate-fade-up",
+        className,
+      )}
+      style={state === "revealed" && delay ? { animationDelay: `${delay}ms` } : undefined}
     >
       {children}
     </Tag>

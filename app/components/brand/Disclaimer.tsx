@@ -17,19 +17,19 @@ export default function Disclaimer({
 }) {
   if (variant === "plain") {
     return (
-      <p className={cn("text-xs leading-relaxed text-ink-muted", className)}>{DISCLAIMER_TEXT}</p>
+      <p className={cn("text-xs leading-relaxed text-rosewood", className)}>{DISCLAIMER_TEXT}</p>
     );
   }
 
   return (
     <div
       className={cn(
-        "flex items-start gap-3 rounded-clay border-2 border-clay-line bg-clay/70 px-5 py-4",
+        "flex items-start gap-3 rounded-[20px] border border-rose-border bg-white px-5 py-4",
         className,
       )}
     >
-      <Info aria-hidden className="mt-0.5 h-5 w-5 shrink-0 text-berry" strokeWidth={1.75} />
-      <p className="text-sm leading-relaxed text-ink-muted">{DISCLAIMER_TEXT}</p>
+      <Info aria-hidden className="mt-0.5 h-5 w-5 shrink-0 text-deep-maroon" strokeWidth={1.75} />
+      <p className="text-sm leading-relaxed text-rosewood">{DISCLAIMER_TEXT}</p>
     </div>
   );
 }

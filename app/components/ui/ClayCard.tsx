@@ -26,7 +26,7 @@ export default function ClayCard({
   return (
     <Tag
       className={cn(
-        "rounded-clay border-2 shadow-clay",
+        "rounded-clay border shadow-clay",
         tones[tone],
         interactive && "clay-press hover:shadow-clay-lg",
         className,

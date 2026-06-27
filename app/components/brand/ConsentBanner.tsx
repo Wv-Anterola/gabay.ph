@@ -44,7 +44,7 @@ export default function ConsentBanner() {
           aria-live="polite"
           className="fixed inset-x-0 bottom-0 z-[1000] flex justify-center p-4"
         >
-          <div className="flex w-full max-w-content flex-col gap-4 rounded-clay border-2 border-clay-line bg-clay px-6 py-5 shadow-clay-lg sm:flex-row sm:items-center">
+          <div className="flex w-full max-w-content flex-col gap-4 rounded-clay border border-clay-line bg-clay px-6 py-5 shadow-clay-lg sm:flex-row sm:items-center">
             <div className="flex items-start gap-3">
               <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-cream text-berry shadow-clay-sm">
                 <Cookie aria-hidden className="h-5 w-5" strokeWidth={1.75} />
@@ -62,14 +62,14 @@ export default function ConsentBanner() {
               <button
                 type="button"
                 onClick={() => decide("declined")}
-                className="clay-press min-h-[44px] rounded-2xl border-2 border-clay-line bg-cream px-5 text-sm font-semibold text-ink hover:bg-clay-deep"
+                className="clay-press min-h-[44px] rounded-full border border-clay-line bg-cream px-5 text-sm font-semibold text-ink hover:bg-clay-deep"
               >
                 Decline
               </button>
               <button
                 type="button"
                 onClick={() => decide("accepted")}
-                className="clay-press inline-flex min-h-[44px] items-center gap-2 rounded-2xl bg-berry px-5 text-sm font-semibold text-white shadow-clay-berry hover:bg-berry-deep"
+                className="clay-press inline-flex min-h-[44px] items-center gap-2 rounded-full bg-berry px-5 text-sm font-semibold text-white shadow-clay-berry hover:bg-berry-deep"
               >
                 <ShieldCheck aria-hidden className="h-4 w-4" strokeWidth={2} />
                 Accept
