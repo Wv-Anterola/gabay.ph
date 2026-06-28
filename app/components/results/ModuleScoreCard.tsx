@@ -3,8 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { MODULE_ICON, MODULE_ACCENT } from "@/app/components/shared/moduleVisuals";
 import { READINESS_LABEL } from "@/lib/scoring";
-import { UPG_SECTION_IMPACT_LABEL, UPG_SECTION_IMPACT_TONE } from "@/lib/upg";
-import type { UpgSectionImpact } from "@/lib/upg";
 import type { ModuleScore, ReadinessLevel } from "@/lib/types";
 
 const LEVEL_BADGE: Record<ReadinessLevel, "teal" | "mango" | "berry"> = {
@@ -20,13 +18,7 @@ const LEVEL_BAR: Record<ReadinessLevel, string> = {
   needs_work: "bg-state-weak",
 };
 
-export default function ModuleScoreCard({
-  score,
-  upgImpact,
-}: {
-  score: ModuleScore;
-  upgImpact?: UpgSectionImpact;
-}) {
+export default function ModuleScoreCard({ score }: { score: ModuleScore }) {
   const Icon = MODULE_ICON[score.module];
   return (
     <Card className="h-full">
@@ -57,11 +49,6 @@ export default function ModuleScoreCard({
 
         <div className="mt-3 flex flex-wrap gap-2">
           <Badge variant={LEVEL_BADGE[score.level]}>{READINESS_LABEL[score.level]}</Badge>
-          {upgImpact ? (
-            <Badge variant={UPG_SECTION_IMPACT_TONE[upgImpact]}>
-              {UPG_SECTION_IMPACT_LABEL[upgImpact]}
-            </Badge>
-          ) : null}
         </div>
       </CardContent>
     </Card>

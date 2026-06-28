@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ClipboardList, Eye, History, RotateCcw } from "lucide-react";
-import UpgHero from "./UpgHero";
+import ReadinessHero from "./ReadinessHero";
 import ModuleScoreCard from "./ModuleScoreCard";
 import WeakTopicList from "./WeakTopicList";
 import ReadinessChart from "./ReadinessChart";
@@ -26,7 +26,7 @@ import {
   setCurrentMockAttemptId,
 } from "@/lib/storage";
 import { generateStudyPlan } from "@/lib/studyPlan";
-import { ensureUpg, sectionUpgImpact } from "@/lib/upg";
+import { ensureUpg } from "@/lib/upg";
 import {
   formatDuration,
   getMockExamTotalSeconds,
@@ -113,14 +113,12 @@ export default function ResultsView() {
         </Badge>
       </div>
 
-      {upg ? (
-        <Reveal>
-          <UpgHero estimate={upg.estimate} result={result} hsAverage={mockResult?.hsAverage} />
-        </Reveal>
-      ) : null}
+      <Reveal>
+        <ReadinessHero result={result} estimate={upg?.estimate} />
+      </Reveal>
 
       {mockResult ? (
-        <Reveal delay={upg ? 80 : 0}>
+        <Reveal delay={80}>
           <Card>
             <CardContent className="p-6">
               <div className="grid gap-4 md:grid-cols-4">
@@ -190,10 +188,7 @@ export default function ResultsView() {
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {result.modules.map((m, i) => (
             <Reveal key={m.module} delay={i * 90} className="h-full">
-              <ModuleScoreCard
-                score={m}
-                upgImpact={mockResult ? sectionUpgImpact(m, result.modules) : undefined}
-              />
+              <ModuleScoreCard score={m} />
             </Reveal>
           ))}
         </div>

@@ -21,10 +21,10 @@ export default function StudyPlan7Day({ plan }: { plan: StudyDay[] }) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-lg">
           <CalendarDays aria-hidden className="size-5 text-berry" strokeWidth={2} />
-          Your 7-day UPG improvement plan
+          Your 7-day study plan
         </CardTitle>
         <CardDescription>
-          A day-by-day guide built from the topics most affecting your estimated UPG. Start today.
+          A day-by-day guide built from the topics that will move your score the most. Start today.
         </CardDescription>
       </CardHeader>
       <CardContent>

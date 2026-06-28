@@ -30,10 +30,10 @@ export default function WeakTopicList({
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-lg">
             <Target aria-hidden className="size-5 text-berry" strokeWidth={2} />
-            Biggest UPG opportunities
+            Your biggest opportunities
           </CardTitle>
           <CardDescription>
-            Improving these topics is likely to have the biggest effect on your estimated UPG.
+            Improving these topics is likely to lift your readiness the most.
           </CardDescription>
         </CardHeader>
         <CardContent>

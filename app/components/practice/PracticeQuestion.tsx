@@ -1,7 +1,6 @@
 "use client";
 
 import { Check, X } from "lucide-react";
-import Tag from "@/app/components/ui/Tag";
 import MathText from "@/app/components/shared/MathText";
 import PracticeFeedback from "./PracticeFeedback";
 import { getPassage } from "@/lib/questions";
@@ -32,9 +31,6 @@ export default function PracticeQuestion({
         <span className="tabular text-xs font-bold uppercase tracking-wide text-ink-faint">
           {index + 1} of {total}
         </span>
-        <Tag>{question.topic}</Tag>
-        {question.subtopic ? <Tag>{question.subtopic}</Tag> : null}
-        <Tag>{question.difficulty}</Tag>
       </div>
 
       {passage ? (
