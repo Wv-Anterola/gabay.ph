@@ -16,24 +16,18 @@ import {
 import type { ModuleScore } from "@/lib/types";
 
 describe("weightedScoreToUpg", () => {
-  it("keeps the lenient linear map at/above the knee (0.25)", () => {
-    expect(weightedScoreToUpg(0.9)).toBe(1.2);
-    expect(weightedScoreToUpg(0.8)).toBe(1.4);
-    expect(weightedScoreToUpg(0.7)).toBe(1.6);
-    expect(weightedScoreToUpg(0.5)).toBe(2.0);
-    expect(weightedScoreToUpg(0.3)).toBe(2.4);
-    expect(weightedScoreToUpg(0.25)).toBe(2.5); // the knee
+  it("maps weighted score linearly across the 1.00–5.00 scale", () => {
+    expect(weightedScoreToUpg(0.9)).toBe(1.4);
+    expect(weightedScoreToUpg(0.8)).toBe(1.8);
+    expect(weightedScoreToUpg(0.7)).toBe(2.2);
+    expect(weightedScoreToUpg(0.5)).toBe(3.0);
+    expect(weightedScoreToUpg(0.25)).toBe(4.0); // chance level on 4-choice items
+    expect(weightedScoreToUpg(0.1)).toBe(4.6);
   });
 
-  it("uses a steeper failing tail below the knee, up to the soft cap", () => {
-    expect(weightedScoreToUpg(0.2)).toBe(2.7); // tail, was 2.6 under pure linear
-    expect(weightedScoreToUpg(0.1)).toBe(3.1);
-    expect(weightedScoreToUpg(0)).toBe(3.5); // soft cap
-  });
-
-  it("clamps to [1.00, 3.50]", () => {
+  it("clamps to [1.00, 5.00]", () => {
     expect(weightedScoreToUpg(1)).toBe(UPG_MIN);
-    expect(weightedScoreToUpg(0)).toBe(UPG_MAX); // soft cap = 3.50
+    expect(weightedScoreToUpg(0)).toBe(UPG_MAX); // failing floor = 5.00
     expect(weightedScoreToUpg(1.5)).toBe(UPG_MIN);
     expect(weightedScoreToUpg(-0.5)).toBe(UPG_MAX);
   });
@@ -119,13 +113,13 @@ describe("hsAverageToUpg", () => {
 
 describe("estimateUpg HS blend (40% HS / 60% mock)", () => {
   it("blends the HS average with the mock estimate when provided", () => {
-    // mock 0.5 -> 2.00; HS 95 -> 1.25; blend = 0.4*1.25 + 0.6*2.00 = 1.70
+    // mock 0.5 -> 3.00; HS 95 -> 1.25; blend = 0.4*1.25 + 0.6*3.00 = 2.30
     const e = estimateUpg({ weightedScore: 0.5, completionRate: 1, hsAverage: 95 });
-    expect(e.pointEstimate).toBe(1.7);
+    expect(e.pointEstimate).toBe(2.3);
   });
 
   it("is mock-only when no HS average is given", () => {
-    expect(estimateUpg({ weightedScore: 0.5, completionRate: 1 }).pointEstimate).toBe(2.0);
+    expect(estimateUpg({ weightedScore: 0.5, completionRate: 1 }).pointEstimate).toBe(3.0);
   });
 
   it("a strong HS average pulls a weak mock toward a better estimate", () => {
@@ -138,30 +132,31 @@ describe("estimateUpg HS blend (40% HS / 60% mock)", () => {
 describe("estimateUpg", () => {
   it("returns a clamped range whose width follows confidence", () => {
     const e = estimateUpg({ weightedScore: 0.6, completionRate: 1, dragSectionName: "Math" });
-    expect(e.pointEstimate).toBe(1.8);
+    expect(e.pointEstimate).toBe(2.6);
     expect(e.confidence).toBe("high");
-    expect(e.lowerBound).toBe(1.75);
-    expect(e.upperBound).toBe(1.85);
-    expect(e.readinessBand).toBe("very_good");
+    expect(e.lowerBound).toBe(2.46);
+    expect(e.upperBound).toBe(2.74);
+    expect(e.readinessBand).toBe("satisfactory");
     expect(e.explanation).toContain("Math");
   });
 
   it("uses a wider range for low completion", () => {
-    const e = estimateUpg({ weightedScore: 0.5, completionRate: 0.5 });
+    // weightedScore 0.75 -> 2.00 so there is no performance-width term to add.
+    const e = estimateUpg({ weightedScore: 0.75, completionRate: 0.5 });
     expect(e.confidence).toBe("low");
     expect(e.upperBound - e.lowerBound).toBeCloseTo(0.3, 5); // ±0.15
   });
 
-  it("widens the interval and reaches the soft cap for very weak performance", () => {
+  it("widens the interval and reaches the failing floor for very weak performance", () => {
     const e = estimateUpg({ weightedScore: 0.05, completionRate: 1 });
-    expect(e.pointEstimate).toBeGreaterThan(3.0); // past the old hard cap
-    expect(e.pointEstimate).toBeLessThanOrEqual(UPG_MAX); // soft cap 3.50
+    expect(e.pointEstimate).toBeGreaterThan(4.0);
+    expect(e.pointEstimate).toBeLessThanOrEqual(UPG_MAX); // failing floor 5.00
     expect(e.readinessBand).toBe("failed");
     // Even at high completion, the performance term widens the band well past 0.05.
     expect(e.upperBound - e.lowerBound).toBeGreaterThan(0.2);
   });
 
-  it("never reports outside [1.00, 3.50] even at the extremes", () => {
+  it("never reports outside [1.00, 5.00] even at the extremes", () => {
     const best = estimateUpg({ weightedScore: 1, completionRate: 1 });
     expect(best.lowerBound).toBeGreaterThanOrEqual(UPG_MIN);
     const worst = estimateUpg({ weightedScore: 0, completionRate: 0 });

@@ -23,21 +23,18 @@ export type UpgSectionImpact = "high" | "moderate" | "low";
  * no network). The linear mapping below is a placeholder for a future
  * calibrated model — keep it pure and easy to swap.
  *
- * Lower UPG is better. Stronger weighted mock performance maps to a lower
- * estimate via:  upg = 3.00 - (weightedScore * 2.00),  clamped to [1.00, 3.00].
+ * Lower UPG is better. Weighted mock performance maps linearly across the full
+ * official 1.00–5.00 grade scale:  upg = 5.00 - (weightedScore * 4.00),
+ * clamped to [1.00, 5.00]. A perfect mock → 1.00; an empty/near-zero mock →
+ * 5.00; chance-level (~0.25 on 4-choice items) → ~4.00. This is intentionally
+ * NOT lenient: weak performance should read as weak.
  */
 
 export const UPG_MIN = 1.0;
-/** Soft cap: the failing tail rises to here (not the official 5.00 floor). */
-export const UPG_MAX = 3.5;
-export const UPG_INTERCEPT = 3.0;
-export const UPG_SLOPE = 2.0;
-/**
- * Below this weighted score the map switches to a steeper "failing tail" so
- * weak performance spreads toward the soft cap instead of bunching at 3.00.
- * At/above the knee the lenient main map is unchanged.
- */
-export const UPG_TAIL_KNEE = 0.25;
+/** The official failing floor. Weak performance rises to here. */
+export const UPG_MAX = 5.0;
+export const UPG_INTERCEPT = 5.0;
+export const UPG_SLOPE = 4.0;
 
 /**
  * The appeal line. UP admits roughly 10–15% of applicants; borderline scores
@@ -162,18 +159,12 @@ function clampUpg(value: number): number {
 }
 
 /**
- * Map a normalized weighted score (0–1) to a clamped point UPG estimate.
- * Piecewise: lenient linear above the knee, steeper failing tail below it that
- * rises to the soft cap (UPG_MAX) at a weighted score of 0.
+ * Map a normalized weighted score (0–1) to a clamped point UPG estimate on the
+ * full official 1.00–5.00 scale via a single linear map (lower is better).
  */
 export function weightedScoreToUpg(weightedScore: number): number {
   const safe = Math.min(1, Math.max(0, weightedScore));
-  if (safe >= UPG_TAIL_KNEE) {
-    return round2(clampUpg(UPG_INTERCEPT - safe * UPG_SLOPE));
-  }
-  const kneeUpg = UPG_INTERCEPT - UPG_TAIL_KNEE * UPG_SLOPE; // 2.50 at the knee
-  const tailSlope = (UPG_MAX - kneeUpg) / UPG_TAIL_KNEE; // rise from knee to soft cap
-  return round2(clampUpg(kneeUpg + (UPG_TAIL_KNEE - safe) * tailSlope));
+  return round2(clampUpg(UPG_INTERCEPT - safe * UPG_SLOPE));
 }
 
 export function readinessBandForUpg(upg: number): UpgReadinessBand {
