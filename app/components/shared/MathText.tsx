@@ -1,4 +1,5 @@
 import katex from "katex";
+import type { ReactNode } from "react";
 
 type Token =
   | { type: "text"; value: string }
@@ -59,6 +60,19 @@ function tokenize(input: string): Token[] {
   return tokens;
 }
 
+/** Render plain text with inline **bold** segments (math is handled separately). */
+function renderInline(value: string): ReactNode[] {
+  const cleaned = value.replaceAll("\\$", "$");
+  return cleaned.split(/(\*\*[^*]+\*\*)/g).map((part, index) => {
+    const bold = part.match(/^\*\*([^*]+)\*\*$/);
+    return bold ? (
+      <strong key={index}>{bold[1]}</strong>
+    ) : (
+      <span key={index}>{part}</span>
+    );
+  });
+}
+
 export default function MathText({
   text,
   className,
@@ -70,7 +84,7 @@ export default function MathText({
     <>
       {tokenize(text).map((token, index) => {
         if (token.type === "text") {
-          return <span key={index}>{token.value.replaceAll("\\$", "$")}</span>;
+          return <span key={index}>{renderInline(token.value)}</span>;
         }
 
         const html = katex.renderToString(token.value, {
