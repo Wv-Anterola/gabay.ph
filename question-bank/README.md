@@ -181,6 +181,9 @@ review_status: approved      # optional; approved | needs_review | rejected (def
 image_src: /questions/triangle.png   # optional
 image_alt: A right triangle with legs 3 and 4   # required when image_src is set
 image_caption: Figure 1      # optional
+# OR use generated SVG diagrams:
+diagram_alt: A right triangle with legs 3 and 4   # required when ## Diagram is set
+diagram_caption: Figure 1      # optional
 ---
 
 ## Question
@@ -198,6 +201,51 @@ Subtract 3 from both sides, then divide by 2.
 
 You may also batch several standalone questions in one file by separating each block with a line
 that is exactly `===`.
+
+### Generated SVG diagrams
+
+For math items that need a figure, add a structured `## Diagram` JSON block. The importer validates
+the template data, writes a static SVG to `public/questions/<bank>/<question-id>.svg`, and wires it
+into the runtime question image automatically. Do not paste raw SVG into Markdown.
+
+```md
+---
+id: math-geometry-001
+section: math
+topic: Parallel Lines & Angles
+difficulty: medium
+answer: b
+estimated_time: 60
+diagram_alt: Two parallel lines cut by a transversal with angles labeled 3x degrees and x plus 40 degrees.
+diagram_caption: Same-side interior angles
+---
+
+## Question
+Two parallel lines are cut by a transversal...
+
+## Choices
+A. ...
+B. ...
+C. ...
+D. ...
+
+## Explanation
+Same-side interior angles are supplementary.
+
+## Diagram
+{
+  "kind": "parallel-lines-transversal",
+  "labels": {
+    "angleA": "3x°",
+    "angleB": "x + 40°"
+  }
+}
+```
+
+Supported v1 `kind` values are `coordinate-line-points`, `circle-inscribed-angle`,
+`parallel-lines-transversal`, `similar-triangles`, `grouped-bar-chart`, `two-way-table`,
+`combination-slots`, `venn-syllogism`, `rectangle-area`, `triangle-angle-sum`, `right-triangle`,
+`ratio-parts`, and `marble-bag`.
 
 ### 2. Question set (one shared passage, many questions)
 

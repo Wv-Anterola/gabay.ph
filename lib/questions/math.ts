@@ -114,6 +114,11 @@ export const mathQuestions: Question[] = [
     subtopic: "Area",
     difficulty: "easy",
     stem: "What is the area of a rectangle that is 8 cm long and 5 cm wide?",
+    image: {
+      src: "/questions/core/math-006.svg",
+      alt: "A rectangle labeled 8 cm by 5 cm.",
+      caption: "Rectangle dimensions",
+    },
     choices: [
       { id: "a", text: "13 cm²" },
       { id: "b", text: "26 cm²" },
@@ -134,6 +139,11 @@ export const mathQuestions: Question[] = [
     subtopic: "Triangles",
     difficulty: "medium",
     stem: "Two angles of a triangle measure 50° and 65°. What is the third angle?",
+    image: {
+      src: "/questions/core/math-007.svg",
+      alt: "A triangle with two angles labeled 50 degrees and 65 degrees and the third angle unknown.",
+      caption: "Triangle angle sum",
+    },
     choices: [
       { id: "a", text: "55°" },
       { id: "b", text: "65°" },
@@ -155,6 +165,11 @@ export const mathQuestions: Question[] = [
     subtopic: "Pythagorean theorem",
     difficulty: "hard",
     stem: "A right triangle has legs of 6 and 8. What is the length of the hypotenuse?",
+    image: {
+      src: "/questions/core/math-008.svg",
+      alt: "A right triangle with legs 6 and 8 and hypotenuse unknown.",
+      caption: "Right triangle",
+    },
     choices: [
       { id: "a", text: "10" },
       { id: "b", text: "12" },
@@ -196,6 +211,11 @@ export const mathQuestions: Question[] = [
     subtopic: "Ratio",
     difficulty: "hard",
     stem: "Sand and cement are mixed in a ratio of 3:1. If you use 12 kg of sand, how much cement is needed?",
+    image: {
+      src: "/questions/core/math-010.svg",
+      alt: "A ratio bar showing 3 parts sand and 1 part cement.",
+      caption: "Sand to cement ratio",
+    },
     choices: [
       { id: "a", text: "3 kg" },
       { id: "b", text: "4 kg" },
@@ -238,6 +258,11 @@ export const mathQuestions: Question[] = [
     subtopic: "Probability",
     difficulty: "hard",
     stem: "A bag has 3 red and 5 blue marbles. What is the probability of drawing a red marble at random?",
+    image: {
+      src: "/questions/core/math-012.svg",
+      alt: "A bag containing 3 red marbles and 5 blue marbles.",
+      caption: "Marbles in the bag",
+    },
     choices: [
       { id: "a", text: "3/5" },
       { id: "b", text: "3/8" },

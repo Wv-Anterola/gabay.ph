@@ -10,6 +10,12 @@ import type {
   QuestionBank,
   ReviewStatus,
 } from "@/lib/types";
+import {
+  CORE_MATH_DIAGRAMS,
+  parseMathDiagramSpec,
+  renderMathDiagram,
+  type MathDiagramSpec,
+} from "./math-diagrams";
 
 type ImportedChoice = { id: ChoiceId; text: string };
 
@@ -23,6 +29,7 @@ export type ImportedQuestion = Omit<
   passage?: string;
   bankId: string;
   reviewStatus: ReviewStatus;
+  diagram?: MathDiagramSpec;
 };
 
 /** A passage parsed from a set's header block. */
@@ -58,6 +65,8 @@ const DIFFICULTIES: Difficulty[] = ["easy", "medium", "hard"];
 const REVIEW_STATUSES: ReviewStatus[] = ["needs_review", "approved", "rejected"];
 
 const DEFAULT_BANK_ID = "default";
+const DEFAULT_ASSET_OUTPUT_DIR = "public/questions";
+const PUBLIC_QUESTION_ASSET_PREFIX = "/questions";
 
 function slugifyBank(value: string): string {
   return value
@@ -110,6 +119,10 @@ function sectionBody(body: string, heading: string): string {
   return (next === -1 ? rest : rest.slice(0, next)).trim();
 }
 
+function questionDiagramSrc(bankId: string, questionId: string): string {
+  return `${PUBLIC_QUESTION_ASSET_PREFIX}/${bankId}/${questionId}.svg`;
+}
+
 function parseChoices(raw: string, filePath: string): ImportedChoice[] {
   const choices = raw
     .split("\n")
@@ -158,12 +171,14 @@ function parseQuestionBlock(
   folderBankId: string,
 ): ImportedQuestion {
   const { attrs, body } = parseFrontmatter(block, filePath);
+  const bankId = resolveBankId(attrs, defaults, folderBankId);
   const sectionRaw = (attrs.section ?? defaults.section ?? "").toLowerCase();
   const section = SECTION_ALIASES[sectionRaw];
   const difficulty = attrs.difficulty as Difficulty;
   const answer = (attrs.answer ?? "").toLowerCase() as ChoiceId;
   const estimated = Number(attrs.estimated_time);
   const question = sectionBody(body, "Question");
+  const diagramRaw = sectionBody(body, "Diagram");
   const explanation = sectionBody(body, "Explanation");
   const choices = parseChoices(sectionBody(body, "Choices"), filePath);
   const passageInline = sectionBody(body, "Passage") || undefined;
@@ -188,10 +203,20 @@ function parseQuestionBlock(
   if (attrs.image_src && !attrs.image_alt) {
     throw new Error(`${filePath}: image_alt is required when image_src is present`);
   }
+  if (diagramRaw && attrs.image_src) {
+    throw new Error(`${filePath}: use either ## Diagram or image_src, not both`);
+  }
+  if (diagramRaw && !attrs.diagram_alt) {
+    throw new Error(`${filePath}: diagram_alt is required when ## Diagram is present`);
+  }
+
+  const diagram = diagramRaw
+    ? parseMathDiagramSpec(diagramRaw, { filePath, questionId: attrs.id })
+    : undefined;
 
   return {
     id: attrs.id,
-    bankId: resolveBankId(attrs, defaults, folderBankId),
+    bankId,
     section,
     topic: attrs.topic,
     subtopic: attrs.subtopic || undefined,
@@ -205,7 +230,14 @@ function parseQuestionBlock(
           alt: attrs.image_alt,
           caption: attrs.image_caption || undefined,
         }
+      : diagram
+        ? {
+            src: questionDiagramSrc(bankId, attrs.id),
+            alt: attrs.diagram_alt,
+            caption: attrs.diagram_caption || undefined,
+          }
       : undefined,
+    diagram,
     choices,
     answer,
     explanation,
@@ -390,10 +422,59 @@ export const importedBanks: QuestionBank[] = ${JSON.stringify(banks, null, 2)};
 export const DEFAULT_INPUT_DIR = "question-bank";
 export const DEFAULT_OUTPUT_FILE = "lib/questions/imported.ts";
 
+export type ImportQuestionOptions = {
+  assetOutputDir?: string;
+  includeCoreDiagrams?: boolean;
+};
+
+export function writeQuestionDiagramAssets(
+  files: Array<{ path: string; source: string; folderBankId: string }>,
+  assetOutputDir = DEFAULT_ASSET_OUTPUT_DIR,
+): number {
+  let written = 0;
+  for (const { path, source, folderBankId } of files) {
+    const parsed = parseQuestionFile(source, path, folderBankId);
+    for (const question of parsed.questions) {
+      if (!question.diagram) continue;
+      const assetPath = join(assetOutputDir, question.bankId, `${question.id}.svg`);
+      mkdirSync(dirname(assetPath), { recursive: true });
+      writeFileSync(
+        assetPath,
+        renderMathDiagram(question.diagram, {
+          filePath: path,
+          questionId: question.id,
+        }),
+      );
+      written += 1;
+    }
+  }
+  return written;
+}
+
+export function writeCoreMathDiagramAssets(
+  assetOutputDir = DEFAULT_ASSET_OUTPUT_DIR,
+): number {
+  for (const diagram of CORE_MATH_DIAGRAMS) {
+    const assetPath = join(assetOutputDir, PRESET_CORE_ASSET_BANK_ID, `${diagram.questionId}.svg`);
+    mkdirSync(dirname(assetPath), { recursive: true });
+    writeFileSync(
+      assetPath,
+      renderMathDiagram(diagram.spec, {
+        filePath: "lib/questions/math.ts",
+        questionId: diagram.questionId,
+      }),
+    );
+  }
+  return CORE_MATH_DIAGRAMS.length;
+}
+
+const PRESET_CORE_ASSET_BANK_ID = "core";
+
 /** Parse every Markdown file under `inputDir` and (re)write the generated bank source. */
 export function importQuestions(
   inputDir = DEFAULT_INPUT_DIR,
   outputFile = DEFAULT_OUTPUT_FILE,
+  options: ImportQuestionOptions = {},
 ): QuestionBank[] {
   const files = walkMarkdown(inputDir).map((path) => ({
     path,
@@ -403,6 +484,11 @@ export function importQuestions(
   const banks = buildBanks(files);
   mkdirSync(dirname(outputFile), { recursive: true });
   writeFileSync(outputFile, generateSource(banks));
+  const assetOutputDir = options.assetOutputDir ?? DEFAULT_ASSET_OUTPUT_DIR;
+  writeQuestionDiagramAssets(files, assetOutputDir);
+  if (options.includeCoreDiagrams ?? true) {
+    writeCoreMathDiagramAssets(assetOutputDir);
+  }
   return banks;
 }
 

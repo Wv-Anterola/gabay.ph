@@ -1,5 +1,8 @@
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { buildBanks, parseQuestionFile } from "./import-questions";
+import { buildBanks, importQuestions, parseQuestionFile } from "./import-questions";
 
 const SINGLE = `---
 id: q-001
@@ -78,6 +81,22 @@ D. four
 Because one.
 `;
 
+const WITH_DIAGRAM = SINGLE.replace(
+  "estimated_time: 60",
+  "estimated_time: 60\ndiagram_alt: A rectangle labeled 8 by 5.",
+).replace(
+  "## Explanation\nSubtract 3, divide by 2.",
+  `## Explanation
+Subtract 3, divide by 2.
+
+## Diagram
+{
+  "kind": "rectangle-area",
+  "widthLabel": "8",
+  "heightLabel": "5"
+}`,
+);
+
 describe("parseQuestionFile", () => {
   it("parses a single question and defaults to the folder bank id", () => {
     const { questions, passages } = parseQuestionFile(SINGLE, "q-001.md", "upcat-core");
@@ -146,6 +165,28 @@ describe("parseQuestionFile", () => {
     );
     expect(() => parseQuestionFile(bad, "q.md")).toThrow(/image_alt/);
   });
+
+  it("parses a Diagram block without affecting the question sections", () => {
+    const { questions } = parseQuestionFile(WITH_DIAGRAM, "q.md", "math-bank");
+    expect(questions[0].question).toBe("What is $x$ if $2x + 3 = 11$?");
+    expect(questions[0].explanation).toBe("Subtract 3, divide by 2.");
+    expect(questions[0].diagram).toMatchObject({ kind: "rectangle-area" });
+    expect(questions[0].image).toEqual({
+      src: "/questions/math-bank/q-001.svg",
+      alt: "A rectangle labeled 8 by 5.",
+      caption: undefined,
+    });
+  });
+
+  it("rejects a Diagram block without alt text", () => {
+    const bad = WITH_DIAGRAM.replace("diagram_alt: A rectangle labeled 8 by 5.\n", "");
+    expect(() => parseQuestionFile(bad, "q.md")).toThrow(/diagram_alt/);
+  });
+
+  it("rejects an unknown Diagram kind", () => {
+    const bad = WITH_DIAGRAM.replace('"kind": "rectangle-area"', '"kind": "raw-svg"');
+    expect(() => parseQuestionFile(bad, "q.md")).toThrow(/unknown diagram kind/);
+  });
 });
 
 describe("buildBanks", () => {
@@ -181,5 +222,25 @@ describe("buildBanks", () => {
     );
     const banks = buildBanks([{ path: "a.md", source: named, folderBankId: "x" }]);
     expect(banks[0]).toMatchObject({ id: "x", name: "Fancy Bank" });
+  });
+
+  it("generates svg assets for imported Diagram blocks", () => {
+    const root = join(tmpdir(), `question-import-${Date.now()}`);
+    const inputDir = join(root, "question-bank");
+    const bankDir = join(inputDir, "math-bank");
+    const outputFile = join(root, "imported.ts");
+    const assetOutputDir = join(root, "public", "questions");
+    mkdirSync(bankDir, { recursive: true });
+    writeFileSync(join(bankDir, "math.md"), WITH_DIAGRAM);
+
+    const banks = importQuestions(inputDir, outputFile, {
+      assetOutputDir,
+      includeCoreDiagrams: false,
+    });
+
+    const svgPath = join(assetOutputDir, "math-bank", "q-001.svg");
+    expect(banks[0].questions[0].image?.src).toBe("/questions/math-bank/q-001.svg");
+    expect(existsSync(svgPath)).toBe(true);
+    expect(readFileSync(svgPath, "utf8")).toContain("<svg");
   });
 });

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">math-010 ratio-parts</title>
+  <desc id="desc">A ratio bar split into labeled parts.</desc>
+  <rect width="640" height="360" rx="18" fill="#ffffff"/>
+  <rect x="16" y="16" width="608" height="328" rx="14" fill="#fffafa" stroke="#e7d3d5" stroke-width="2"/>
+  
+  <rect x="125" y="126" width="292.5" height="82" fill="#f3e6e8" stroke="#5c0a14" stroke-width="3"/>
+  <text x="271.25" y="174" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="600" fill="#9e2b25">Sand ×3</text>
+<rect x="417.5" y="126" width="97.5" height="82" fill="#ffffff" stroke="#5c0a14" stroke-width="3"/>
+  <text x="466.25" y="174" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="600" fill="#8c5a60">Cement ×1</text>
+  <text x="320" y="245" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" font-weight="600" fill="#9e2b25">Ratio 3:1</text>
+  <text x="320" y="278" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#8c5a60">Equal-size parts represent the mix.</text>
+  
+</svg>

@@ -143,6 +143,7 @@ difficulty: medium
 answer: a
 estimated_time: 60
 review_status: approved
+diagram_alt: A circle with center O and points A, B, and C connected to show the given angles.
 ---
 
 ## Question
@@ -162,6 +163,20 @@ Therefore, $2 \times \text{angle } CBO + \text{angle } BOC = 180^\circ$.
 $2 \times \text{angle } CBO + 2x^\circ = 180^\circ$.
 $\text{angle } CBO = 90^\circ - x^\circ$.
 
+## Diagram
+{
+  "kind": "circle-inscribed-angle",
+  "labels": {
+    "center": "O",
+    "pointA": "A",
+    "pointB": "B",
+    "pointC": "C",
+    "inscribedAngle": "x°",
+    "centralAngle": "2x°",
+    "targetAngle": "∠CBO = ?"
+  }
+}
+
 ===
 
 ---
@@ -172,6 +187,7 @@ difficulty: hard
 answer: b
 estimated_time: 90
 review_status: approved
+diagram_alt: Two parallel lines cut by a transversal with angles labeled 3x degrees and x plus 40 degrees.
 ---
 
 ## Question
@@ -188,6 +204,15 @@ Same-side interior angles between parallel lines are supplementary, so they add 
 $3x + (x + 40) = 180 \Rightarrow 4x + 40 = 180 \Rightarrow x = 35$.
 The two angles are $3x = 105^\circ$ and $x + 40 = 75^\circ$. The larger is $105^\circ$.
 
+## Diagram
+{
+  "kind": "parallel-lines-transversal",
+  "labels": {
+    "angleA": "3x°",
+    "angleB": "x + 40°"
+  }
+}
+
 ===
 
 ---
@@ -198,6 +223,7 @@ difficulty: hard
 answer: b
 estimated_time: 90
 review_status: approved
+diagram_alt: Two triangles labeled ABC and DEF with corresponding sides AB equals 6 and DE equals 9.
 ---
 
 ## Question
@@ -214,6 +240,21 @@ For similar triangles, the ratio of areas equals the square of the ratio of corr
 $\frac{\text{area } DEF}{\text{area } ABC} = \left(\frac{DE}{AB}\right)^2 = \left(\frac{9}{6}\right)^2 = \frac{9}{4}$.
 So area $DEF = 24 \times \frac{9}{4} = 54$ square units.
 
+## Diagram
+{
+  "kind": "similar-triangles",
+  "left": {
+    "name": "ABC",
+    "sideLabel": "AB = 6",
+    "areaLabel": "Area = 24"
+  },
+  "right": {
+    "name": "DEF",
+    "sideLabel": "DE = 9",
+    "areaLabel": "Area = ?"
+  }
+}
+
 ===
 
 ---
@@ -224,6 +265,7 @@ difficulty: easy
 answer: c
 estimated_time: 60
 review_status: approved
+diagram_alt: A figure comparing Restaurant X and Restaurant Y profits in April and May.
 ---
 
 ## Question
@@ -240,6 +282,17 @@ Total profit of X (April + May) = $30 + 40 = 70$.
 Total profit of Y (April + May) = $40 + 50 = 90$.
 Difference = $90 - 70 = 20$ thousand pesos = $20,000$.
 
+## Diagram
+{
+  "kind": "grouped-bar-chart",
+  "yLabel": "Profit (thousand pesos)",
+  "categories": ["April", "May"],
+  "series": [
+    { "label": "Restaurant X", "values": [30, 40] },
+    { "label": "Restaurant Y", "values": [40, 50] }
+  ]
+}
+
 ===
 
 ---
@@ -250,6 +303,7 @@ difficulty: medium
 answer: b
 estimated_time: 60
 review_status: approved
+diagram_alt: A two-way table showing smokers and non-smokers by male and female counts.
 ---
 
 ## Question
@@ -269,6 +323,20 @@ The condition is "a randomly chosen 18-year old MALE".
 Total males = $25 \text{ (smokers)} + 75 \text{ (non-smokers)} = 100$.
 Male smokers = 25.
 Probability = $25 / 100 = 1/4$.
+
+## Diagram
+{
+  "kind": "two-way-table",
+  "rowHeaders": ["Smokers", "Non-smokers"],
+  "columnHeaders": ["Male", "Female"],
+  "values": [
+    [25, 11],
+    [75, 89]
+  ],
+  "highlight": {
+    "column": "Male"
+  }
+}
 
 ===
 

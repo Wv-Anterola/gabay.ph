@@ -593,6 +593,10 @@ export const importedBanks: QuestionBank[] = [
         "topic": "Circles & Inscribed Angles",
         "difficulty": "medium",
         "stem": "Let points $A$, $B$, and $C$ lie on a circle with center at point $O$. If angle $BAC$ is of measure $x^\\circ$, then what is the measure of angle $CBO$?",
+        "image": {
+          "src": "/questions/upcat-mock-a/math-006.svg",
+          "alt": "A circle with center O and points A, B, and C connected to show the given angles."
+        },
         "choices": [
           {
             "id": "a",
@@ -624,6 +628,10 @@ export const importedBanks: QuestionBank[] = [
         "topic": "Parallel Lines & Angles",
         "difficulty": "hard",
         "stem": "Two parallel lines are cut by a transversal. The two same-side interior (co-interior) angles formed measure $(3x)^\\circ$ and $(x + 40)^\\circ$. What is the measure of the larger of these two angles?",
+        "image": {
+          "src": "/questions/upcat-mock-a/math-007.svg",
+          "alt": "Two parallel lines cut by a transversal with angles labeled 3x degrees and x plus 40 degrees."
+        },
         "choices": [
           {
             "id": "a",
@@ -655,6 +663,10 @@ export const importedBanks: QuestionBank[] = [
         "topic": "Area & Similarity",
         "difficulty": "hard",
         "stem": "Triangles $ABC$ and $DEF$ are similar, with side $AB$ corresponding to side $DE$. If $AB = 6$, $DE = 9$, and the area of triangle $ABC$ is $24$ square units, what is the area of triangle $DEF$?",
+        "image": {
+          "src": "/questions/upcat-mock-a/math-008.svg",
+          "alt": "Two triangles labeled ABC and DEF with corresponding sides AB equals 6 and DE equals 9."
+        },
         "choices": [
           {
             "id": "a",
@@ -686,6 +698,10 @@ export const importedBanks: QuestionBank[] = [
         "topic": "Data Interpretation",
         "difficulty": "easy",
         "stem": "The profits (in thousand pesos) of Restaurants X and Y are as follows: in April, X earned 30 and Y earned 40; in May, X earned 40 and Y earned 50. Which of the following is a correct comparison of the total profit of Restaurants X and Y, from April to May?",
+        "image": {
+          "src": "/questions/upcat-mock-a/math-009.svg",
+          "alt": "A figure comparing Restaurant X and Restaurant Y profits in April and May."
+        },
         "choices": [
           {
             "id": "a",
@@ -717,6 +733,10 @@ export const importedBanks: QuestionBank[] = [
         "topic": "Basic Probability",
         "difficulty": "medium",
         "stem": "In a barangay, a survey was conducted to determine the number of 18-year old youths who smoke. \nSmokers: Male=25, Female=11. \nNon-Smokers: Male=75, Female=89. \nWhat is the probability that a randomly chosen 18-year old male of the barangay is a smoker?",
+        "image": {
+          "src": "/questions/upcat-mock-a/math-010.svg",
+          "alt": "A two-way table showing smokers and non-smokers by male and female counts."
+        },
         "choices": [
           {
             "id": "a",

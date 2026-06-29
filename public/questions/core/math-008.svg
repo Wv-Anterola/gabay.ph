@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">math-008 right-triangle</title>
+  <desc id="desc">A right triangle with two legs and the hypotenuse labeled.</desc>
+  <rect width="640" height="360" rx="18" fill="#ffffff"/>
+  <rect x="16" y="16" width="608" height="328" rx="14" fill="#fffafa" stroke="#e7d3d5" stroke-width="2"/>
+  
+  <polygon points="170,265 500,265 500,90" fill="#ffffff" stroke="#5c0a14" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M500 238 L472 238 L472 265" fill="none" stroke="#9e2b25" stroke-width="3"/>
+  <text x="335" y="296" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20" font-weight="600" fill="#9e2b25">8</text>
+  <text x="534" y="184" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="20" font-weight="600" fill="#9e2b25" transform="rotate(-90 534 184)">6</text>
+  <text x="314" y="160" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="22" font-weight="600" fill="#9e2b25">?</text>
+  <text x="320" y="320" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="17" font-weight="600" fill="#8c5a60">a² + b² = c²</text>
+  
+</svg>

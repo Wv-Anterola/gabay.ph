@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">math-010 two-way-table</title>
+  <desc id="desc">A two-way table for conditional probability.</desc>
+  <rect width="640" height="360" rx="18" fill="#ffffff"/>
+  <rect x="16" y="16" width="608" height="328" rx="14" fill="#fffafa" stroke="#e7d3d5" stroke-width="2"/>
+  
+  <rect x="92" y="72" width="132" height="56" fill="#fbf7f7" stroke="#e7d3d5" stroke-width="2"/>
+  <text x="158" y="106" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="700" fill="#5c0a14"></text>
+<rect x="224" y="72" width="132" height="56" fill="#fbf7f7" stroke="#e7d3d5" stroke-width="2"/>
+  <text x="290" y="106" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="700" fill="#5c0a14">Male</text>
+<rect x="356" y="72" width="132" height="56" fill="#fbf7f7" stroke="#e7d3d5" stroke-width="2"/>
+  <text x="422" y="106" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="700" fill="#5c0a14">Female</text>
+  <rect x="92" y="128" width="132" height="56" fill="#fbf7f7" stroke="#e7d3d5" stroke-width="2"/>
+  <text x="158" y="162" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="700" fill="#5c0a14">Smokers</text>
+<rect x="224" y="128" width="132" height="56" fill="#f3e6e8" stroke="#e7d3d5" stroke-width="2"/>
+  <text x="290" y="162" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="650" fill="#5c0a14">25</text>
+<rect x="356" y="128" width="132" height="56" fill="#ffffff" stroke="#e7d3d5" stroke-width="2"/>
+  <text x="422" y="162" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="650" fill="#5c0a14">11</text>
+<rect x="92" y="184" width="132" height="56" fill="#fbf7f7" stroke="#e7d3d5" stroke-width="2"/>
+  <text x="158" y="218" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="700" fill="#5c0a14">Non-smokers</text>
+<rect x="224" y="184" width="132" height="56" fill="#f3e6e8" stroke="#e7d3d5" stroke-width="2"/>
+  <text x="290" y="218" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="650" fill="#5c0a14">75</text>
+<rect x="356" y="184" width="132" height="56" fill="#ffffff" stroke="#e7d3d5" stroke-width="2"/>
+  <text x="422" y="218" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="16" font-weight="650" fill="#5c0a14">89</text>
+  <text x="320" y="292" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#8c5a60">Use the condition first, then count favorable cases.</text>
+  
+</svg>

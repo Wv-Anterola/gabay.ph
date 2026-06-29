@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">math-012 marble-bag</title>
+  <desc id="desc">A bag with colored marbles and a count legend.</desc>
+  <rect width="640" height="360" rx="18" fill="#ffffff"/>
+  <rect x="16" y="16" width="608" height="328" rx="14" fill="#fffafa" stroke="#e7d3d5" stroke-width="2"/>
+  
+  <path d="M218 110 C235 72 405 72 422 110 L462 254 C416 288 232 288 178 254 Z" fill="#ffffff" stroke="#5c0a14" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M232 111 C260 132 383 132 410 111" fill="none" stroke="#e7d3d5" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="252" cy="166" r="16" fill="#9e2b25" stroke="#ffffff" stroke-width="3"/>
+<circle cx="294" cy="154" r="16" fill="#9e2b25" stroke="#ffffff" stroke-width="3"/>
+<circle cx="336" cy="168" r="16" fill="#9e2b25" stroke="#ffffff" stroke-width="3"/>
+<circle cx="376" cy="153" r="16" fill="#8c5a60" stroke="#ffffff" stroke-width="3"/>
+<circle cx="236" cy="214" r="16" fill="#8c5a60" stroke="#ffffff" stroke-width="3"/>
+<circle cx="280" cy="222" r="16" fill="#8c5a60" stroke="#ffffff" stroke-width="3"/>
+<circle cx="326" cy="216" r="16" fill="#8c5a60" stroke="#ffffff" stroke-width="3"/>
+<circle cx="374" cy="220" r="16" fill="#8c5a60" stroke="#ffffff" stroke-width="3"/>
+  <circle cx="190" cy="286" r="8" fill="#9e2b25" stroke="#ffffff" stroke-width="2"/>
+  <text x="208" y="291" text-anchor="start" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#8c5a60">3 Red</text>
+<circle cx="320" cy="286" r="8" fill="#8c5a60" stroke="#ffffff" stroke-width="2"/>
+  <text x="338" y="291" text-anchor="start" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#8c5a60">5 Blue</text>
+  
+</svg>

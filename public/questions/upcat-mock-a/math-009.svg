@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">math-009 grouped-bar-chart</title>
+  <desc id="desc">A grouped bar chart comparing two data series across categories.</desc>
+  <rect width="640" height="360" rx="18" fill="#ffffff"/>
+  <rect x="16" y="16" width="608" height="328" rx="14" fill="#fffafa" stroke="#e7d3d5" stroke-width="2"/>
+  
+  <line x1="95" y1="275" x2="555" y2="275" stroke="#5c0a14" stroke-width="3" stroke-linecap="round"/>
+  <line x1="95" y1="275" x2="95" y2="56" stroke="#5c0a14" stroke-width="3" stroke-linecap="round"/>
+  <text x="36" y="170" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="600" fill="#8c5a60" transform="rotate(-90 36 170)">Profit (thousand pesos)</text>
+  <rect x="410" y="42" width="14" height="14" rx="3" fill="#9e2b25"/>
+  <text x="432" y="55" text-anchor="start" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600" fill="#8c5a60">Restaurant X</text>
+<rect x="410" y="66" width="14" height="14" rx="3" fill="#8c5a60"/>
+  <text x="432" y="79" text-anchor="start" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600" fill="#8c5a60">Restaurant Y</text>
+  <rect x="133" y="152" width="28" height="123" rx="4" fill="#9e2b25"/>
+  <text x="147" y="144" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700" fill="#5c0a14">30</text>
+<rect x="169" y="111" width="28" height="164" rx="4" fill="#8c5a60"/>
+  <text x="183" y="103" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700" fill="#5c0a14">40</text>
+  <text x="165" y="301" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="700" fill="#5c0a14">April</text>
+<rect x="283" y="111" width="28" height="164" rx="4" fill="#9e2b25"/>
+  <text x="297" y="103" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700" fill="#5c0a14">40</text>
+<rect x="319" y="70" width="28" height="205" rx="4" fill="#8c5a60"/>
+  <text x="333" y="62" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="700" fill="#5c0a14">50</text>
+  <text x="315" y="301" text-anchor="middle" font-family="ui-sans-serif, system-ui, sans-serif" font-size="15" font-weight="700" fill="#5c0a14">May</text>
+  
+</svg>

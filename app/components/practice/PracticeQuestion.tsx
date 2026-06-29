@@ -2,6 +2,7 @@
 
 import { Check, X } from "lucide-react";
 import MathText from "@/app/components/shared/MathText";
+import QuestionFigure from "@/app/components/shared/QuestionFigure";
 import PracticeFeedback from "./PracticeFeedback";
 import { getPassage } from "@/lib/questions";
 import { cn } from "@/lib/cn";
@@ -42,19 +43,7 @@ export default function PracticeQuestion({
         </div>
       ) : null}
 
-      {question.image ? (
-        <figure className="mt-4 rounded-clay border border-clay-line bg-cream px-4 py-4">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={question.image.src}
-            alt={question.image.alt}
-            className="max-h-80 w-full rounded-xl object-contain"
-          />
-          {question.image.caption ? (
-            <figcaption className="mt-2 text-xs text-ink-muted">{question.image.caption}</figcaption>
-          ) : null}
-        </figure>
-      ) : null}
+      <QuestionFigure image={question.image} surface="cream" />
 
       <h2 className="mt-5 text-lg font-semibold leading-relaxed text-ink lg:text-xl">
         <MathText text={question.stem} />

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, Flag, XCircle } from "lucide-react";
 import MathText from "@/app/components/shared/MathText";
+import QuestionFigure from "@/app/components/shared/QuestionFigure";
 import Tag from "@/app/components/ui/Tag";
 import { getPassage, getQuestionById } from "@/lib/questions";
 import { formatDuration } from "@/lib/mockExam";
@@ -129,21 +130,7 @@ export default function AnswerReviewView({ attemptId }: { attemptId: string }) {
                 </div>
               ) : null}
 
-              {question.image ? (
-                <figure className="mt-4 rounded-clay border border-clay-line bg-clay px-4 py-4">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={question.image.src}
-                    alt={question.image.alt}
-                    className="max-h-80 w-full rounded-xl object-contain"
-                  />
-                  {question.image.caption ? (
-                    <figcaption className="mt-2 text-xs text-ink-muted">
-                      {question.image.caption}
-                    </figcaption>
-                  ) : null}
-                </figure>
-              ) : null}
+              <QuestionFigure image={question.image} />
 
               <h2 className="mt-5 text-lg font-bold leading-relaxed text-ink">
                 <MathText text={question.stem} />
