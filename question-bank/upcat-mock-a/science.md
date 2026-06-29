@@ -33,7 +33,7 @@ review_status: approved
 ---
 
 ## Question
-Which of the following is a step in mitosis where the chromosomes are aligned vertically at the center of the cell?
+Which step in mitosis is the stage where the chromosomes are aligned along the center of the cell (the metaphase plate)?
 
 ## Choices
 A. Prophase
@@ -81,16 +81,16 @@ review_status: approved
 ---
 
 ## Question
-Assume a phylogenetic tree showing 5 species (1-5) branching from a common ancestor. Species 1, 2, and 3 branch off from a node labeled 'a'. Species 4 and 5 branch off from a different main branch. Which structure shows that species 1, 2, and 3 are more closely related to each other than they are to species 4 and 5?
+On a phylogenetic tree, species 1, 2, and 3 branch from one common node, while species 4 and 5 branch from a separate lineage. What best indicates that species 1, 2, and 3 are more closely related to each other than they are to species 4 and 5?
 
 ## Choices
-A. structure a
-B. structure b
-C. structure e
-D. structure f
+A. They share a more recent common ancestor (node) with one another than with species 4 and 5.
+B. They are drawn physically closer together on the page.
+C. They have the same number of descendant species.
+D. They are listed with lower numbers on the tree.
 
 ## Explanation
-In a phylogenetic tree, the closer the branching point (node) between species, the more closely related they are. Structure 'a' represents the most recent common ancestor exclusive to species 1, 2, and 3.
+Relatedness on a phylogenetic tree is shown by how recently lineages share a common ancestor — not by their physical spacing on the page. Sharing a more recent common node means species 1, 2, and 3 are more closely related to each other.
 
 ===
 
@@ -153,7 +153,7 @@ review_status: approved
 ---
 
 ## Question
-Which of the following samples is a homogenous solution?
+Which of the following samples is a homogeneous solution?
 
 ## Choices
 A. HCl (g)
@@ -177,16 +177,16 @@ review_status: approved
 ---
 
 ## Question
-Assume images of 4 molecular structures. Option C contains a double bond or triple bond. Which of the following molecules has a pi ($\pi$) bond?
+Which of the following molecules contains a pi ($\pi$) bond?
 
 ## Choices
-A. Structure A (all single bonds)
-B. Structure B (all single bonds)
-C. Structure C (contains a double bond)
-D. Structure D (all single bonds)
+A. $H_2$
+B. $Cl_2$
+C. $O_2$
+D. $CH_4$
 
 ## Explanation
-A single covalent bond consists of one sigma ($\sigma$) bond. A double bond consists of one sigma bond and one pi ($\pi$) bond. A triple bond consists of one sigma bond and two pi bonds.
+A single covalent bond is one sigma ($\sigma$) bond; a pi ($\pi$) bond appears only in double or triple bonds. $H_2$, $Cl_2$, and the four C–H bonds in $CH_4$ are all single bonds. $O_2$ has a double bond ($O=O$) made of one sigma and one pi bond, so it is the only molecule with a $\pi$ bond.
 
 ===
 
@@ -351,7 +351,7 @@ review_status: approved
 ---
 
 ## Question
-Assume a graph showing two curves: "rainfall" peaking at 12nn, and "water level" peaking at 2pm. In the Meycauayan River, the amount of rainfall and the corresponding increase in the river level are measured. Which statement is true?
+In the Meycauayan River, the amount of rainfall and the corresponding increase in the river level are measured through the day. The rainfall peaks at 12:00 noon, while the water level peaks at 2:00 PM. Which statement is true?
 
 ## Choices
 A. The length of time of the rainfall and the length of time that an increase in water level is observed are both equal to 8 hours.

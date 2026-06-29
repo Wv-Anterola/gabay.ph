@@ -1,7 +1,7 @@
 ---
 id: math-001
 section: math
-topic: Sequences & Series
+topic: Scientific Notation
 difficulty: easy
 answer: c
 estimated_time: 60
@@ -65,7 +65,7 @@ review_status: approved
 Archie can eat a meal in 30 minutes. Jughead can eat the same meal in 10 minutes. How long (in minutes) will it take them to eat the meal together?
 
 ## Choices
-A. 30/4
+A. 7.5
 B. 20
 C. 1/20
 D. 1/30
@@ -74,7 +74,7 @@ D. 1/30
 Archie's rate = $1/30$ of a meal per minute.
 Jughead's rate = $1/10$ of a meal per minute.
 Combined rate = $1/30 + 1/10 = 1/30 + 3/30 = 4/30$ of a meal per minute.
-Time taken = $1 / (\text{combined rate}) = \frac{30}{4}$ minutes.
+Time taken = $1 / (\text{combined rate}) = \frac{30}{4} = 7.5$ minutes.
 
 ===
 
@@ -175,17 +175,18 @@ review_status: approved
 ---
 
 ## Question
-In a figure, lines $AB$ and $EF$ are parallel. Line $BC$ is parallel to line $GE$. Angle $ABC = 20^\circ$. Angle $CDE = 95^\circ$. What is the value of $x$ (where $x$ is angle $DEF$)?
+Two parallel lines are cut by a transversal. The two same-side interior (co-interior) angles formed measure $(3x)^\circ$ and $(x + 40)^\circ$. What is the measure of the larger of these two angles?
 
 ## Choices
-A. $70^\circ$
-B. $75^\circ$
-C. $95^\circ$
-D. $115^\circ$
+A. $75^\circ$
+B. $105^\circ$
+C. $115^\circ$
+D. $135^\circ$
 
 ## Explanation
-Since $AB \parallel EF$, we can use transversal properties. Draw a line parallel to $AB$ and $EF$ through point $D$. The angle $95^\circ$ is split into two alternate interior angles. 
-Through careful geometric tracing (or extending line $CD$ to intersect $EF$), we find that $x = 75^\circ$.
+Same-side interior angles between parallel lines are supplementary, so they add to $180^\circ$:
+$3x + (x + 40) = 180 \Rightarrow 4x + 40 = 180 \Rightarrow x = 35$.
+The two angles are $3x = 105^\circ$ and $x + 40 = 75^\circ$. The larger is $105^\circ$.
 
 ===
 
@@ -200,19 +201,18 @@ review_status: approved
 ---
 
 ## Question
-In the figure, $ABCD$ is a square. The ratio of the area of triangle $GCE$ to the area of triangle $FCE$ is $2/3$. If $CF = 9$, find the area of $ABCD$.
+Triangles $ABC$ and $DEF$ are similar, with side $AB$ corresponding to side $DE$. If $AB = 6$, $DE = 9$, and the area of triangle $ABC$ is $24$ square units, what is the area of triangle $DEF$?
 
 ## Choices
-A. 25
-B. 36
-C. 49
+A. 16
+B. 54
+C. 36
 D. 81
 
 ## Explanation
-Since triangles $GCE$ and $FCE$ share the same height from $E$ to the line $CF$, the ratio of their areas is the ratio of their bases: $GC / FC = 2/3$.
-Since $CF = 9$, $GC = (\frac{2}{3}) \times 9 = 6$.
-Because $ABCD$ is a square, its side length is equal to $GC$ ($6$). 
-Area of $ABCD = 6^2 = 36$.
+For similar triangles, the ratio of areas equals the square of the ratio of corresponding sides:
+$\frac{\text{area } DEF}{\text{area } ABC} = \left(\frac{DE}{AB}\right)^2 = \left(\frac{9}{6}\right)^2 = \frac{9}{4}$.
+So area $DEF = 24 \times \frac{9}{4} = 54$ square units.
 
 ===
 
@@ -227,7 +227,7 @@ review_status: approved
 ---
 
 ## Question
-Assume a bar graph showing profits for Restaurant X and Y. For April: X=30, Y=40. For May: X=40, Y=50. Values in thousand pesos. Which of the following is a correct comparison of the total profit of Restaurants X and Y, from April to May?
+The profits (in thousand pesos) of Restaurants X and Y are as follows: in April, X earned 30 and Y earned 40; in May, X earned 40 and Y earned 50. Which of the following is a correct comparison of the total profit of Restaurants X and Y, from April to May?
 
 ## Choices
 A. The total profit of X is equal to that of Y.
@@ -305,19 +305,19 @@ id: math-012
 section: math
 topic: Deductive Reasoning
 difficulty: medium
-answer: c
+answer: a
 estimated_time: 60
 review_status: approved
 ---
 
 ## Question
-All clowns are funny. Some mascots aren’t funny. Which of the following is not consistent with the given statements?
+All clowns are funny. Some mascots are not funny. Which of the following can be validly concluded from the statements?
 
 ## Choices
 A. Some mascots are not clowns.
 B. Some clowns are not mascots.
 C. No mascot is a clown.
-D. Some mascots are clowns too.
+D. All mascots are clowns.
 
 ## Explanation
-If all clowns are funny, and some mascots aren't funny, then the mascots that aren't funny cannot be clowns. This means "Some mascots are not clowns" (A) is true. B and D are possible. However, we cannot definitively say "No mascot is a clown" (C), because there might be some mascots that ARE funny, and those funny mascots COULD be clowns. Therefore, C makes an unsupported universal negative claim.
+Since all clowns are funny, anything that is not funny cannot be a clown. The mascots that are not funny therefore cannot be clowns, so "Some mascots are not clowns" (A) must be true. B, C, and D may or may not be true, but none of them follows necessarily from the premises.

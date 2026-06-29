@@ -263,7 +263,7 @@ export const importedBanks: QuestionBank[] = [
           },
           {
             "id": "c",
-            "text": "It is contrary to custom"
+            "text": "It is a waste of money"
           },
           {
             "id": "d",
@@ -271,7 +271,7 @@ export const importedBanks: QuestionBank[] = [
           }
         ],
         "answer": "d",
-        "explanation": "The idiom \"against the grain\" means contrary to one's natural inclination or feeling, making it difficult or irritating to accept.",
+        "explanation": "The idiom \"against the grain\" means contrary to one's natural inclination or feeling. In this sentence, having to pay for poor work is galling or irritating — it goes against what feels right.",
         "estimatedTimeSeconds": 40,
         "sourceType": "original_generated",
         "reviewStatus": "approved"
@@ -329,11 +329,11 @@ export const importedBanks: QuestionBank[] = [
           },
           {
             "id": "d",
-            "text": "He wanted to know if you won the first prize."
+            "text": "He wanted to know did you win the first prize."
           }
         ],
         "answer": "c",
-        "explanation": "\"Whether\" is preferred over \"if\" in formal writing when introducing an indirect question, and the past tense \"won\" aligns correctly with the past tense \"wanted.\"",
+        "explanation": "In an indirect question the subject and verb keep statement order (no inversion), and the tense must match the past tense \"wanted.\" A and D wrongly invert with \"did,\" and B uses the present \"win\" instead of the past \"won.\" Only C is correct: \"whether you won.\"",
         "estimatedTimeSeconds": 40,
         "sourceType": "original_generated",
         "reviewStatus": "approved"
@@ -435,7 +435,7 @@ export const importedBanks: QuestionBank[] = [
         "id": "math-001",
         "module": "math",
         "bankId": "upcat-mock-a",
-        "topic": "Sequences & Series",
+        "topic": "Scientific Notation",
         "difficulty": "easy",
         "stem": "The value of $(\\frac{4}{5} \\times 10^{-4}) + (\\frac{18}{4} \\times 10^{-3})$ is?",
         "choices": [
@@ -503,7 +503,7 @@ export const importedBanks: QuestionBank[] = [
         "choices": [
           {
             "id": "a",
-            "text": "30/4"
+            "text": "7.5"
           },
           {
             "id": "b",
@@ -519,7 +519,7 @@ export const importedBanks: QuestionBank[] = [
           }
         ],
         "answer": "a",
-        "explanation": "Archie's rate = $1/30$ of a meal per minute.\nJughead's rate = $1/10$ of a meal per minute.\nCombined rate = $1/30 + 1/10 = 1/30 + 3/30 = 4/30$ of a meal per minute.\nTime taken = $1 / (\\text{combined rate}) = \\frac{30}{4}$ minutes.",
+        "explanation": "Archie's rate = $1/30$ of a meal per minute.\nJughead's rate = $1/10$ of a meal per minute.\nCombined rate = $1/30 + 1/10 = 1/30 + 3/30 = 4/30$ of a meal per minute.\nTime taken = $1 / (\\text{combined rate}) = \\frac{30}{4} = 7.5$ minutes.",
         "estimatedTimeSeconds": 90,
         "sourceType": "original_generated",
         "reviewStatus": "approved"
@@ -623,27 +623,27 @@ export const importedBanks: QuestionBank[] = [
         "bankId": "upcat-mock-a",
         "topic": "Parallel Lines & Angles",
         "difficulty": "hard",
-        "stem": "In a figure, lines $AB$ and $EF$ are parallel. Line $BC$ is parallel to line $GE$. Angle $ABC = 20^\\circ$. Angle $CDE = 95^\\circ$. What is the value of $x$ (where $x$ is angle $DEF$)?",
+        "stem": "Two parallel lines are cut by a transversal. The two same-side interior (co-interior) angles formed measure $(3x)^\\circ$ and $(x + 40)^\\circ$. What is the measure of the larger of these two angles?",
         "choices": [
           {
             "id": "a",
-            "text": "$70^\\circ$"
-          },
-          {
-            "id": "b",
             "text": "$75^\\circ$"
           },
           {
+            "id": "b",
+            "text": "$105^\\circ$"
+          },
+          {
             "id": "c",
-            "text": "$95^\\circ$"
+            "text": "$115^\\circ$"
           },
           {
             "id": "d",
-            "text": "$115^\\circ$"
+            "text": "$135^\\circ$"
           }
         ],
         "answer": "b",
-        "explanation": "Since $AB \\parallel EF$, we can use transversal properties. Draw a line parallel to $AB$ and $EF$ through point $D$. The angle $95^\\circ$ is split into two alternate interior angles. \nThrough careful geometric tracing (or extending line $CD$ to intersect $EF$), we find that $x = 75^\\circ$.",
+        "explanation": "Same-side interior angles between parallel lines are supplementary, so they add to $180^\\circ$:\n$3x + (x + 40) = 180 \\Rightarrow 4x + 40 = 180 \\Rightarrow x = 35$.\nThe two angles are $3x = 105^\\circ$ and $x + 40 = 75^\\circ$. The larger is $105^\\circ$.",
         "estimatedTimeSeconds": 90,
         "sourceType": "original_generated",
         "reviewStatus": "approved"
@@ -654,19 +654,19 @@ export const importedBanks: QuestionBank[] = [
         "bankId": "upcat-mock-a",
         "topic": "Area & Similarity",
         "difficulty": "hard",
-        "stem": "In the figure, $ABCD$ is a square. The ratio of the area of triangle $GCE$ to the area of triangle $FCE$ is $2/3$. If $CF = 9$, find the area of $ABCD$.",
+        "stem": "Triangles $ABC$ and $DEF$ are similar, with side $AB$ corresponding to side $DE$. If $AB = 6$, $DE = 9$, and the area of triangle $ABC$ is $24$ square units, what is the area of triangle $DEF$?",
         "choices": [
           {
             "id": "a",
-            "text": "25"
+            "text": "16"
           },
           {
             "id": "b",
-            "text": "36"
+            "text": "54"
           },
           {
             "id": "c",
-            "text": "49"
+            "text": "36"
           },
           {
             "id": "d",
@@ -674,7 +674,7 @@ export const importedBanks: QuestionBank[] = [
           }
         ],
         "answer": "b",
-        "explanation": "Since triangles $GCE$ and $FCE$ share the same height from $E$ to the line $CF$, the ratio of their areas is the ratio of their bases: $GC / FC = 2/3$.\nSince $CF = 9$, $GC = (\\frac{2}{3}) \\times 9 = 6$.\nBecause $ABCD$ is a square, its side length is equal to $GC$ ($6$). \nArea of $ABCD = 6^2 = 36$.",
+        "explanation": "For similar triangles, the ratio of areas equals the square of the ratio of corresponding sides:\n$\\frac{\\text{area } DEF}{\\text{area } ABC} = \\left(\\frac{DE}{AB}\\right)^2 = \\left(\\frac{9}{6}\\right)^2 = \\frac{9}{4}$.\nSo area $DEF = 24 \\times \\frac{9}{4} = 54$ square units.",
         "estimatedTimeSeconds": 90,
         "sourceType": "original_generated",
         "reviewStatus": "approved"
@@ -685,7 +685,7 @@ export const importedBanks: QuestionBank[] = [
         "bankId": "upcat-mock-a",
         "topic": "Data Interpretation",
         "difficulty": "easy",
-        "stem": "Assume a bar graph showing profits for Restaurant X and Y. For April: X=30, Y=40. For May: X=40, Y=50. Values in thousand pesos. Which of the following is a correct comparison of the total profit of Restaurants X and Y, from April to May?",
+        "stem": "The profits (in thousand pesos) of Restaurants X and Y are as follows: in April, X earned 30 and Y earned 40; in May, X earned 40 and Y earned 50. Which of the following is a correct comparison of the total profit of Restaurants X and Y, from April to May?",
         "choices": [
           {
             "id": "a",
@@ -778,7 +778,7 @@ export const importedBanks: QuestionBank[] = [
         "bankId": "upcat-mock-a",
         "topic": "Deductive Reasoning",
         "difficulty": "medium",
-        "stem": "All clowns are funny. Some mascots aren’t funny. Which of the following is not consistent with the given statements?",
+        "stem": "All clowns are funny. Some mascots are not funny. Which of the following can be validly concluded from the statements?",
         "choices": [
           {
             "id": "a",
@@ -794,11 +794,11 @@ export const importedBanks: QuestionBank[] = [
           },
           {
             "id": "d",
-            "text": "Some mascots are clowns too."
+            "text": "All mascots are clowns."
           }
         ],
-        "answer": "c",
-        "explanation": "If all clowns are funny, and some mascots aren't funny, then the mascots that aren't funny cannot be clowns. This means \"Some mascots are not clowns\" (A) is true. B and D are possible. However, we cannot definitively say \"No mascot is a clown\" (C), because there might be some mascots that ARE funny, and those funny mascots COULD be clowns. Therefore, C makes an unsupported universal negative claim.",
+        "answer": "a",
+        "explanation": "Since all clowns are funny, anything that is not funny cannot be a clown. The mascots that are not funny therefore cannot be clowns, so \"Some mascots are not clowns\" (A) must be true. B, C, and D may or may not be true, but none of them follows necessarily from the premises.",
         "estimatedTimeSeconds": 60,
         "sourceType": "original_generated",
         "reviewStatus": "approved"
@@ -1085,8 +1085,8 @@ export const importedBanks: QuestionBank[] = [
             "text": "Maraming pulo sa Pilipinas."
           }
         ],
-        "answer": "c",
-        "explanation": "Dahil ang banog ay matatagpuan sa iba't ibang isla (Luzon, Samar, Leyte, Mindanao), binigyan ito ng iba't ibang pangalan ng mga lokal na komunidad na nakatira sa mga lugar na ito.",
+        "answer": "b",
+        "explanation": "Ang iba't ibang pangalan tulad ng haribon, manaol (ang matandang tawag ng mga Tagalog at Bisaya), garuda, at malabagook ay nagmula sa magkakaibang pangkat-etniko. Ipinahihiwatig nito ang pagkakaroon ng maraming wika sa Pilipinas.",
         "estimatedTimeSeconds": 60,
         "sourceType": "original_generated",
         "reviewStatus": "approved"
@@ -1352,7 +1352,7 @@ export const importedBanks: QuestionBank[] = [
         "bankId": "upcat-mock-a",
         "topic": "Cell Biology",
         "difficulty": "easy",
-        "stem": "Which of the following is a step in mitosis where the chromosomes are aligned vertically at the center of the cell?",
+        "stem": "Which step in mitosis is the stage where the chromosomes are aligned along the center of the cell (the metaphase plate)?",
         "choices": [
           {
             "id": "a",
@@ -1414,27 +1414,27 @@ export const importedBanks: QuestionBank[] = [
         "bankId": "upcat-mock-a",
         "topic": "Ecology & Evolution",
         "difficulty": "medium",
-        "stem": "Assume a phylogenetic tree showing 5 species (1-5) branching from a common ancestor. Species 1, 2, and 3 branch off from a node labeled 'a'. Species 4 and 5 branch off from a different main branch. Which structure shows that species 1, 2, and 3 are more closely related to each other than they are to species 4 and 5?",
+        "stem": "On a phylogenetic tree, species 1, 2, and 3 branch from one common node, while species 4 and 5 branch from a separate lineage. What best indicates that species 1, 2, and 3 are more closely related to each other than they are to species 4 and 5?",
         "choices": [
           {
             "id": "a",
-            "text": "structure a"
+            "text": "They share a more recent common ancestor (node) with one another than with species 4 and 5."
           },
           {
             "id": "b",
-            "text": "structure b"
+            "text": "They are drawn physically closer together on the page."
           },
           {
             "id": "c",
-            "text": "structure e"
+            "text": "They have the same number of descendant species."
           },
           {
             "id": "d",
-            "text": "structure f"
+            "text": "They are listed with lower numbers on the tree."
           }
         ],
         "answer": "a",
-        "explanation": "In a phylogenetic tree, the closer the branching point (node) between species, the more closely related they are. Structure 'a' represents the most recent common ancestor exclusive to species 1, 2, and 3.",
+        "explanation": "Relatedness on a phylogenetic tree is shown by how recently lineages share a common ancestor — not by their physical spacing on the page. Sharing a more recent common node means species 1, 2, and 3 are more closely related to each other.",
         "estimatedTimeSeconds": 60,
         "sourceType": "original_generated",
         "reviewStatus": "approved"
@@ -1507,7 +1507,7 @@ export const importedBanks: QuestionBank[] = [
         "bankId": "upcat-mock-a",
         "topic": "Solutions & Mixtures",
         "difficulty": "easy",
-        "stem": "Which of the following samples is a homogenous solution?",
+        "stem": "Which of the following samples is a homogeneous solution?",
         "choices": [
           {
             "id": "a",
@@ -1538,27 +1538,27 @@ export const importedBanks: QuestionBank[] = [
         "bankId": "upcat-mock-a",
         "topic": "Chemical Bonding",
         "difficulty": "medium",
-        "stem": "Assume images of 4 molecular structures. Option C contains a double bond or triple bond. Which of the following molecules has a pi ($\\pi$) bond?",
+        "stem": "Which of the following molecules contains a pi ($\\pi$) bond?",
         "choices": [
           {
             "id": "a",
-            "text": "Structure A (all single bonds)"
+            "text": "$H_2$"
           },
           {
             "id": "b",
-            "text": "Structure B (all single bonds)"
+            "text": "$Cl_2$"
           },
           {
             "id": "c",
-            "text": "Structure C (contains a double bond)"
+            "text": "$O_2$"
           },
           {
             "id": "d",
-            "text": "Structure D (all single bonds)"
+            "text": "$CH_4$"
           }
         ],
         "answer": "c",
-        "explanation": "A single covalent bond consists of one sigma ($\\sigma$) bond. A double bond consists of one sigma bond and one pi ($\\pi$) bond. A triple bond consists of one sigma bond and two pi bonds.",
+        "explanation": "A single covalent bond is one sigma ($\\sigma$) bond; a pi ($\\pi$) bond appears only in double or triple bonds. $H_2$, $Cl_2$, and the four C–H bonds in $CH_4$ are all single bonds. $O_2$ has a double bond ($O=O$) made of one sigma and one pi bond, so it is the only molecule with a $\\pi$ bond.",
         "estimatedTimeSeconds": 60,
         "sourceType": "original_generated",
         "reviewStatus": "approved"
@@ -1755,7 +1755,7 @@ export const importedBanks: QuestionBank[] = [
         "bankId": "upcat-mock-a",
         "topic": "Hydrology",
         "difficulty": "medium",
-        "stem": "Assume a graph showing two curves: \"rainfall\" peaking at 12nn, and \"water level\" peaking at 2pm. In the Meycauayan River, the amount of rainfall and the corresponding increase in the river level are measured. Which statement is true?",
+        "stem": "In the Meycauayan River, the amount of rainfall and the corresponding increase in the river level are measured through the day. The rainfall peaks at 12:00 noon, while the water level peaks at 2:00 PM. Which statement is true?",
         "choices": [
           {
             "id": "a",

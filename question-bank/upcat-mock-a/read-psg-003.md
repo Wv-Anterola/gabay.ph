@@ -17,7 +17,7 @@ Sa pagtatangkang lunasan ang pagkaubos ng mga banog, ilang organisasyon, tulad n
 id: read-009
 topic: Reading Comprehension
 difficulty: easy
-answer: c
+answer: b
 estimated_time: 60
 review_status: approved
 ---
@@ -32,7 +32,7 @@ C. Maraming lugar sa Pilipinas na katatagpuan ng banog.
 D. Maraming pulo sa Pilipinas.
 
 ## Explanation
-Dahil ang banog ay matatagpuan sa iba't ibang isla (Luzon, Samar, Leyte, Mindanao), binigyan ito ng iba't ibang pangalan ng mga lokal na komunidad na nakatira sa mga lugar na ito.
+Ang iba't ibang pangalan tulad ng haribon, manaol (ang matandang tawag ng mga Tagalog at Bisaya), garuda, at malabagook ay nagmula sa magkakaibang pangkat-etniko. Ipinahihiwatig nito ang pagkakaroon ng maraming wika sa Pilipinas.
 
 ===
 

@@ -114,11 +114,11 @@ It goes **against the grain** to have to pay him for such poor work.
 ## Choices
 A. It is against good manners
 B. It is against the law
-C. It is contrary to custom
+C. It is a waste of money
 D. It is irritating
 
 ## Explanation
-The idiom "against the grain" means contrary to one's natural inclination or feeling, making it difficult or irritating to accept.
+The idiom "against the grain" means contrary to one's natural inclination or feeling. In this sentence, having to pay for poor work is galling or irritating — it goes against what feels right.
 
 ===
 
@@ -168,10 +168,10 @@ Choose the best from among the statements given below:
 A. He wanted to know if did you win the first prize.
 B. He wanted to know if you win the first prize.
 C. He wanted to know whether you won the first prize.
-D. He wanted to know if you won the first prize.
+D. He wanted to know did you win the first prize.
 
 ## Explanation
-"Whether" is preferred over "if" in formal writing when introducing an indirect question, and the past tense "won" aligns correctly with the past tense "wanted."
+In an indirect question the subject and verb keep statement order (no inversion), and the tense must match the past tense "wanted." A and D wrongly invert with "did," and B uses the present "win" instead of the past "won." Only C is correct: "whether you won."
 
 ===
 
