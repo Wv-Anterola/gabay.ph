@@ -1,27 +1,39 @@
-import { MODULES, MODULE_ORDER, getModuleQuestions, getQuestionById } from "@/lib/questions";
+import {
+  MODULES,
+  MODULE_ORDER,
+  PRESET_BANK_ID,
+  getModuleQuestions,
+  getQuestionById,
+} from "@/lib/questions";
 import type { MockExamAttempt, ModuleId, Question } from "@/lib/types";
 
 export const MOCK_EXAM_SECTION_ORDER: ModuleId[] = [...MODULE_ORDER];
 
-export function getMockExamSections(): Array<{ module: ModuleId; questions: Question[] }> {
+export function getMockExamSections(
+  bankId: string = PRESET_BANK_ID,
+): Array<{ module: ModuleId; questions: Question[] }> {
   return MOCK_EXAM_SECTION_ORDER.map((module) => ({
     module,
-    questions: getModuleQuestions(module),
+    questions: getModuleQuestions(module, bankId),
   }));
 }
 
-export function getMockQuestionIdsBySection(): Record<ModuleId, string[]> {
+export function getMockQuestionIdsBySection(
+  bankId: string = PRESET_BANK_ID,
+): Record<ModuleId, string[]> {
   return Object.fromEntries(
-    getMockExamSections().map(({ module, questions }) => [
+    getMockExamSections(bankId).map(({ module, questions }) => [
       module,
       questions.map((q) => q.id),
     ]),
   ) as Record<ModuleId, string[]>;
 }
 
-export function getMockQuestionsByModule(): Record<ModuleId, Question[]> {
+export function getMockQuestionsByModule(
+  bankId: string = PRESET_BANK_ID,
+): Record<ModuleId, Question[]> {
   return Object.fromEntries(
-    getMockExamSections().map(({ module, questions }) => [module, questions]),
+    getMockExamSections(bankId).map(({ module, questions }) => [module, questions]),
   ) as Record<ModuleId, Question[]>;
 }
 
@@ -32,8 +44,11 @@ export function getMockExamTotalSeconds(): number {
   );
 }
 
-export function getMockExamQuestionCount(): number {
-  return getMockExamSections().reduce((sum, section) => sum + section.questions.length, 0);
+export function getMockExamQuestionCount(bankId: string = PRESET_BANK_ID): number {
+  return getMockExamSections(bankId).reduce(
+    (sum, section) => sum + section.questions.length,
+    0,
+  );
 }
 
 export function getAttemptQuestion(

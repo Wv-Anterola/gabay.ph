@@ -1,9 +1,17 @@
-import type { ModuleId, ModuleMeta, Passage, Question } from "@/lib/types";
+import type {
+  ModuleId,
+  ModuleMeta,
+  Passage,
+  Question,
+  QuestionBank,
+  QuestionBankMeta,
+} from "@/lib/types";
 import { languageQuestions } from "./language";
 import { readingQuestions } from "./reading";
 import { mathQuestions } from "./math";
 import { scienceQuestions } from "./science";
 import { passages } from "./passages";
+import { importedBanks } from "./imported";
 
 /** All authored questions across modules (any review status). */
 const ALL_QUESTIONS: Question[] = [
@@ -20,6 +28,45 @@ const ALL_QUESTIONS: Question[] = [
 export const approvedQuestions: Question[] = ALL_QUESTIONS.filter(
   (q) => q.reviewStatus === "approved",
 );
+
+/* ------------------------------------------------------------------ *
+ * Question banks
+ *
+ * The preset "core" bank is the authored pool above. Additional banks
+ * (e.g. authored in Markdown and run through `npm run questions:import`)
+ * are appended from `imported.ts`. Today only the preset is served; the
+ * registry is the seam for serving alternates later.
+ * ------------------------------------------------------------------ */
+
+export const PRESET_BANK_ID = "core";
+
+const coreBank: QuestionBank = {
+  id: PRESET_BANK_ID,
+  name: "Tero Core Mock",
+  description: "Default UPCAT mock exam built from Tero's authored question pool.",
+  questions: approvedQuestions,
+  passages,
+};
+
+const ALL_BANKS: QuestionBank[] = [coreBank, ...importedBanks];
+const BANK_BY_ID = new Map<string, QuestionBank>(ALL_BANKS.map((b) => [b.id, b]));
+
+/** Every question across every bank, for id lookups during resume/review. */
+const QUESTION_BY_ID = new Map<string, Question>(
+  ALL_BANKS.flatMap((b) => b.questions).map((q) => [q.id, q]),
+);
+
+export function listBanks(): QuestionBankMeta[] {
+  return ALL_BANKS.map(({ id, name, description }) => ({ id, name, description }));
+}
+
+export function getBank(id: string = PRESET_BANK_ID): QuestionBank | undefined {
+  return BANK_BY_ID.get(id);
+}
+
+export function getPresetBank(): QuestionBank {
+  return coreBank;
+}
 
 export const MODULE_ORDER: ModuleId[] = ["language", "reading", "math", "science"];
 
@@ -59,24 +106,31 @@ export const MODULES: Record<ModuleId, ModuleMeta> = {
 };
 
 const PASSAGE_BY_ID: Record<string, Passage> = Object.fromEntries(
-  passages.map((p) => [p.id, p]),
+  ALL_BANKS.flatMap((b) => b.passages).map((p) => [p.id, p]),
 );
 
 export function isModuleId(value: string): value is ModuleId {
   return (MODULE_ORDER as string[]).includes(value);
 }
 
-/** Approved questions for a module, in authored order. */
-export function getModuleQuestions(module: ModuleId): Question[] {
-  return approvedQuestions.filter((q) => q.module === module);
+/** Approved questions for a module in a given bank, in authored order. */
+export function getModuleQuestions(
+  module: ModuleId,
+  bankId: string = PRESET_BANK_ID,
+): Question[] {
+  const bank = getBank(bankId) ?? coreBank;
+  return bank.questions.filter(
+    (q) => q.module === module && q.reviewStatus === "approved",
+  );
 }
 
 export function getPassage(id?: string): Passage | undefined {
   return id ? PASSAGE_BY_ID[id] : undefined;
 }
 
+/** Find a question by id across every bank (preset + imported). */
 export function getQuestionById(id: string): Question | undefined {
-  return approvedQuestions.find((q) => q.id === id);
+  return QUESTION_BY_ID.get(id);
 }
 
 /**

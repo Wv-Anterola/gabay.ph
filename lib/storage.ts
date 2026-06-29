@@ -1,6 +1,6 @@
 "use client";
 
-import { MODULE_ORDER } from "@/lib/questions";
+import { MODULE_ORDER, PRESET_BANK_ID } from "@/lib/questions";
 import type {
   AnswerMap,
   DiagnosticResult,
@@ -182,6 +182,7 @@ export function resumeAttemptClock(
 export function createMockExamAttempt(
   questionIdsBySection: Record<ModuleId, string[]>,
   totalSeconds: number,
+  bankId: string = PRESET_BANK_ID,
 ): MockExamAttempt {
   const now = Date.now();
   return {
@@ -197,6 +198,7 @@ export function createMockExamAttempt(
     questionTimeSpentSeconds: {},
     sectionOrder: [...MODULE_ORDER],
     questionIdsBySection,
+    bankId,
   };
 }
 

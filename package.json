@@ -12,6 +12,7 @@
     "test:watch": "vitest",
     "postinstall": "prisma generate",
     "questions:import": "tsx scripts/import-questions.ts",
+    "questions:add": "tsx scripts/add-questions.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev"
   },

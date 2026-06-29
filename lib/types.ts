@@ -16,6 +16,8 @@ export interface Choice {
 export interface Question {
   id: string;
   module: ModuleId;
+  /** Which question bank this item belongs to (defaults to the preset "core" bank). */
+  bankId?: string;
   topic: string;
   subtopic?: string;
   difficulty: Difficulty;
@@ -39,6 +41,23 @@ export interface Passage {
   id: string;
   title: string;
   body: string;
+}
+
+/** Lightweight bank descriptor (no question payload), for pickers and listings. */
+export interface QuestionBankMeta {
+  id: string;
+  name: string;
+  description?: string;
+}
+
+/**
+ * A self-contained set of questions (plus any shared passages) that can be
+ * served as one mock exam. The "core" preset bank is built from Tero's
+ * authored pool; additional banks are produced by the Markdown importer.
+ */
+export interface QuestionBank extends QuestionBankMeta {
+  questions: Question[];
+  passages: Passage[];
 }
 
 export interface ModuleMeta {
@@ -134,6 +153,8 @@ export interface MockExamAttempt {
   questionTimeSpentSeconds: Record<string, number>;
   sectionOrder: ModuleId[];
   questionIdsBySection: Record<ModuleId, string[]>;
+  /** Which question bank this attempt was drawn from (defaults to the preset). */
+  bankId?: string;
   /** Self-reported HS average (avg of G8–G11), 0–100. Feeds the UPG blend. */
   hsAverage?: number;
 }
