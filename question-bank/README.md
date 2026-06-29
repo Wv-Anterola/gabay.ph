@@ -119,8 +119,16 @@ added** and you get the exact error. Note: one file is either all standalone que
 ## Review gate
 
 Imported questions default to **`review_status: needs_review`**, which means they are stored but
-**not served** until approved. To approve, set `review_status: approved` on a question (or in a set
-header to approve the whole set) and re-run the import:
+**not served** until approved. The fastest way to approve a whole bank:
+
+```bash
+npm run questions:approve <bank>
+# e.g. npm run questions:approve upcat-mock-a
+```
+
+This sets `review_status: approved` on every question in that bank's files and re-imports. To
+approve selectively instead, set `review_status: approved` on a single question (or in a set header
+to approve the whole set) and re-run `npm run questions:import`:
 
 ```md
 ---
@@ -131,6 +139,13 @@ review_status: approved
 ```
 
 The preset "core" bank is unaffected by this gate.
+
+## Which bank the exam serves
+
+The exam serves the bank named by `ACTIVE_BANK_ID` in `lib/questions/index.ts` (currently
+`upcat-mock-a`). Change that one line to switch which mock is live. If the active bank is missing or
+has no approved questions yet, the exam automatically falls back to the preset `core` bank so it is
+never empty. Module/question counts shown in the UI reflect the active bank.
 
 ## Question banks
 

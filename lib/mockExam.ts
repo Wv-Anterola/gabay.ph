@@ -1,7 +1,7 @@
 import {
   MODULES,
   MODULE_ORDER,
-  PRESET_BANK_ID,
+  getActiveBank,
   getModuleQuestions,
   getQuestionById,
 } from "@/lib/questions";
@@ -10,7 +10,7 @@ import type { MockExamAttempt, ModuleId, Question } from "@/lib/types";
 export const MOCK_EXAM_SECTION_ORDER: ModuleId[] = [...MODULE_ORDER];
 
 export function getMockExamSections(
-  bankId: string = PRESET_BANK_ID,
+  bankId: string = getActiveBank().id,
 ): Array<{ module: ModuleId; questions: Question[] }> {
   return MOCK_EXAM_SECTION_ORDER.map((module) => ({
     module,
@@ -19,7 +19,7 @@ export function getMockExamSections(
 }
 
 export function getMockQuestionIdsBySection(
-  bankId: string = PRESET_BANK_ID,
+  bankId: string = getActiveBank().id,
 ): Record<ModuleId, string[]> {
   return Object.fromEntries(
     getMockExamSections(bankId).map(({ module, questions }) => [
@@ -30,7 +30,7 @@ export function getMockQuestionIdsBySection(
 }
 
 export function getMockQuestionsByModule(
-  bankId: string = PRESET_BANK_ID,
+  bankId: string = getActiveBank().id,
 ): Record<ModuleId, Question[]> {
   return Object.fromEntries(
     getMockExamSections(bankId).map(({ module, questions }) => [module, questions]),
@@ -44,7 +44,7 @@ export function getMockExamTotalSeconds(): number {
   );
 }
 
-export function getMockExamQuestionCount(bankId: string = PRESET_BANK_ID): number {
+export function getMockExamQuestionCount(bankId: string = getActiveBank().id): number {
   return getMockExamSections(bankId).reduce(
     (sum, section) => sum + section.questions.length,
     0,

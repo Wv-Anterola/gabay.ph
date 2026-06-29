@@ -27,6 +27,7 @@ export default function MockExamStart() {
   const [attempt, setAttempt] = useState<MockExamAttempt | null>(null);
   const [latestResult, setLatestResult] = useState<MockExamResult | null>(null);
   const totalSeconds = getMockExamTotalSeconds();
+  const questionCount = getMockExamQuestionCount();
 
   useEffect(() => {
     setAttempt(getCurrentMockAttempt());
@@ -61,7 +62,7 @@ export default function MockExamStart() {
             Complete one full mock, then get your estimated UPG.
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-muted">
-            Tero uses the current 63-question bank across Language, Reading, Math, and Science.
+            Tero uses the current {questionCount}-question bank across Language, Reading, Math, and Science.
             When you finish, see your readiness score, weak topics, and an estimated UPG range.
             Your progress saves automatically — answers, flags, section, question, and remaining
             time.

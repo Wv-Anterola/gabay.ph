@@ -13,6 +13,7 @@
     "postinstall": "prisma generate",
     "questions:import": "tsx scripts/import-questions.ts",
     "questions:add": "tsx scripts/add-questions.ts",
+    "questions:approve": "tsx scripts/approve-questions.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev"
   },

@@ -116,5 +116,1692 @@ export const importedBanks: QuestionBank[] = [
       }
     ],
     "description": "Example bank showing the Markdown import format. Not served in the exam."
+  },
+  {
+    "id": "upcat-mock-a",
+    "name": "Upcat Mock A",
+    "questions": [
+      {
+        "id": "lang-001",
+        "module": "language",
+        "bankId": "upcat-mock-a",
+        "topic": "English Vocabulary",
+        "difficulty": "easy",
+        "stem": "Sometimes we experience “unconscious” errors, and ______ to say words we do not mean to express.",
+        "choices": [
+          {
+            "id": "a",
+            "text": "manage"
+          },
+          {
+            "id": "b",
+            "text": "try"
+          },
+          {
+            "id": "c",
+            "text": "prefer"
+          },
+          {
+            "id": "d",
+            "text": "likely"
+          }
+        ],
+        "answer": "a",
+        "explanation": "The sentence describes unintentionally saying something. \"Manage to say words we do not mean\" fits best, implying that despite our conscious intent, the unconscious slips out.",
+        "estimatedTimeSeconds": 40,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "lang-002",
+        "module": "language",
+        "bankId": "upcat-mock-a",
+        "topic": "English Grammar",
+        "difficulty": "medium",
+        "stem": "Identify the underlined part that contains an error:\nIn earlier times(A), criminals were hung(B) in the(C) town plaza(D).",
+        "choices": [
+          {
+            "id": "a",
+            "text": "In earlier times"
+          },
+          {
+            "id": "b",
+            "text": "were hung"
+          },
+          {
+            "id": "c",
+            "text": "in the"
+          },
+          {
+            "id": "d",
+            "text": "town plaza"
+          }
+        ],
+        "answer": "b",
+        "explanation": "When referring to the execution of a person, the past tense of \"hang\" is \"hanged,\" not \"hung.\"",
+        "estimatedTimeSeconds": 40,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "lang-003",
+        "module": "language",
+        "bankId": "upcat-mock-a",
+        "topic": "English Grammar",
+        "difficulty": "hard",
+        "stem": "Identify the underlined part that contains an error:\nThe surgeon requested for(A) a scalpel, a piece of(B) sterile glove(C), and a mask(D).",
+        "choices": [
+          {
+            "id": "a",
+            "text": "requested for"
+          },
+          {
+            "id": "b",
+            "text": "a piece of"
+          },
+          {
+            "id": "c",
+            "text": "sterile glove"
+          },
+          {
+            "id": "d",
+            "text": "a mask"
+          }
+        ],
+        "answer": "a",
+        "explanation": "\"Request\" is a transitive verb and does not require the preposition \"for.\" It should simply be \"requested a scalpel.\"",
+        "estimatedTimeSeconds": 40,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "lang-004",
+        "module": "language",
+        "bankId": "upcat-mock-a",
+        "topic": "English Vocabulary",
+        "difficulty": "medium",
+        "stem": "Select the meaning that best fits the context of the underlined word:\nThe company shall **furnish** the cardholder a monthly statement of account.",
+        "choices": [
+          {
+            "id": "a",
+            "text": "give"
+          },
+          {
+            "id": "b",
+            "text": "make"
+          },
+          {
+            "id": "c",
+            "text": "write"
+          },
+          {
+            "id": "d",
+            "text": "mail"
+          }
+        ],
+        "answer": "a",
+        "explanation": "In this context, to \"furnish\" means to supply or provide (give) someone with something.",
+        "estimatedTimeSeconds": 40,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "lang-005",
+        "module": "language",
+        "bankId": "upcat-mock-a",
+        "topic": "English Idioms",
+        "difficulty": "medium",
+        "stem": "Select the meaning that best fits the context of the underlined phrase:\nIt goes **against the grain** to have to pay him for such poor work.",
+        "choices": [
+          {
+            "id": "a",
+            "text": "It is against good manners"
+          },
+          {
+            "id": "b",
+            "text": "It is against the law"
+          },
+          {
+            "id": "c",
+            "text": "It is contrary to custom"
+          },
+          {
+            "id": "d",
+            "text": "It is irritating"
+          }
+        ],
+        "answer": "d",
+        "explanation": "The idiom \"against the grain\" means contrary to one's natural inclination or feeling, making it difficult or irritating to accept.",
+        "estimatedTimeSeconds": 40,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "lang-006",
+        "module": "language",
+        "bankId": "upcat-mock-a",
+        "topic": "English Sentence Order",
+        "difficulty": "medium",
+        "stem": "Determine the best order of the following words/phrases to form a logical sentence:\n1. apartment\n2. blue\n3. the student’s\n4. is\n5. painted",
+        "choices": [
+          {
+            "id": "a",
+            "text": "5-2-4-3-1"
+          },
+          {
+            "id": "b",
+            "text": "3-1-4-5-2"
+          },
+          {
+            "id": "c",
+            "text": "3-2-1-4-5"
+          },
+          {
+            "id": "d",
+            "text": "4-3-2-1-5"
+          }
+        ],
+        "answer": "b",
+        "explanation": "The correct logical order is Subject-Verb-Adjective: \"The student's (3) apartment (1) is (4) painted (5) blue (2).\"",
+        "estimatedTimeSeconds": 50,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "lang-007",
+        "module": "language",
+        "bankId": "upcat-mock-a",
+        "topic": "English Grammar",
+        "difficulty": "medium",
+        "stem": "Choose the best from among the statements given below:",
+        "choices": [
+          {
+            "id": "a",
+            "text": "He wanted to know if did you win the first prize."
+          },
+          {
+            "id": "b",
+            "text": "He wanted to know if you win the first prize."
+          },
+          {
+            "id": "c",
+            "text": "He wanted to know whether you won the first prize."
+          },
+          {
+            "id": "d",
+            "text": "He wanted to know if you won the first prize."
+          }
+        ],
+        "answer": "c",
+        "explanation": "\"Whether\" is preferred over \"if\" in formal writing when introducing an indirect question, and the past tense \"won\" aligns correctly with the past tense \"wanted.\"",
+        "estimatedTimeSeconds": 40,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "lang-008",
+        "module": "language",
+        "bankId": "upcat-mock-a",
+        "topic": "Filipino Grammar",
+        "difficulty": "hard",
+        "stem": "Piliin ang letra ng bahaging may mali:\nAng mahalagang kontribusyon(A) sa pag-unlad ng ating kabuhayan at kultura(B) ang iba’t ibang sektor(C) ng lipunan(D).",
+        "choices": [
+          {
+            "id": "a",
+            "text": "Ang mahalagang kontribusyon"
+          },
+          {
+            "id": "b",
+            "text": "sa pag-unlad ng ating kabuhayan at kultura"
+          },
+          {
+            "id": "c",
+            "text": "ang iba’t ibang sektor"
+          },
+          {
+            "id": "d",
+            "text": "ng lipunan"
+          }
+        ],
+        "answer": "a",
+        "explanation": "The sentence structure is inverted and lacks a clear predicate marker. It should be \"May mahalagang kontribusyon...\" to indicate possession/action by the different sectors.",
+        "estimatedTimeSeconds": 40,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "lang-009",
+        "module": "language",
+        "bankId": "upcat-mock-a",
+        "topic": "Filipino Vocabulary",
+        "difficulty": "medium",
+        "stem": "Piliin ang angkop na salita para sa patlang:\nMaaring makatulong ang _________ ng mga estudyante sa pagpigil ng napipintong pagtaas ng tuition fee.",
+        "choices": [
+          {
+            "id": "a",
+            "text": "paggalaw"
+          },
+          {
+            "id": "b",
+            "text": "paggawa"
+          },
+          {
+            "id": "c",
+            "text": "panawagan"
+          },
+          {
+            "id": "d",
+            "text": "pagkilos"
+          }
+        ],
+        "answer": "d",
+        "explanation": "\"Pagkilos\" implies organized action or movement, which is the appropriate term for students rallying against a tuition fee increase.",
+        "estimatedTimeSeconds": 40,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "lang-010",
+        "module": "language",
+        "bankId": "upcat-mock-a",
+        "topic": "Filipino Vocabulary",
+        "difficulty": "medium",
+        "stem": "Piliin ang katulad na kahulugan ng salitang nakasalungguhit:\nMatayog ang lipad ng **imahinasyon** ng taong mapagmasid sa paligid.",
+        "choices": [
+          {
+            "id": "a",
+            "text": "malalim mag-isip"
+          },
+          {
+            "id": "b",
+            "text": "komplikado mag-isip"
+          },
+          {
+            "id": "c",
+            "text": "malawak mag-isip"
+          },
+          {
+            "id": "d",
+            "text": "malikhaing mag-isip"
+          }
+        ],
+        "answer": "d",
+        "explanation": "\"Matayog ang lipad ng imahinasyon\" directly translates to having a high-flying imagination, which means to think creatively (\"malikhaing mag-isip\").",
+        "estimatedTimeSeconds": 40,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "math-001",
+        "module": "math",
+        "bankId": "upcat-mock-a",
+        "topic": "Sequences & Series",
+        "difficulty": "easy",
+        "stem": "The value of $(\\frac{4}{5} \\times 10^{-4}) + (\\frac{18}{4} \\times 10^{-3})$ is?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "0.053"
+          },
+          {
+            "id": "b",
+            "text": "0.00125"
+          },
+          {
+            "id": "c",
+            "text": "0.00458"
+          },
+          {
+            "id": "d",
+            "text": "0.00053"
+          }
+        ],
+        "answer": "c",
+        "explanation": "Convert both to the same exponent ($10^{-4}$):\n$18/4 = 4.5$\n$4.5 \\times 10^{-3} = 45 \\times 10^{-4}$\nNow add: $(\\frac{4}{5}) + 45 = 0.8 + 45 = 45.8$\nSo, $45.8 \\times 10^{-4} = 0.00458$.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "math-002",
+        "module": "math",
+        "bankId": "upcat-mock-a",
+        "topic": "Rational Expressions",
+        "difficulty": "medium",
+        "stem": "For $x \\neq -1$ and $x \\neq -\\frac{3}{2}$, which of the following is equivalent to $\\frac{x + 1}{(2x + 3)(x + 1)^2}$?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "$\\frac{(x + 1)^2}{2x + 3}$"
+          },
+          {
+            "id": "b",
+            "text": "$\\frac{1}{2x + 3}$"
+          },
+          {
+            "id": "c",
+            "text": "$\\frac{1}{(2x + 3)(x + 1)}$"
+          },
+          {
+            "id": "d",
+            "text": "$\\frac{1}{x + 2}$"
+          }
+        ],
+        "answer": "c",
+        "explanation": "Cancel out the common factor of $(x + 1)$ from the numerator and denominator:\n$\\frac{x + 1}{(2x + 3)(x + 1)(x + 1)} = \\frac{1}{(2x + 3)(x + 1)}$.",
+        "estimatedTimeSeconds": 90,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "math-003",
+        "module": "math",
+        "bankId": "upcat-mock-a",
+        "topic": "Work & Rate Problems",
+        "difficulty": "medium",
+        "stem": "Archie can eat a meal in 30 minutes. Jughead can eat the same meal in 10 minutes. How long (in minutes) will it take them to eat the meal together?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "30/4"
+          },
+          {
+            "id": "b",
+            "text": "20"
+          },
+          {
+            "id": "c",
+            "text": "1/20"
+          },
+          {
+            "id": "d",
+            "text": "1/30"
+          }
+        ],
+        "answer": "a",
+        "explanation": "Archie's rate = $1/30$ of a meal per minute.\nJughead's rate = $1/10$ of a meal per minute.\nCombined rate = $1/30 + 1/10 = 1/30 + 3/30 = 4/30$ of a meal per minute.\nTime taken = $1 / (\\text{combined rate}) = \\frac{30}{4}$ minutes.",
+        "estimatedTimeSeconds": 90,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "math-004",
+        "module": "math",
+        "bankId": "upcat-mock-a",
+        "topic": "Linear Equations",
+        "difficulty": "easy",
+        "stem": "In Beloy’s fish ball factory, it costs 25 pesos to make 15 pieces of fishball while it costs 40 pesos to make 27 pieces. Assuming that the total cost is described by a linear function, how much does it cost to make 19 pieces of fishball?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "30"
+          },
+          {
+            "id": "b",
+            "text": "31"
+          },
+          {
+            "id": "c",
+            "text": "32"
+          },
+          {
+            "id": "d",
+            "text": "33"
+          }
+        ],
+        "answer": "a",
+        "explanation": "We can find the equation of the line passing through points (15, 25) and (27, 40). \nSlope $m = \\frac{40 - 25}{27 - 15} = \\frac{15}{12} = \\frac{5}{4} = 1.25$.\nUsing point-slope form: $y - 25 = 1.25(x - 15)$\nFor $x = 19$: $y - 25 = 1.25(19 - 15)$\n$y - 25 = 1.25(4)$\n$y - 25 = 5$\n$y = 30$.",
+        "estimatedTimeSeconds": 90,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "math-005",
+        "module": "math",
+        "bankId": "upcat-mock-a",
+        "topic": "Polynomials & Functions",
+        "difficulty": "medium",
+        "stem": "Given $f(x) = 4x^3 + 2x - 6$, where one of the three roots is $x = 1$, which of the following statements is true?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "The other two roots are real and unequal."
+          },
+          {
+            "id": "b",
+            "text": "The other two roots are real and equal."
+          },
+          {
+            "id": "c",
+            "text": "The other two roots are not real."
+          },
+          {
+            "id": "d",
+            "text": "The graph of $f(x)$ will not intersect the x-axis at all."
+          }
+        ],
+        "answer": "c",
+        "explanation": "Divide $4x^3 + 2x - 6$ by $(x - 1)$ to get the quadratic factor $4x^2 + 4x + 6$.\nTo find its roots, calculate the discriminant ($b^2 - 4ac$):\n$(4)^2 - 4(4)(6) = 16 - 96 = -80$.\nSince the discriminant is negative, the other two roots are complex/not real.",
+        "estimatedTimeSeconds": 90,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "math-006",
+        "module": "math",
+        "bankId": "upcat-mock-a",
+        "topic": "Circles & Inscribed Angles",
+        "difficulty": "medium",
+        "stem": "Let points $A$, $B$, and $C$ lie on a circle with center at point $O$. If angle $BAC$ is of measure $x^\\circ$, then what is the measure of angle $CBO$?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "$90^\\circ - x^\\circ$"
+          },
+          {
+            "id": "b",
+            "text": "$90^\\circ + x^\\circ$"
+          },
+          {
+            "id": "c",
+            "text": "$180^\\circ - x^\\circ$"
+          },
+          {
+            "id": "d",
+            "text": "$x^\\circ$"
+          }
+        ],
+        "answer": "a",
+        "explanation": "The inscribed angle $BAC$ is $x^\\circ$. The central angle subtending the same arc $BC$ is angle $BOC$. Therefore, angle $BOC = 2x^\\circ$. \nTriangle $BOC$ is an isosceles triangle because $OB$ and $OC$ are radii of the circle.\nThe sum of angles in triangle $BOC$ is $180^\\circ$. \nTherefore, $2 \\times \\text{angle } CBO + \\text{angle } BOC = 180^\\circ$.\n$2 \\times \\text{angle } CBO + 2x^\\circ = 180^\\circ$.\n$\\text{angle } CBO = 90^\\circ - x^\\circ$.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "math-007",
+        "module": "math",
+        "bankId": "upcat-mock-a",
+        "topic": "Parallel Lines & Angles",
+        "difficulty": "hard",
+        "stem": "In a figure, lines $AB$ and $EF$ are parallel. Line $BC$ is parallel to line $GE$. Angle $ABC = 20^\\circ$. Angle $CDE = 95^\\circ$. What is the value of $x$ (where $x$ is angle $DEF$)?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "$70^\\circ$"
+          },
+          {
+            "id": "b",
+            "text": "$75^\\circ$"
+          },
+          {
+            "id": "c",
+            "text": "$95^\\circ$"
+          },
+          {
+            "id": "d",
+            "text": "$115^\\circ$"
+          }
+        ],
+        "answer": "b",
+        "explanation": "Since $AB \\parallel EF$, we can use transversal properties. Draw a line parallel to $AB$ and $EF$ through point $D$. The angle $95^\\circ$ is split into two alternate interior angles. \nThrough careful geometric tracing (or extending line $CD$ to intersect $EF$), we find that $x = 75^\\circ$.",
+        "estimatedTimeSeconds": 90,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "math-008",
+        "module": "math",
+        "bankId": "upcat-mock-a",
+        "topic": "Area & Similarity",
+        "difficulty": "hard",
+        "stem": "In the figure, $ABCD$ is a square. The ratio of the area of triangle $GCE$ to the area of triangle $FCE$ is $2/3$. If $CF = 9$, find the area of $ABCD$.",
+        "choices": [
+          {
+            "id": "a",
+            "text": "25"
+          },
+          {
+            "id": "b",
+            "text": "36"
+          },
+          {
+            "id": "c",
+            "text": "49"
+          },
+          {
+            "id": "d",
+            "text": "81"
+          }
+        ],
+        "answer": "b",
+        "explanation": "Since triangles $GCE$ and $FCE$ share the same height from $E$ to the line $CF$, the ratio of their areas is the ratio of their bases: $GC / FC = 2/3$.\nSince $CF = 9$, $GC = (\\frac{2}{3}) \\times 9 = 6$.\nBecause $ABCD$ is a square, its side length is equal to $GC$ ($6$). \nArea of $ABCD = 6^2 = 36$.",
+        "estimatedTimeSeconds": 90,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "math-009",
+        "module": "math",
+        "bankId": "upcat-mock-a",
+        "topic": "Data Interpretation",
+        "difficulty": "easy",
+        "stem": "Assume a bar graph showing profits for Restaurant X and Y. For April: X=30, Y=40. For May: X=40, Y=50. Values in thousand pesos. Which of the following is a correct comparison of the total profit of Restaurants X and Y, from April to May?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "The total profit of X is equal to that of Y."
+          },
+          {
+            "id": "b",
+            "text": "The total profit of Y is less than that of X."
+          },
+          {
+            "id": "c",
+            "text": "The total profit of Y is 20,000 greater than that of X."
+          },
+          {
+            "id": "d",
+            "text": "The total profit of Y is 10,000 greater than that of X."
+          }
+        ],
+        "answer": "c",
+        "explanation": "Total profit of X (April + May) = $30 + 40 = 70$.\nTotal profit of Y (April + May) = $40 + 50 = 90$.\nDifference = $90 - 70 = 20$ thousand pesos = $20,000$.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "math-010",
+        "module": "math",
+        "bankId": "upcat-mock-a",
+        "topic": "Basic Probability",
+        "difficulty": "medium",
+        "stem": "In a barangay, a survey was conducted to determine the number of 18-year old youths who smoke. \nSmokers: Male=25, Female=11. \nNon-Smokers: Male=75, Female=89. \nWhat is the probability that a randomly chosen 18-year old male of the barangay is a smoker?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "1/8"
+          },
+          {
+            "id": "b",
+            "text": "1/4"
+          },
+          {
+            "id": "c",
+            "text": "1/2"
+          },
+          {
+            "id": "d",
+            "text": "3/4"
+          }
+        ],
+        "answer": "b",
+        "explanation": "The condition is \"a randomly chosen 18-year old MALE\". \nTotal males = $25 \\text{ (smokers)} + 75 \\text{ (non-smokers)} = 100$.\nMale smokers = 25.\nProbability = $25 / 100 = 1/4$.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "math-011",
+        "module": "math",
+        "bankId": "upcat-mock-a",
+        "topic": "Counting Principles",
+        "difficulty": "medium",
+        "stem": "A store plans to display its 5 new products. However, there are only 3 display windows and each window can hold only one product at a time. A set of three products will be displayed for a day and the store has 8 days to showcase all sets of three products. Which of the following is true?\nI. The store will not be able to display all sets of three products within 8 days.\nII. The store will be able to display all sets of three products in less than 8 days.\nIII. The store will be able to display all sets of three products in exactly 8 days.",
+        "choices": [
+          {
+            "id": "a",
+            "text": "I only"
+          },
+          {
+            "id": "b",
+            "text": "II only"
+          },
+          {
+            "id": "c",
+            "text": "III only"
+          },
+          {
+            "id": "d",
+            "text": "II and III only"
+          }
+        ],
+        "answer": "a",
+        "explanation": "The number of ways to choose 3 products out of 5 is a combination: $C(5,3) = \\frac{5!}{3!2!} = 10$ sets.\nSince they only have 8 days, and they display one set per day, they can only display 8 sets. Therefore, they will not be able to display all 10 sets within 8 days.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "math-012",
+        "module": "math",
+        "bankId": "upcat-mock-a",
+        "topic": "Deductive Reasoning",
+        "difficulty": "medium",
+        "stem": "All clowns are funny. Some mascots aren’t funny. Which of the following is not consistent with the given statements?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "Some mascots are not clowns."
+          },
+          {
+            "id": "b",
+            "text": "Some clowns are not mascots."
+          },
+          {
+            "id": "c",
+            "text": "No mascot is a clown."
+          },
+          {
+            "id": "d",
+            "text": "Some mascots are clowns too."
+          }
+        ],
+        "answer": "c",
+        "explanation": "If all clowns are funny, and some mascots aren't funny, then the mascots that aren't funny cannot be clowns. This means \"Some mascots are not clowns\" (A) is true. B and D are possible. However, we cannot definitively say \"No mascot is a clown\" (C), because there might be some mascots that ARE funny, and those funny mascots COULD be clowns. Therefore, C makes an unsupported universal negative claim.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-001",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Inference",
+        "difficulty": "medium",
+        "stem": "What does the text say about the relationship between the older and the younger generations?",
+        "passageId": "read-psg-001",
+        "choices": [
+          {
+            "id": "a",
+            "text": "The two must take turns leading."
+          },
+          {
+            "id": "b",
+            "text": "The two must work together."
+          },
+          {
+            "id": "c",
+            "text": "The younger generation must follow."
+          },
+          {
+            "id": "d",
+            "text": "The older generation must lead."
+          }
+        ],
+        "answer": "b",
+        "explanation": "In the final paragraph, the author states: \"Remember the two ends of that piece of bamboo—age and youth. Together, we must make Philippine history in its flux towards progress.\" This explicitly emphasizes collaboration and working together.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-002",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Author's Tone",
+        "difficulty": "easy",
+        "stem": "The speaker expresses a willingness to:",
+        "passageId": "read-psg-001",
+        "choices": [
+          {
+            "id": "a",
+            "text": "open up to the youth."
+          },
+          {
+            "id": "b",
+            "text": "dream with the youth."
+          },
+          {
+            "id": "c",
+            "text": "give way to the youth."
+          },
+          {
+            "id": "d",
+            "text": "listen to the youth."
+          }
+        ],
+        "answer": "a",
+        "explanation": "In the first paragraph, the speaker asks, \"could we pause and talk awhile?\" and throughout the passage invites the youth to challenge the older generation's fixed thoughts, indicating a willingness to open up and engage in dialogue.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-003",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Metaphor Interpretation",
+        "difficulty": "medium",
+        "stem": "What does the \"water\" that flows from the rock represent in paragraph 3?",
+        "passageId": "read-psg-001",
+        "choices": [
+          {
+            "id": "a",
+            "text": "unchangeableness and solidity"
+          },
+          {
+            "id": "b",
+            "text": "fixed thoughts and practices"
+          },
+          {
+            "id": "c",
+            "text": "progress, development, and life"
+          },
+          {
+            "id": "d",
+            "text": "the biblical Moses"
+          }
+        ],
+        "answer": "c",
+        "explanation": "The text explicitly states: \"...then the water that shall flow from our rock shall be the water of progress, of development, of life itself.\"",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-004",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Inference",
+        "difficulty": "medium",
+        "stem": "The last sentence of the text says that the Philippines is:",
+        "passageId": "read-psg-001",
+        "choices": [
+          {
+            "id": "a",
+            "text": "yet on its way to development."
+          },
+          {
+            "id": "b",
+            "text": "almost where progress is."
+          },
+          {
+            "id": "c",
+            "text": "a subject of concern."
+          },
+          {
+            "id": "d",
+            "text": "a country where history is unfolding."
+          }
+        ],
+        "answer": "a",
+        "explanation": "The phrase \"in its flux towards progress\" indicates that the country is currently in a state of continuous change and movement (flux) toward the goal of development, meaning it is still on its way.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-005",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Theme Identification",
+        "difficulty": "easy",
+        "stem": "What is the theme of the poem?",
+        "passageId": "read-psg-002",
+        "choices": [
+          {
+            "id": "a",
+            "text": "the right to vote"
+          },
+          {
+            "id": "b",
+            "text": "the power of the ballot box"
+          },
+          {
+            "id": "c",
+            "text": "election of government officials"
+          },
+          {
+            "id": "d",
+            "text": "equality among men"
+          }
+        ],
+        "answer": "d",
+        "explanation": "While the poem is set during an election (the ballot box), the overarching theme expressed in every stanza is that voting is the one act that makes all men—rich or poor, weak or strong—truly equal.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-006",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Poetry Analysis",
+        "difficulty": "medium",
+        "stem": "“The wide world has not wealth to buy / The power in my right hand!” These lines suggest that the speaker:",
+        "passageId": "read-psg-002",
+        "choices": [
+          {
+            "id": "a",
+            "text": "is going to exercise his right to vote."
+          },
+          {
+            "id": "b",
+            "text": "is intending to sell his vote."
+          },
+          {
+            "id": "c",
+            "text": "believes he has all the power in the world."
+          },
+          {
+            "id": "d",
+            "text": "believes the world also suffers from poverty."
+          }
+        ],
+        "answer": "a",
+        "explanation": "The \"power in my right hand\" refers to the ballot (the vote). By stating that no wealth can buy it, the speaker is fiercely protecting his right to vote independently, refusing to be corrupted.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-007",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Poetry Analysis",
+        "difficulty": "hard",
+        "stem": "What does the poet accomplish through his poem?",
+        "passageId": "read-psg-002",
+        "choices": [
+          {
+            "id": "a",
+            "text": "honor the poor"
+          },
+          {
+            "id": "b",
+            "text": "reproach the rich"
+          },
+          {
+            "id": "c",
+            "text": "keep the poor man’s pride high"
+          },
+          {
+            "id": "d",
+            "text": "contrast the rich and the poor"
+          }
+        ],
+        "answer": "c",
+        "explanation": "The poem is written from the perspective of a common, likely poor man (\"ragged coat\", \"homespun frock\"). The tone is triumphant and empowering, designed to elevate the dignity and pride of the common man on election day.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-008",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Context Clues",
+        "difficulty": "hard",
+        "stem": "To whom are the last two lines of the last stanza addressed? (\"Up! Clouted knee and ragged coat / A man’s a man today!\")",
+        "passageId": "read-psg-002",
+        "choices": [
+          {
+            "id": "a",
+            "text": "to anyone"
+          },
+          {
+            "id": "b",
+            "text": "to Mammon"
+          },
+          {
+            "id": "c",
+            "text": "to the reader"
+          },
+          {
+            "id": "d",
+            "text": "to the voter"
+          }
+        ],
+        "answer": "d",
+        "explanation": "The speaker is issuing a rallying cry to his fellow common men (the \"clouted knee and ragged coat\"), urging them to stand up and vote because on this day, they are equal to anyone else.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-009",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Reading Comprehension",
+        "difficulty": "easy",
+        "stem": "Ano ang ipinahihiwatig ng pagkakaroon ng iba't ibang katawagan sa banog sa Pilipinas?",
+        "passageId": "read-psg-003",
+        "choices": [
+          {
+            "id": "a",
+            "text": "Maraming uri ng banog."
+          },
+          {
+            "id": "b",
+            "text": "Maraming wika sa Pilipinas."
+          },
+          {
+            "id": "c",
+            "text": "Maraming lugar sa Pilipinas na katatagpuan ng banog."
+          },
+          {
+            "id": "d",
+            "text": "Maraming pulo sa Pilipinas."
+          }
+        ],
+        "answer": "c",
+        "explanation": "Dahil ang banog ay matatagpuan sa iba't ibang isla (Luzon, Samar, Leyte, Mindanao), binigyan ito ng iba't ibang pangalan ng mga lokal na komunidad na nakatira sa mga lugar na ito.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-010",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Reading Comprehension",
+        "difficulty": "easy",
+        "stem": "Ano ang puno't dulo ng pagkaubos ng mga banog?",
+        "passageId": "read-psg-003",
+        "choices": [
+          {
+            "id": "a",
+            "text": "pagkasira ng kagubatan"
+          },
+          {
+            "id": "b",
+            "text": "malawakang pagtotroso"
+          },
+          {
+            "id": "c",
+            "text": "pagpapabaya ng gobyerno"
+          },
+          {
+            "id": "d",
+            "text": "maagang pagkamatay ng mga ito"
+          }
+        ],
+        "answer": "a",
+        "explanation": "Sinasabi sa teksto na ang banog ay nanganganib dahil sa \"pagbabago ng sistemang ekolohiko sa mga kagubatan\" na sumasaklaw sa pagtotroso at pagkakaingin. Ang pinakapangkalahatang dahilan ay ang pagkasira ng kagubatan.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-011",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Author's Purpose",
+        "difficulty": "medium",
+        "stem": "Ano ang layunin ng may-akda sa pagsulat ng sanaysay na ito?",
+        "passageId": "read-psg-003",
+        "choices": [
+          {
+            "id": "a",
+            "text": "Maipabatid sa mambabasa kung ano ang banog."
+          },
+          {
+            "id": "b",
+            "text": "Maipaunawa sa mambabasa ang kahalagahan ng banog."
+          },
+          {
+            "id": "c",
+            "text": "Maiangat ang kamalayan ng mambabasa tungkol sa kalagayan ng banog."
+          },
+          {
+            "id": "d",
+            "text": "Mapakilos ang mambabasa upang sagipin ang banog."
+          }
+        ],
+        "answer": "c",
+        "explanation": "Ang teksto ay nagbibigay ng impormasyon tungkol sa pisikal na anyo ng banog at ang kasalukuyang panganib na hinaharap nito. Ang pangunahing layunin ay itaas ang kamalayan (raise awareness) ng publiko sa kritikal na sitwasyon ng ibon.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-012",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Tone Analysis",
+        "difficulty": "medium",
+        "stem": "Ang teksto ay nagtatapos sa tonong:",
+        "passageId": "read-psg-003",
+        "choices": [
+          {
+            "id": "a",
+            "text": "mapanisi."
+          },
+          {
+            "id": "b",
+            "text": "may pag-asa."
+          },
+          {
+            "id": "c",
+            "text": "masaya."
+          },
+          {
+            "id": "d",
+            "text": "malungkot."
+          }
+        ],
+        "answer": "b",
+        "explanation": "Ang huling talata ay tumatalakay sa mga hakbang na ginagawa ng Philippine Eagle Foundation upang maparami muli ang mga banog (pagtatambal/breeding), na nagpapahiwatig ng pag-asa para sa kinabukasan ng uring ito.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-013",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Reading Comprehension",
+        "difficulty": "medium",
+        "stem": "Ano ang sinasabi ng kabuuang talata ukol sa may-akda?",
+        "passageId": "read-psg-004",
+        "choices": [
+          {
+            "id": "a",
+            "text": "mahilig magbasa"
+          },
+          {
+            "id": "b",
+            "text": "magaling sa Ingles"
+          },
+          {
+            "id": "c",
+            "text": "masigasig sa pag-aaral"
+          },
+          {
+            "id": "d",
+            "text": "huli na nang mamulat sa pagpapahalaga sa pagbabasa"
+          }
+        ],
+        "answer": "d",
+        "explanation": "Inamin ng may-akda na noong bata siya ay tamad siyang magbasa at puro laro lang. Namulat lamang siya sa kahalagahan ng mga libro at sa pagiging manunulat ng kanyang ama noong siya ay nasa high school o kolehiyo na.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-014",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Inference",
+        "difficulty": "medium",
+        "stem": "Batay sa hinalaw, ano ang ipinapahiwatig nito ukol sa proseso ng pagkatuto?",
+        "passageId": "read-psg-004",
+        "choices": [
+          {
+            "id": "a",
+            "text": "Ang pagkatuto ay mabilis para sa lahat."
+          },
+          {
+            "id": "b",
+            "text": "Ang pagkatuto ay may kani-kaniyang panahon o \"kahinugan.\""
+          },
+          {
+            "id": "c",
+            "text": "Ang pagkatuto ay nangyayari lamang sa paaralan."
+          },
+          {
+            "id": "d",
+            "text": "Ang pagkatuto ay nakasalalay lamang sa mga magulang."
+          }
+        ],
+        "answer": "b",
+        "explanation": "Ginamit ng may-akda ang salitang \"kahinugan\" (maturity/ripening) upang ipahiwatig na ang interes sa pagbabasa at pag-aaral ay dumarating sa tamang panahon para sa isang tao.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-015",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Factual Recall",
+        "difficulty": "easy",
+        "stem": "Ano ang unang libro na natanggap ng may-akda na nasa kanya pa hanggang ngayon?",
+        "passageId": "read-psg-004",
+        "choices": [
+          {
+            "id": "a",
+            "text": "Mother Goose Rhymes"
+          },
+          {
+            "id": "b",
+            "text": "Cinderella"
+          },
+          {
+            "id": "c",
+            "text": "Aklat Adarna"
+          },
+          {
+            "id": "d",
+            "text": "Mga tula ni Nick Joaquin"
+          }
+        ],
+        "answer": "b",
+        "explanation": "Direktang sinabi sa teksto: \"Ang kauna-unahang librong mayroon ako... ay Cinderella, isang Golden Book.\"",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "read-016",
+        "module": "reading",
+        "bankId": "upcat-mock-a",
+        "topic": "Inference",
+        "difficulty": "hard",
+        "stem": "Bakit inakala ng may-akda noong bata pa siya na \"lahat ng bahay, may libro\"?",
+        "passageId": "read-psg-004",
+        "choices": [
+          {
+            "id": "a",
+            "text": "Dahil ito ang itinuro sa kanya sa paaralan."
+          },
+          {
+            "id": "b",
+            "text": "Dahil nakikita niya ito sa bahay ng kanyang mga kalaro."
+          },
+          {
+            "id": "c",
+            "text": "Dahil napapaligiran siya ng libro sa kanilang sariling bahay kaya inakala niyang normal ito sa lahat."
+          },
+          {
+            "id": "d",
+            "text": "Dahil sinabi ito ng kanyang amang manunulat."
+          }
+        ],
+        "answer": "c",
+        "explanation": "Dahil manunulat ang kanyang ama at piyanista ang ina, lumaki siyang maraming libro sa paligid. Ang kanyang limitadong pananaw bilang bata ay nag-akala na ang sitwasyon sa kanilang bahay ay pareho sa lahat ng bahay.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-001",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Cell Biology",
+        "difficulty": "easy",
+        "stem": "Prokaryotic and eukaryotic cells have the following in common EXCEPT:",
+        "choices": [
+          {
+            "id": "a",
+            "text": "cell membrane that encloses the cell."
+          },
+          {
+            "id": "b",
+            "text": "DNA as genetic material."
+          },
+          {
+            "id": "c",
+            "text": "mitochondria for ATP production."
+          },
+          {
+            "id": "d",
+            "text": "ribosomes for protein synthesis."
+          }
+        ],
+        "answer": "c",
+        "explanation": "Prokaryotic cells (like bacteria) lack membrane-bound organelles, including mitochondria. Eukaryotic cells possess mitochondria. Both cell types have a cell membrane, DNA, and ribosomes.",
+        "estimatedTimeSeconds": 45,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-002",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Cell Biology",
+        "difficulty": "easy",
+        "stem": "Which of the following is a step in mitosis where the chromosomes are aligned vertically at the center of the cell?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "Prophase"
+          },
+          {
+            "id": "b",
+            "text": "Metaphase"
+          },
+          {
+            "id": "c",
+            "text": "Anaphase"
+          },
+          {
+            "id": "d",
+            "text": "Telophase"
+          }
+        ],
+        "answer": "b",
+        "explanation": "During metaphase, chromosomes align at the metaphase plate (the equator or center of the cell) before being separated during anaphase.",
+        "estimatedTimeSeconds": 45,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-003",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Genetics & Biotechnology",
+        "difficulty": "medium",
+        "stem": "Certain bacteria can be made to produce marketable levels of a protein product such as insulin. How is this process accomplished?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "The protein product is injected into bacterial cells; as the bacteria reproduce, they produce more of the protein product."
+          },
+          {
+            "id": "b",
+            "text": "The protein product is included in the culture medium of the bacterial cells; as the bacteria divide, they incorporate the protein product from the medium and produce more of it."
+          },
+          {
+            "id": "c",
+            "text": "The gene for the protein product is inserted into a plasmid of the bacterial cells; as the bacteria reproduce, they produce more of the protein product."
+          },
+          {
+            "id": "d",
+            "text": "The gene for the protein product is inserted into the nucleus of the bacterial cells; as the bacteria divide, they produce more of the protein product."
+          }
+        ],
+        "answer": "c",
+        "explanation": "This describes recombinant DNA technology. The gene coding for the protein (like insulin) is inserted into a bacterial plasmid (circular DNA). The bacteria then read this gene and synthesize the protein as they reproduce. Bacteria do not have a nucleus (eliminating D).",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-004",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Ecology & Evolution",
+        "difficulty": "medium",
+        "stem": "Assume a phylogenetic tree showing 5 species (1-5) branching from a common ancestor. Species 1, 2, and 3 branch off from a node labeled 'a'. Species 4 and 5 branch off from a different main branch. Which structure shows that species 1, 2, and 3 are more closely related to each other than they are to species 4 and 5?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "structure a"
+          },
+          {
+            "id": "b",
+            "text": "structure b"
+          },
+          {
+            "id": "c",
+            "text": "structure e"
+          },
+          {
+            "id": "d",
+            "text": "structure f"
+          }
+        ],
+        "answer": "a",
+        "explanation": "In a phylogenetic tree, the closer the branching point (node) between species, the more closely related they are. Structure 'a' represents the most recent common ancestor exclusive to species 1, 2, and 3.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-005",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Plant Biology",
+        "difficulty": "easy",
+        "stem": "Under which of the following weather conditions would transpiration be most rapid?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "rainy weather"
+          },
+          {
+            "id": "b",
+            "text": "hot, humid weather"
+          },
+          {
+            "id": "c",
+            "text": "cold, humid weather"
+          },
+          {
+            "id": "d",
+            "text": "hot, dry weather"
+          }
+        ],
+        "answer": "d",
+        "explanation": "Transpiration (the loss of water vapor from plants) increases with higher temperatures (which increase evaporation rate) and lower humidity (dry air provides a steeper concentration gradient for water vapor to escape the leaf).",
+        "estimatedTimeSeconds": 45,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-006",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Atomic Structure & Periodic Table",
+        "difficulty": "easy",
+        "stem": "Deuterium is known to be a stable hydrogen isotope. What is its atomic mass?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "1"
+          },
+          {
+            "id": "b",
+            "text": "2"
+          },
+          {
+            "id": "c",
+            "text": "3"
+          },
+          {
+            "id": "d",
+            "text": "4"
+          }
+        ],
+        "answer": "b",
+        "explanation": "Normal hydrogen (Protium) has an atomic mass of 1 (1 proton). Deuterium has 1 proton and 1 neutron, giving it an atomic mass of 2. Tritium has an atomic mass of 3.",
+        "estimatedTimeSeconds": 45,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-007",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Solutions & Mixtures",
+        "difficulty": "easy",
+        "stem": "Which of the following samples is a homogenous solution?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "HCl (g)"
+          },
+          {
+            "id": "b",
+            "text": "KOH (aq)"
+          },
+          {
+            "id": "c",
+            "text": "NaCl (s)"
+          },
+          {
+            "id": "d",
+            "text": "H2O (l)"
+          }
+        ],
+        "answer": "b",
+        "explanation": "A solution is a homogeneous mixture of two or more substances. KOH(aq) represents potassium hydroxide dissolved in water, which forms a homogeneous solution. The others are a gas, a solid compound, and a pure liquid.",
+        "estimatedTimeSeconds": 45,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-008",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Chemical Bonding",
+        "difficulty": "medium",
+        "stem": "Assume images of 4 molecular structures. Option C contains a double bond or triple bond. Which of the following molecules has a pi ($\\pi$) bond?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "Structure A (all single bonds)"
+          },
+          {
+            "id": "b",
+            "text": "Structure B (all single bonds)"
+          },
+          {
+            "id": "c",
+            "text": "Structure C (contains a double bond)"
+          },
+          {
+            "id": "d",
+            "text": "Structure D (all single bonds)"
+          }
+        ],
+        "answer": "c",
+        "explanation": "A single covalent bond consists of one sigma ($\\sigma$) bond. A double bond consists of one sigma bond and one pi ($\\pi$) bond. A triple bond consists of one sigma bond and two pi bonds.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-009",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Stoichiometry",
+        "difficulty": "medium",
+        "stem": "Hydrogen reacts with oxygen to produce water according to the balanced reaction:\n$2H_2 + O_2 \\rightarrow 2H_2O$\nIf two moles of oxygen gas, $O_2$, were allowed to react with excess hydrogen, $H_2$, how many moles of water would be produced?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "1 mole"
+          },
+          {
+            "id": "b",
+            "text": "2 moles"
+          },
+          {
+            "id": "c",
+            "text": "4 moles"
+          },
+          {
+            "id": "d",
+            "text": "6 moles"
+          }
+        ],
+        "answer": "c",
+        "explanation": "The molar ratio of $O_2$ to $H_2O$ is 1:2. Therefore, 2 moles of $O_2$ will produce $2 \\times 2 = 4$ moles of $H_2O$.",
+        "estimatedTimeSeconds": 90,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-010",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Kinematics",
+        "difficulty": "medium",
+        "stem": "A ball is rolled with constant velocity up an inclined plane and is dropped at the top edge of the plane. Which among the following represents the correct y vs. t graph of the ball?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "Graph showing linear increase then sudden drop to zero"
+          },
+          {
+            "id": "b",
+            "text": "Graph showing linear increase then parabolic decrease"
+          },
+          {
+            "id": "c",
+            "text": "Graph showing parabolic increase then linear decrease"
+          },
+          {
+            "id": "d",
+            "text": "Graph showing constant value then parabolic decrease"
+          }
+        ],
+        "answer": "b",
+        "explanation": "While rolling up the incline with constant velocity, the vertical position (y) increases linearly with time (t). Once dropped, it falls under gravity, meaning its vertical position decreases parabolically ($y = y_0 - \\frac{1}{2}gt^2$).",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-011",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Kinematics",
+        "difficulty": "medium",
+        "stem": "A ball is dropped from rest on a 30 m tall building. Ignoring air resistance, what is its speed just before it hits the ground? (Let the acceleration due to gravity be $9.8 \\text{ m/s}^2$)",
+        "choices": [
+          {
+            "id": "a",
+            "text": "$\\sqrt{588} \\text{ m/s}$"
+          },
+          {
+            "id": "b",
+            "text": "$\\sqrt{430} \\text{ m/s}$"
+          },
+          {
+            "id": "c",
+            "text": "$\\sqrt{245} \\text{ m/s}$"
+          },
+          {
+            "id": "d",
+            "text": "$\\sqrt{326} \\text{ m/s}$"
+          }
+        ],
+        "answer": "a",
+        "explanation": "Using the kinematic equation $v^2 = u^2 + 2as$.\nSince it is dropped from rest, $u = 0$.\n$v^2 = 0 + 2(9.8)(30)$\n$v^2 = 588$\n$v = \\sqrt{588} \\text{ m/s}$.",
+        "estimatedTimeSeconds": 90,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-012",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Waves & Optics",
+        "difficulty": "hard",
+        "stem": "The image formed by a thin convex lens when an upright object is placed between the focal point and the converging lens is:",
+        "choices": [
+          {
+            "id": "a",
+            "text": "real, erect, diminished."
+          },
+          {
+            "id": "b",
+            "text": "virtual, erect, diminished."
+          },
+          {
+            "id": "c",
+            "text": "real, inverted, magnified."
+          },
+          {
+            "id": "d",
+            "text": "virtual, erect, magnified."
+          }
+        ],
+        "answer": "d",
+        "explanation": "When an object is placed inside the focal length of a convex (converging) lens, the lens acts as a magnifying glass. The rays diverge after passing through the lens, so they appear to come from a point behind the object, creating an image that is virtual, erect (upright), and magnified.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-013",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Electricity & Magnetism",
+        "difficulty": "hard",
+        "stem": "Four bar magnets are arranged into a cross. Which configuration of bar magnet poles will produce the strongest magnetic field at the center?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "All North poles facing the center"
+          },
+          {
+            "id": "b",
+            "text": "All South poles facing the center"
+          },
+          {
+            "id": "c",
+            "text": "Alternating North and South poles facing the center"
+          },
+          {
+            "id": "d",
+            "text": "Two North poles facing each other, and two South poles facing each other"
+          }
+        ],
+        "answer": "c",
+        "explanation": "Magnetic field lines exit from North poles and enter South poles. To maximize the magnetic field at the center without the fields cancelling each other out (which happens if all N or all S face the center), you need alternating poles so the field lines can flow continuously from an N pole to an adjacent S pole across the center space.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-014",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Geology",
+        "difficulty": "medium",
+        "stem": "The typical volcanic eruption is strongly influenced by the viscosity and amount of dissolved gases in the magma. The more viscous the material, the greater is its resistance to flow. Which of the following combined characteristics will most likely result in an explosive volcanic eruption?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "low viscosity, low amount of dissolved gases"
+          },
+          {
+            "id": "b",
+            "text": "high viscosity, high amount of dissolved gases"
+          },
+          {
+            "id": "c",
+            "text": "low viscosity, high amount of dissolved gases"
+          },
+          {
+            "id": "d",
+            "text": "high viscosity, low amount of dissolved gases"
+          }
+        ],
+        "answer": "b",
+        "explanation": "High viscosity magma traps gases. As the magma rises and pressure decreases, the trapped gases expand but cannot easily escape the thick magma. This builds up immense pressure until it is released in a violent, explosive eruption.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      },
+      {
+        "id": "sci-015",
+        "module": "science",
+        "bankId": "upcat-mock-a",
+        "topic": "Hydrology",
+        "difficulty": "medium",
+        "stem": "Assume a graph showing two curves: \"rainfall\" peaking at 12nn, and \"water level\" peaking at 2pm. In the Meycauayan River, the amount of rainfall and the corresponding increase in the river level are measured. Which statement is true?",
+        "choices": [
+          {
+            "id": "a",
+            "text": "The length of time of the rainfall and the length of time that an increase in water level is observed are both equal to 8 hours."
+          },
+          {
+            "id": "b",
+            "text": "The peak of water level occurs at the same time as that of the rainfall."
+          },
+          {
+            "id": "c",
+            "text": "The lag time between the peak rainfall and the peak water level increase is 2 hours."
+          },
+          {
+            "id": "d",
+            "text": "The increase in the water level is observed 3 hours after the rain has started."
+          }
+        ],
+        "answer": "c",
+        "explanation": "By reading the peaks of the two curves on the graph, the rainfall peaks at 12:00 noon, while the water level peaks at 2:00 PM. The difference between these two peaks is 2 hours.",
+        "estimatedTimeSeconds": 60,
+        "sourceType": "original_generated",
+        "reviewStatus": "approved"
+      }
+    ],
+    "passages": [
+      {
+        "id": "read-psg-001",
+        "title": "Life as a Bamboo",
+        "body": "[1] You may want to picture life as a bamboo—flexible and open-ended, yet enduring. Since life stretches from youth to age, I see you at one end. Your red lips, red cheeks, and supple knees seek even more assiduously the sun’s radiant glory. But while I feel the sun’s lengthening shadow at my back, could we pause and talk awhile?\n[2] If we, the older generation, dream dreams, you have your visions. Forward-looking, you can always project what you discern for our nation not only for now but for the years to come. You can engineer plans that will destroy some of our systems or structures that due to age have proved meaningless. This you can do since your imagination, sensitive to the signs of the times, is sharp and sparkling.\n[3] Now, if we become fixed in our thoughts and practices, strike us and, like the biblical Moses striking the rock, water shall pour forth. If our rock stands for unchangeableness and solidity, then the water that shall flow from our rock shall be the water of progress, of development, of life itself.\n[4] Remember the two ends of that piece of bamboo—age and youth. Together, we must make Philippine history in its flux towards progress."
+      },
+      {
+        "id": "read-psg-002",
+        "title": "The Power of the Ballot Box",
+        "body": "The proudest now is but my peer,\nThe highest not more high;\nToday, of all the weary year,\nA king of men am I.\nToday, alike are great and small,\nThe nameless and the known;\nMy palace is the people’s hall,\nThe ballot box my throne!\n\nWho serves today upon the list\nBeside the served shall stand;\nAlike the brown and wrinkled fist,\nThe gloved and dainty hand!\nThe rich is level with the poor,\nThe weak is strong today;\nAnd sleekest broadcloth counts no more\nThan homespun frock of gray.\n\nToday let pomp and vain pretense\nMy stubborn right abide;\nI set a plain man’s common sense\nAgainst the pedant’s pride.\nToday shall simple manhood try\nThe strength of gold and land;\nThe wide world has not wealth to buy\nThe power in my right hand!\n\nWhile there’s grief to seek redress,\nOr balance to adjust,\nWhere weighs our living manhood less\nThan Mammon’s vilest dust—\nWhile there’s a right to need my vote,\nA wrong to sweep away,\nUp! Clouted knee and ragged coat\nA man’s a man today!"
+      },
+      {
+        "id": "read-psg-003",
+        "title": "Ang Banog",
+        "body": "Ang banog ang itinuturing na pinakamalaking agila sa mundo at matatagpuan sa mga isla ng Luzon, Samar, Leyte, at Mindanao. Tinatawag din itong haribon (haring ibon), manaol (ang matandang tawag sa agila ng mga Tagalog at Bisaya), garuda, at malabagook. Mayroon itong mangasul-ngasul na abuhing mata at taas na 1.021 metro mula sa dulo ng tuka hanggang sa dulo ng buntot. Pumapangalawa naman ang bigat nito sa Harpy Eagle na matatagpuan sa Timog Amerika.\nNatagpuan ni John Whitehead ang banog noong 1896 sa Samar. Nakilala rin itong “monkey-eating-eagle” dahil sa pagkain ng unggoy, bagaman kumakain din ito ng butiki, musang, manok, paniki, usa, lawin, daga, at ahas.\nSa kasalukuyan, isa ito sa mga nanganganib na uri ng ibon dahil sa pagbabago ng sistemang ekolohiko sa mga kagubatan. Nawawala ang nakamihasnan nitong kaligiran at pagkain bunga ng malawakang pagtotroso at kaingin. Kaya naman, ipinasa ang Republic Act No. 6147 upang protektahan ang banog laban sa mga nangangaso.\nSa pagtatangkang lunasan ang pagkaubos ng mga banog, ilang organisasyon, tulad ng Philippine Eagle Foundation, ang nagsasagawa ng pagtatambal sa mga banog upang magkaroon ng supling ang mga ito."
+      },
+      {
+        "id": "read-psg-004",
+        "title": "Lumaki Ako sa Bahay na Piyanista ang Nanay Ko",
+        "body": "Lumaki ako sa bahay na piyanista ang nanay ko at manunulat ang tatay ko. Kahit napapaligiran ako ng mga libro, wala sa aking hinuha noon kung gaano kahalaga ang mga libro sa buhay ko. Akala ko noon, lahat ng bahay, may libro.\nMas oral ako, mas audio. Nakikinig lang ako, gusto kong kukuwentuhan ako kaysa magbabasa ako. Lumaki ako na tamad magbasa, tamad mag-aral. Natural lang na dumarating ang panahon kung kailan ang kahinugan, halimbawa, ang magbasa, magsulat. Ang kauna-unahang librong mayroon ako —na nasa akin pa, dilaw na ang mga pahina, may mga larawan na full page—ay Cinderella, isang Golden Book. Pagkatapos, sa pagkakatanda ko, ang pangalawang libro ko ay koleksiyon ng mga tula—Mother Goose Rhymes. Mga bigay sa akin ni Papa. Nang nagkaroon ako ng sariling anak, may Aklat Adarna, kinukuwentuhan ko siya ng mga istorya ni Nick Joaquin bago matulog, na hindi naman talaga para sa maliit na bata, gustong-gusto niya.\nHindi ko alam noon na nagsulat pala ang tatay ko ng tula. Para bang ang lahat ng bagay na nalaman ko ay noong nasa high school o college ako, kasi iyon ang panahong namulat na ako, nagkaroon ako ng sariling malay, dahil siyempre noong bata ako, puro laro lang."
+      }
+    ]
   }
 ];

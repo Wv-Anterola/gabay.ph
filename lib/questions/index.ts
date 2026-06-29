@@ -68,6 +68,37 @@ export function getPresetBank(): QuestionBank {
   return coreBank;
 }
 
+/**
+ * The bank the exam actually serves. Change this one line to switch which mock
+ * is live. If the configured bank is missing or has no approved questions yet,
+ * we fall back to the preset "core" bank so the exam is never empty.
+ */
+export const ACTIVE_BANK_ID = "upcat-mock-a";
+
+function approvedCount(bank: QuestionBank, module: ModuleId): number {
+  return bank.questions.filter(
+    (q) => q.module === module && q.reviewStatus === "approved",
+  ).length;
+}
+
+const activeBank: QuestionBank = (() => {
+  const configured = BANK_BY_ID.get(ACTIVE_BANK_ID);
+  const hasApproved = configured?.questions.some((q) => q.reviewStatus === "approved");
+  if (configured && hasApproved) return configured;
+  if (configured && !hasApproved && typeof console !== "undefined") {
+    console.warn(
+      `[questions] Active bank "${ACTIVE_BANK_ID}" has no approved questions yet — ` +
+        `serving "${PRESET_BANK_ID}". Run \`npm run questions:approve ${ACTIVE_BANK_ID}\`.`,
+    );
+  }
+  return coreBank;
+})();
+
+/** The bank currently served by the exam (active bank, or core fallback). */
+export function getActiveBank(): QuestionBank {
+  return activeBank;
+}
+
 export const MODULE_ORDER: ModuleId[] = ["language", "reading", "math", "science"];
 
 export const MODULES: Record<ModuleId, ModuleMeta> = {
@@ -76,7 +107,7 @@ export const MODULES: Record<ModuleId, ModuleMeta> = {
     name: "Language Proficiency",
     shortName: "Language",
     blurb: "Grammar, vocabulary, idioms, sentence correction, and analogies.",
-    itemCount: languageQuestions.filter((q) => q.reviewStatus === "approved").length,
+    itemCount: approvedCount(activeBank, "language"),
     estimatedMinutes: 12,
   },
   reading: {
@@ -84,7 +115,7 @@ export const MODULES: Record<ModuleId, ModuleMeta> = {
     name: "Reading Comprehension",
     shortName: "Reading",
     blurb: "Short passages with main-idea, inference, and vocabulary questions.",
-    itemCount: readingQuestions.filter((q) => q.reviewStatus === "approved").length,
+    itemCount: approvedCount(activeBank, "reading"),
     estimatedMinutes: 12,
   },
   math: {
@@ -92,7 +123,7 @@ export const MODULES: Record<ModuleId, ModuleMeta> = {
     name: "Mathematics",
     shortName: "Math",
     blurb: "Number sense, algebra, geometry, word problems, and data.",
-    itemCount: mathQuestions.filter((q) => q.reviewStatus === "approved").length,
+    itemCount: approvedCount(activeBank, "math"),
     estimatedMinutes: 10,
   },
   science: {
@@ -100,7 +131,7 @@ export const MODULES: Record<ModuleId, ModuleMeta> = {
     name: "Science",
     shortName: "Science",
     blurb: "Biology, chemistry, physics, earth science, and general science.",
-    itemCount: scienceQuestions.filter((q) => q.reviewStatus === "approved").length,
+    itemCount: approvedCount(activeBank, "science"),
     estimatedMinutes: 11,
   },
 };
@@ -116,7 +147,7 @@ export function isModuleId(value: string): value is ModuleId {
 /** Approved questions for a module in a given bank, in authored order. */
 export function getModuleQuestions(
   module: ModuleId,
-  bankId: string = PRESET_BANK_ID,
+  bankId: string = activeBank.id,
 ): Question[] {
   const bank = getBank(bankId) ?? coreBank;
   return bank.questions.filter(
