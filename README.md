@@ -45,22 +45,27 @@ to persist mock attempts/question responses.
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `DATABASE_URL` | For waitlist / attempt saving | Postgres connection string |
+| `DATABASE_URL` | For waitlist / attempt saving | Pooled Postgres runtime connection string |
 | `DIRECT_URL` | For migrations | Direct Postgres connection (port 5432) |
 | `NEXT_PUBLIC_GA_ID` | For analytics | GA4 measurement id (e.g. `G-XXXXXXXXXX`); leave empty to disable analytics |
 
-If `DATABASE_URL` is missing, app pages still run; persistence routes return clear, non-crashing
-messages instead of failing.
+If `DATABASE_URL` is missing, all exam, results, review, and dashboard flows still work through
+browser storage. Persistence endpoints return a structured `persisted: false` response; waitlist
+signup correctly remains unavailable because it cannot be saved without a database.
 
 ## Database setup notes
 
 1. Create a Supabase project and copy the Postgres connection strings into `.env.local`
    (`DATABASE_URL` = pooled URL on port 6543; `DIRECT_URL` = direct URL on port 5432).
-2. Run `npx prisma generate` to build the client, then `npx prisma migrate dev` to create the
+2. Run `npx prisma generate` to build the client, then `npx prisma migrate dev` locally (or
+   `npx prisma migrate deploy` in production) to create the
    `WaitlistSignup`, `DiagnosticSession`, `MockAttempt`, `MockQuestionResponse`, and
    `AnalyticsEvent` tables.
 3. On Vercel, set the same env vars in the project settings. The pooled URL is required for
    serverless functions; the direct URL is only used by migrations.
+4. The API includes a lightweight per-instance write limit. Before running multiple production
+   instances, also configure a distributed rate limit at the hosting edge (for example, Vercel
+   WAF or Cloudflare); an in-memory limit is intentionally not a cross-instance security boundary.
 
 ## Adding or editing UPCAT questions
 

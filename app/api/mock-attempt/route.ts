@@ -1,7 +1,14 @@
 import { NextResponse } from "next/server";
 import { prisma, isDbConfigured } from "@/lib/db";
-import type { MockExamAttempt, MockExamResult } from "@/lib/types";
 import type { Prisma } from "@/generated/prisma/client";
+import {
+  failureResponse,
+  isPayloadTooLargeError,
+  readJsonObject,
+  successResponse,
+  validateMockAttemptPayload,
+} from "@/lib/api/persistence";
+import { checkRateLimit, rateLimitHeaders } from "@/lib/api/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -14,95 +21,111 @@ function toJson(value: unknown): Prisma.InputJsonValue {
 }
 
 export async function POST(request: Request) {
-  let body: unknown;
-  try {
-    body = await request.json();
-  } catch {
-    return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
+  const rateLimit = checkRateLimit(request, "mock-attempt", { limit: 10, windowMs: 5 * 60 * 1000 });
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      failureResponse("rate_limited", "Too many mock submissions. Please try again later."),
+      { status: 429, headers: rateLimitHeaders(rateLimit) },
+    );
   }
 
-  const data = (body ?? {}) as Record<string, unknown>;
-  const attempt = data.attempt as MockExamAttempt | undefined;
-  const result = data.result as MockExamResult | undefined;
-  const clientId = typeof data.clientId === "string" ? data.clientId : null;
-
-  if (!attempt?.attemptId || !result?.attemptId || attempt.attemptId !== result.attemptId) {
-    return NextResponse.json({ error: "Invalid attempt payload." }, { status: 422 });
+  const body = await readJsonObject(request);
+  if ("error" in body) {
+    return NextResponse.json(
+      failureResponse(
+        isPayloadTooLargeError(body.error) ? "payload_too_large" : "invalid_json",
+        body.error,
+      ),
+      {
+        status: isPayloadTooLargeError(body.error) ? 413 : 400,
+        headers: rateLimitHeaders(rateLimit),
+      },
+    );
+  }
+  const payload = validateMockAttemptPayload(body.value);
+  if ("error" in payload) {
+    return NextResponse.json(failureResponse("invalid_payload", payload.error), {
+      status: 422,
+      headers: rateLimitHeaders(rateLimit),
+    });
   }
 
   if (!isDbConfigured() || !prisma) {
     return NextResponse.json(
-      {
-        ok: false,
-        persisted: false,
-        message: "Mock attempt not saved to the database (DATABASE_URL not configured).",
-      },
-      { status: 200 },
+      failureResponse(
+        "database_unavailable",
+        "Mock results remain available in this browser; database persistence is not configured.",
+      ),
+      { status: 200, headers: rateLimitHeaders(rateLimit) },
     );
   }
 
   try {
-    await prisma.mockAttempt.upsert({
-      where: { id: attempt.attemptId },
-      update: {
-        clientId,
-        status: attempt.status,
-        submittedAt: dateFromMs(attempt.submittedAt),
-        durationSeconds: result.durationSeconds,
-        remainingSeconds: attempt.remainingSeconds,
-        rawScore: result.overall.correct,
-        rawTotal: result.overall.total,
-        weightedScore: result.overall.weightedCorrect ?? null,
-        weightedTotal: result.overall.weightedTotal ?? null,
-        readinessScore: result.overall.readinessScore ?? result.overall.accuracy,
-        sectionScores: toJson(result.modules),
-        overallScore: toJson(result.overall),
-      },
-      create: {
-        id: attempt.attemptId,
-        clientId,
-        status: attempt.status,
-        startedAt: dateFromMs(attempt.startedAt) ?? new Date(),
-        submittedAt: dateFromMs(attempt.submittedAt),
-        durationSeconds: result.durationSeconds,
-        remainingSeconds: attempt.remainingSeconds,
-        rawScore: result.overall.correct,
-        rawTotal: result.overall.total,
-        weightedScore: result.overall.weightedCorrect ?? null,
-        weightedTotal: result.overall.weightedTotal ?? null,
-        readinessScore: result.overall.readinessScore ?? result.overall.accuracy,
-        sectionScores: toJson(result.modules),
-        overallScore: toJson(result.overall),
-      },
-    });
+    const { attempt, result, clientId } = payload.value;
+    await prisma.$transaction(async (tx) => {
+      await tx.mockAttempt.upsert({
+        where: { id: attempt.attemptId },
+        update: {
+          clientId,
+          status: attempt.status,
+          submittedAt: dateFromMs(attempt.submittedAt),
+          durationSeconds: result.durationSeconds,
+          remainingSeconds: attempt.remainingSeconds,
+          rawScore: result.overall.correct,
+          rawTotal: result.overall.total,
+          weightedScore: result.overall.weightedCorrect ?? null,
+          weightedTotal: result.overall.weightedTotal ?? null,
+          readinessScore: result.overall.readinessScore ?? result.overall.accuracy,
+          sectionScores: toJson(result.modules),
+          overallScore: toJson(result.overall),
+        },
+        create: {
+          id: attempt.attemptId,
+          clientId,
+          status: attempt.status,
+          startedAt: dateFromMs(attempt.startedAt) ?? new Date(),
+          submittedAt: dateFromMs(attempt.submittedAt),
+          durationSeconds: result.durationSeconds,
+          remainingSeconds: attempt.remainingSeconds,
+          rawScore: result.overall.correct,
+          rawTotal: result.overall.total,
+          weightedScore: result.overall.weightedCorrect ?? null,
+          weightedTotal: result.overall.weightedTotal ?? null,
+          readinessScore: result.overall.readinessScore ?? result.overall.accuracy,
+          sectionScores: toJson(result.modules),
+          overallScore: toJson(result.overall),
+        },
+      });
 
-    await prisma.mockQuestionResponse.deleteMany({
-      where: { attemptId: attempt.attemptId },
-    });
-
-    if (result.questionReviews.length > 0) {
-      await prisma.mockQuestionResponse.createMany({
+      await tx.mockQuestionResponse.deleteMany({
+        where: { attemptId: attempt.attemptId },
+      });
+      await tx.mockQuestionResponse.createMany({
         data: result.questionReviews.map((review) => ({
           attemptId: attempt.attemptId,
           questionId: review.questionId,
           section: review.module,
           topic: review.topic,
           difficulty: review.difficulty,
-          selectedAnswer: review.selectedAnswer ?? null,
+          selectedAnswer: review.selectedAnswer,
           correctAnswer: review.correctAnswer,
           isAnswered: review.isAnswered,
           isCorrect: review.isCorrect,
           isFlagged: review.isFlagged,
-          timeSpentSeconds: Math.round(review.timeSpentSeconds),
+          timeSpentSeconds: review.timeSpentSeconds,
         })),
       });
-    }
+    });
 
-    return NextResponse.json({ ok: true, persisted: true, id: attempt.attemptId }, { status: 201 });
-  } catch {
+    return NextResponse.json(successResponse(attempt.attemptId), {
+      status: 201,
+      headers: rateLimitHeaders(rateLimit),
+    });
+  } catch (error) {
+    console.error("[persistence:mock-attempt] write failed", error);
     return NextResponse.json(
-      { ok: false, persisted: false, error: "Could not save the mock attempt." },
-      { status: 500 },
+      failureResponse("persistence_failed", "Could not save the mock attempt right now."),
+      { status: 500, headers: rateLimitHeaders(rateLimit) },
     );
   }
 }

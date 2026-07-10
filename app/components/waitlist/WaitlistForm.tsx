@@ -61,9 +61,13 @@ export default function WaitlistForm() {
         return;
       }
 
-      const payload = (await res.json().catch(() => ({}))) as { error?: string };
+      const payload = (await res.json().catch(() => ({}))) as {
+        error?: string;
+        message?: string;
+      };
       setFormError(
-        payload.error ??
+        payload.message ??
+          payload.error ??
           "Something went wrong while saving your signup. Please try again in a moment.",
       );
     } catch {
