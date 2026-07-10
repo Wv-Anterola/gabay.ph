@@ -54,7 +54,7 @@ export default function StudyPlan7Day({ result }: { result: DiagnosticResult }) 
               Your 7-day study plan
             </CardTitle>
             <CardDescription>
-              What to review each day, starting with the topics you missed most.
+              What to review each day, organized into broad study areas and question types.
             </CardDescription>
           </div>
           <div className="shrink-0">
@@ -100,8 +100,8 @@ export default function StudyPlan7Day({ result }: { result: DiagnosticResult }) 
                     const Icon = MODULE_ICON[t.module];
                     return (
                       <div
-                        key={`${t.module}-${t.topic}`}
-                        className="flex items-center gap-2.5"
+                        key={`${t.module}-${t.id}`}
+                        className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 sm:flex-nowrap"
                       >
                         <span
                           className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${MODULE_ACCENT[t.module]}`}
@@ -109,15 +109,18 @@ export default function StudyPlan7Day({ result }: { result: DiagnosticResult }) 
                           <Icon aria-hidden className="h-4 w-4" strokeWidth={1.75} />
                         </span>
                         <div className="min-w-0 flex-1">
-                          <p className="truncate text-sm font-bold text-foreground">{t.topic}</p>
-                          <p className="tabular text-xs text-muted-foreground">
-                            {t.moduleName} · {t.accuracy}% in your mock
+                          <p className="text-sm font-bold text-foreground">{t.focus}</p>
+                          <p className="text-xs leading-relaxed text-muted-foreground">
+                            {t.moduleName} · Question types: {t.questionTypes.join(" · ")}
                           </p>
                         </div>
-                        <span className="tabular inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-berry">
-                          <Clock aria-hidden className="size-4" strokeWidth={2} />
-                          {t.minutes} min
-                        </span>
+                        <div className="tabular ml-10 flex shrink-0 items-center gap-2 text-xs font-semibold text-muted-foreground sm:ml-0 sm:text-sm">
+                          <span>{t.accuracy}% in mock</span>
+                          <span className="inline-flex items-center gap-1.5 text-berry">
+                            <Clock aria-hidden className="size-4" strokeWidth={2} />
+                            {t.minutes} min
+                          </span>
+                        </div>
                       </div>
                     );
                   })}

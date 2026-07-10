@@ -34,20 +34,17 @@ function buildLowResult() {
     q("m2", "math", "Algebra", "b"),
     q("m3", "math", "Geometry", "c"),
   ];
-  const sciQs: Question[] = [
+  const scienceQs: Question[] = [
     q("s1", "science", "Biology", "a"),
     q("s2", "science", "Chemistry", "b"),
   ];
-  // All wrong -> everything weak.
-  const mathAns: AnswerMap = { m1: "d", m2: "d", m3: "d" };
-  const sciAns: AnswerMap = { s1: "d", s2: "d" };
   return buildResult([
-    scoreModule("math", mathQs, mathAns),
-    scoreModule("science", sciQs, sciAns),
+    scoreModule("math", mathQs, { m1: "d", m2: "d", m3: "d" }),
+    scoreModule("science", scienceQs, { s1: "d", s2: "d" }),
   ]);
 }
 
-/** Two weak topics with clearly different accuracy: Algebra 0%, Geometry 50%. */
+/** Two weak areas with clearly different accuracy: Algebra 0%, Geometry 50%. */
 function buildUnevenResult() {
   const qs: Question[] = [
     q("m1", "math", "Algebra", "a"),
@@ -64,49 +61,50 @@ describe("generateStudyPlan", () => {
     for (const budget of STUDY_TIME_OPTIONS) {
       const plan = generateStudyPlan(buildLowResult(), budget);
       expect(plan).toHaveLength(7);
-      plan.forEach((d, i) => expect(d.day).toBe(i + 1));
+      plan.forEach((day, i) => expect(day.day).toBe(i + 1));
     }
   });
 
-  it("includes module, topic, mock accuracy, and minutes per topic", () => {
+  it("includes a broad focus, question types, mock accuracy, and minutes per area", () => {
     const plan = generateStudyPlan(buildLowResult());
     for (const day of plan) {
       expect(day.topics.length).toBeGreaterThan(0);
-      for (const t of day.topics) {
-        expect(t.module).toBeTruthy();
-        expect(t.moduleName).toBeTruthy();
-        expect(t.topic).toBeTruthy();
-        expect(t.accuracy).toBeGreaterThanOrEqual(0);
-        expect(t.accuracy).toBeLessThanOrEqual(100);
-        expect(t.minutes).toBeGreaterThan(0);
+      for (const area of day.topics) {
+        expect(area.id).toBeTruthy();
+        expect(area.module).toBeTruthy();
+        expect(area.moduleName).toBeTruthy();
+        expect(area.focus).toBeTruthy();
+        expect(area.questionTypes.length).toBeGreaterThan(0);
+        expect(area.accuracy).toBeGreaterThanOrEqual(0);
+        expect(area.accuracy).toBeLessThanOrEqual(100);
+        expect(area.minutes).toBeGreaterThan(0);
       }
     }
   });
 
-  it("prioritizes the weakest topics first", () => {
+  it("prioritizes the weakest broad area first", () => {
     const plan = generateStudyPlan(buildLowResult());
-    const weak = new Set(buildLowResult().weakTopics.map((t) => t.topic));
-    expect(weak.has(plan[0].topics[0].topic)).toBe(true);
+    expect(plan[0].topics[0]).toMatchObject({
+      module: "math",
+      focus: "Number sense & algebra",
+      accuracy: 0,
+    });
   });
 
-  it("carries each topic's accuracy from the result", () => {
+  it("carries each grouped area's accuracy from the result", () => {
     const plan = generateStudyPlan(buildUnevenResult(), 60);
     const [algebra, geometry] = plan[0].topics;
-    expect(algebra.topic).toBe("Algebra");
+    expect(algebra.focus).toBe("Number sense & algebra");
     expect(algebra.accuracy).toBe(0);
-    expect(geometry.topic).toBe("Geometry");
+    expect(geometry.focus).toBe("Geometry & measurement");
     expect(geometry.accuracy).toBe(50);
   });
 
-  it("still produces a useful plan for a strong student (fallback path)", () => {
-    const qs: Question[] = [
-      q("a1", "math", "Algebra", "a"),
-      q("a2", "math", "Algebra", "a"),
-    ];
-    const answers: AnswerMap = { a1: "a", a2: "a" }; // perfect
-    const plan = generateStudyPlan(buildResult([scoreModule("math", qs, answers)]));
+  it("still produces a useful plan for a strong student", () => {
+    const qs: Question[] = [q("a1", "math", "Algebra", "a"), q("a2", "math", "Algebra", "a")];
+    const plan = generateStudyPlan(buildResult([scoreModule("math", qs, { a1: "a", a2: "a" })]));
     expect(plan).toHaveLength(7);
-    plan.forEach((d) => expect(d.topics.length).toBeGreaterThan(0));
+    plan.forEach((day) => expect(day.topics.length).toBeGreaterThan(0));
   });
 
   describe("time allocation", () => {
@@ -115,61 +113,85 @@ describe("generateStudyPlan", () => {
         const plan = generateStudyPlan(buildLowResult(), budget);
         for (const day of plan) {
           expect(day.totalMinutes).toBe(budget);
-          const sum = day.topics.reduce((s, t) => s + t.minutes, 0);
-          expect(sum).toBe(budget);
-          day.topics.forEach((t) => expect(t.minutes % 5).toBe(0));
+          expect(day.topics.reduce((sum, topic) => sum + topic.minutes, 0)).toBe(budget);
+          day.topics.forEach((topic) => expect(topic.minutes % 5).toBe(0));
         }
       }
     });
 
-    it("fits more topics per day when the budget is bigger", () => {
-      const result = buildLowResult(); // 4 distinct weak topics
-      const small = generateStudyPlan(result, 30);
-      const medium = generateStudyPlan(result, 60);
-      const large = generateStudyPlan(result, 120);
-      expect(small[0].topics).toHaveLength(1);
-      expect(medium[0].topics).toHaveLength(2);
-      expect(large[0].topics).toHaveLength(3);
+    it("fits more areas per day when the budget is bigger", () => {
+      const result = buildLowResult();
+      expect(generateStudyPlan(result, 30)[0].topics).toHaveLength(1);
+      expect(generateStudyPlan(result, 60)[0].topics).toHaveLength(2);
+      expect(generateStudyPlan(result, 120)[0].topics).toHaveLength(3);
     });
 
-    it("gives weaker topics more minutes within a day", () => {
-      const plan = generateStudyPlan(buildUnevenResult(), 60);
-      const day1 = plan[0];
-      expect(day1.topics.map((t) => t.topic)).toEqual(["Algebra", "Geometry"]);
-      const [algebra, geometry] = day1.topics;
-      expect(algebra.minutes).toBeGreaterThan(geometry.minutes);
-      expect(algebra.minutes + geometry.minutes).toBe(60);
+    it("gives weaker areas more minutes within a day", () => {
+      const day = generateStudyPlan(buildUnevenResult(), 60)[0];
+      expect(day.topics.map((topic) => topic.focus)).toEqual([
+        "Number sense & algebra",
+        "Geometry & measurement",
+      ]);
+      expect(day.topics[0].minutes).toBeGreaterThan(day.topics[1].minutes);
+      expect(day.topics[0].minutes + day.topics[1].minutes).toBe(60);
     });
 
-    it("never gives a weaker topic fewer minutes than a stronger one", () => {
+    it("never gives a weaker area fewer minutes than a stronger one", () => {
       for (const budget of STUDY_TIME_OPTIONS) {
-        const plan = generateStudyPlan(buildLowResult(), budget);
-        for (const day of plan) {
+        for (const day of generateStudyPlan(buildLowResult(), budget)) {
           for (let i = 1; i < day.topics.length; i += 1) {
-            expect(day.topics[i - 1].minutes).toBeGreaterThanOrEqual(
-              day.topics[i].minutes,
-            );
+            expect(day.topics[i - 1].minutes).toBeGreaterThanOrEqual(day.topics[i].minutes);
           }
         }
       }
     });
 
-    it("does not repeat a topic within the same day", () => {
+    it("does not repeat an area within the same day", () => {
       for (const budget of STUDY_TIME_OPTIONS) {
-        const plan = generateStudyPlan(buildUnevenResult(), budget); // only 2 topics
-        for (const day of plan) {
-          const keys = day.topics.map((t) => `${t.module}:${t.topic}`);
+        for (const day of generateStudyPlan(buildUnevenResult(), budget)) {
+          const keys = day.topics.map((topic) => `${topic.module}:${topic.id}`);
           expect(new Set(keys).size).toBe(keys.length);
         }
       }
     });
 
-    it("is deterministic: same result and budget yield the same plan", () => {
+    it("is deterministic: the same result and budget yield the same plan", () => {
       for (const budget of STUDY_TIME_OPTIONS) {
-        const a = generateStudyPlan(buildLowResult(), budget);
-        const b = generateStudyPlan(buildLowResult(), budget);
-        expect(a).toEqual(b);
+        expect(generateStudyPlan(buildLowResult(), budget)).toEqual(
+          generateStudyPlan(buildLowResult(), budget),
+        );
       }
     });
+  });
+
+  it("condenses raw language topics into one area with useful question types", () => {
+    const result = buildResult([
+      scoreModule(
+        "language",
+        [q("l1", "language", "Grammar", "a"), q("l2", "language", "Sentence Correction", "a")],
+        { l1: "d", l2: "d" },
+      ),
+    ]);
+    const [area] = generateStudyPlan(result, 30)[0].topics;
+
+    expect(area).toMatchObject({
+      focus: "Grammar & sentence construction",
+      questionTypes: ["Grammar and usage", "Sentence correction and ordering"],
+      accuracy: 0,
+    });
+  });
+
+  it("keeps every tested UPCAT subtest in the week before repeating areas", () => {
+    const result = buildResult([
+      scoreModule("language", [q("l1", "language", "Grammar", "a")], { l1: "d" }),
+      scoreModule("reading", [q("r1", "reading", "Main Idea", "a")], { r1: "d" }),
+      scoreModule("math", [q("m1", "math", "Algebra", "a")], { m1: "d" }),
+      scoreModule("science", [q("s1", "science", "Biology", "a")], { s1: "d" }),
+    ]);
+    const modules = new Set(
+      generateStudyPlan(result, 30).flatMap((day) => day.topics.map((topic) => topic.module)),
+    );
+
+    expect(modules).toEqual(new Set(["language", "reading", "math", "science"]));
   });
 });

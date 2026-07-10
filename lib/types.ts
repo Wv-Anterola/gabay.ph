@@ -119,19 +119,24 @@ export interface DiagnosticResult {
   strengths: TopicScore[];
 }
 
-/** One topic slot inside a study day, with its minute allotment. */
+/** One broad study area inside a study day, with its minute allotment. */
 export interface StudyTopicPlan {
+  /** Stable key for the broad study area; raw question topics are not shown in the plan. */
+  id: string;
   module: ModuleId;
   moduleName: string;
-  topic: string;
-  accuracy: number; // 0-100 mock accuracy, shown as context next to the topic
-  minutes: number; // minutes to spend on this topic today (multiple of 5)
+  /** A concise, actionable study area such as "Grammar & sentence construction". */
+  focus: string;
+  /** The kinds of questions to look for while reviewing this focus area. */
+  questionTypes: string[];
+  accuracy: number; // 0-100 mock accuracy, shown as context next to the focus area
+  minutes: number; // minutes to spend on this focus area today (multiple of 5)
 }
 
 export interface StudyDay {
   day: number; // 1-7
   totalMinutes: number; // daily review-time budget the day was planned against
-  topics: StudyTopicPlan[]; // weakest topic first; minutes sum to totalMinutes
+  topics: StudyTopicPlan[]; // weakest study area first; minutes sum to totalMinutes
 }
 
 /** What we persist locally per module attempt. */

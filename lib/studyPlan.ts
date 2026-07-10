@@ -1,31 +1,39 @@
-import type { DiagnosticResult, StudyDay, TopicScore } from "@/lib/types";
+import type { DiagnosticResult, ModuleId, StudyDay, TopicScore } from "@/lib/types";
 import { MODULES } from "@/lib/questions";
 
 /**
  * Deterministic 7-day UPCAT study plan generator.
  *
- * Input: a scored DiagnosticResult plus a daily review-time budget in minutes.
- * Output: exactly 7 days, each with one or more focus topics and an explicit
- * minute allotment per topic. Weaker topics get more minutes, and a bigger
- * budget fits more topics per day.
- *
- * The plan is deliberately just a schedule — which topics, which day, how
- * long — not study instructions. Students bring their own materials for the
- * MVP; how they study is up to them.
- *
- * No AI, no randomness, no admissions claims. The same result and budget
- * always yield the same plan.
+ * Raw question topics are condensed into broad, reviewable focus areas with
+ * useful question types. Students can use any UPCAT reviewer or textbook; the
+ * plan is guidance only and deliberately contains no in-product practice links.
  */
 
 const PLAN_LENGTH = 7;
 const MINUTE_STEP = 5;
+
+type FocusAreaDefinition = {
+  id: string;
+  focus: string;
+  questionTypes: readonly string[];
+  topics: readonly string[];
+};
+
+type FocusAreaScore = FocusAreaDefinition & {
+  module: ModuleId;
+  moduleName: string;
+  correct: number;
+  total: number;
+  accuracy: number;
+  hasWeakTopic: boolean;
+};
 
 /** Daily review-time budgets the student can pick from. */
 export const STUDY_TIME_OPTIONS = [30, 60, 120] as const;
 export type StudyMinutes = (typeof STUDY_TIME_OPTIONS)[number];
 export const DEFAULT_STUDY_MINUTES: StudyMinutes = 60;
 
-/** How many topics fit in one day at a given budget. */
+/** How many focus areas fit in one day at a given budget. */
 function topicsPerDay(dailyMinutes: number): number {
   if (dailyMinutes >= 120) return 3;
   if (dailyMinutes >= 60) return 2;
@@ -33,81 +41,333 @@ function topicsPerDay(dailyMinutes: number): number {
 }
 
 /**
- * Choose which topics to study, weakest first, balanced so the plan does not
- * spend every slot on a single module when several modules need work.
- *
- * TODO(study-plan-clustering): topic selection here inherits the arbitrary
- * ordering of `result.weakTopics`. Many topics are backed by a single mock
- * item, so accuracy is a noisy 0%/100% and the weakest-first sort breaks ties
- * on sample size + name — surfacing granular, hard-to-action topics (e.g.
- * "Tone Analysis", "English Sentence Order") that a student can't meaningfully
- * "review" on their own without practice sets. This hurts Language Proficiency
- * and Reading most, where topics are fine-grained and not independently
- * improvable. Figure out a deterministic way to cluster related fine-grained
- * topics into coarser, actionable focus areas (and/or weight by item count so
- * single-item topics don't dominate) before we lean on this plan harder. Keep
- * it deterministic — same result -> same clustering.
+ * Topic labels are grouped at a level a student can actually review. This
+ * covers the core and imported banks; unknown future labels use a useful
+ * module-level fallback instead of appearing as a new, overly-specific task.
  */
-function selectFocusTopics(result: DiagnosticResult, count: number): TopicScore[] {
-  const weak = [...result.weakTopics]; // already sorted most-urgent first
+const FOCUS_AREAS: Record<ModuleId, readonly FocusAreaDefinition[]> = {
+  language: [
+    {
+      id: "grammar-sentence-construction",
+      focus: "Grammar & sentence construction",
+      questionTypes: ["Grammar and usage", "Sentence correction and ordering"],
+      topics: [
+        "Grammar",
+        "Sentence Correction",
+        "Articles",
+        "Modifiers",
+        "Parallelism",
+        "Pronoun case",
+        "Punctuation",
+        "Run-on sentences",
+        "Subject-verb agreement",
+        "Verb tense",
+        "English Grammar",
+        "Filipino Grammar",
+        "English Sentence Order",
+      ],
+    },
+    {
+      id: "vocabulary-word-relationships",
+      focus: "Vocabulary & word relationships",
+      questionTypes: ["Meaning in context", "Idioms, analogies, and word relationships"],
+      topics: [
+        "Vocabulary",
+        "Antonyms",
+        "Synonyms",
+        "Context clues",
+        "Word usage",
+        "Prefixes & roots",
+        "Idioms & Expressions",
+        "Common idioms",
+        "Figurative meaning",
+        "Analogies",
+        "Function",
+        "Degree",
+        "Part to whole",
+        "English Vocabulary",
+        "Filipino Vocabulary",
+        "English Idioms",
+      ],
+    },
+  ],
+  reading: [
+    {
+      id: "passage-comprehension",
+      focus: "Passage comprehension",
+      questionTypes: ["Main idea and supporting detail", "Theme and factual recall"],
+      topics: [
+        "Main Idea",
+        "Detail",
+        "Reading Comprehension",
+        "Factual Recall",
+        "Theme Identification",
+      ],
+    },
+    {
+      id: "author-reasoning-inference",
+      focus: "Author reasoning & inference",
+      questionTypes: ["Purpose and tone", "Inference and deductive reasoning"],
+      topics: [
+        "Author's Purpose",
+        "Author's Tone",
+        "Tone Analysis",
+        "Inference",
+        "Deductive Reasoning",
+      ],
+    },
+    {
+      id: "reading-vocabulary-interpretation",
+      focus: "Vocabulary & interpretation",
+      questionTypes: ["Vocabulary in context", "Figurative language and poetry"],
+      topics: ["Vocabulary in Context", "Context Clues", "Poetry Analysis", "Metaphor Interpretation"],
+    },
+  ],
+  math: [
+    {
+      id: "number-sense-algebra",
+      focus: "Number sense & algebra",
+      questionTypes: ["Computational fluency", "Equation and expression solving"],
+      topics: [
+        "Number Sense",
+        "Fractions",
+        "Percentage",
+        "Algebra",
+        "Linear equations",
+        "Systems",
+        "Exponents",
+        "Linear Equations",
+        "Polynomials & Functions",
+        "Rational Expressions",
+        "Scientific Notation",
+      ],
+    },
+    {
+      id: "geometry-measurement",
+      focus: "Geometry & measurement",
+      questionTypes: ["Diagram and shape problems", "Angles, area, and similarity"],
+      topics: [
+        "Geometry",
+        "Area",
+        "Triangles",
+        "Pythagorean theorem",
+        "Area & Similarity",
+        "Circles & Inscribed Angles",
+        "Parallel Lines & Angles",
+      ],
+    },
+    {
+      id: "data-probability-word-problems",
+      focus: "Data, probability & word problems",
+      questionTypes: ["Data and probability", "Rates, ratios, and applied problems"],
+      topics: [
+        "Word Problems",
+        "Rate",
+        "Ratio",
+        "Data Interpretation",
+        "Average",
+        "Probability",
+        "Basic Probability",
+        "Counting Principles",
+        "Work & Rate Problems",
+      ],
+    },
+  ],
+  science: [
+    {
+      id: "life-science",
+      focus: "Life science",
+      questionTypes: ["Biological processes", "Cells, systems, and ecosystems"],
+      topics: [
+        "Biology",
+        "Cell biology",
+        "Photosynthesis",
+        "Human body",
+        "Ecology",
+        "Cell Biology",
+        "Ecology & Evolution",
+        "Genetics & Biotechnology",
+        "Plant Biology",
+      ],
+    },
+    {
+      id: "physical-science",
+      focus: "Physical science",
+      questionTypes: ["Matter and chemical change", "Forces, energy, and electricity"],
+      topics: [
+        "Chemistry",
+        "Atomic structure",
+        "States of matter",
+        "Acids and bases",
+        "Mixtures",
+        "Physics",
+        "Forces and motion",
+        "Energy",
+        "Electricity",
+        "Atomic Structure & Periodic Table",
+        "Chemical Bonding",
+        "Stoichiometry",
+        "Solutions & Mixtures",
+        "Kinematics",
+        "Electricity & Magnetism",
+        "Waves & Optics",
+      ],
+    },
+    {
+      id: "earth-science-reasoning",
+      focus: "Earth science & scientific reasoning",
+      questionTypes: ["Earth systems", "Scientific method and evidence"],
+      topics: [
+        "Earth Science",
+        "Weather",
+        "Geology",
+        "Astronomy",
+        "General Science",
+        "Scientific method",
+        "Hydrology",
+      ],
+    },
+  ],
+};
 
-  // Fallback: if nothing flagged weak (rare, strong student), use the lowest
-  // overall topics so the plan is still useful.
-  const pool =
-    weak.length > 0
-      ? weak
-      : result.modules
-          .flatMap((m) => m.topics)
-          .sort((a, b) => a.accuracy - b.accuracy)
-          .slice(0, count);
+const FALLBACK_FOCUS: Record<ModuleId, Omit<FocusAreaDefinition, "id" | "topics">> = {
+  language: {
+    focus: "Language foundations",
+    questionTypes: ["Grammar and usage", "Vocabulary and word relationships"],
+  },
+  reading: {
+    focus: "Reading comprehension",
+    questionTypes: ["Understanding passages", "Author reasoning and inference"],
+  },
+  math: {
+    focus: "Mathematical problem solving",
+    questionTypes: ["Core concepts", "Applied problem solving"],
+  },
+  science: {
+    focus: "Science concepts & reasoning",
+    questionTypes: ["Concept application", "Evidence and scientific reasoning"],
+  },
+};
 
-  // Per-module cap scales with how many slots we need to fill.
-  const moduleCap = Math.max(2, Math.ceil(count / 4));
+function focusAreaFor(module: ModuleId, topic: string): FocusAreaDefinition {
+  const defined = FOCUS_AREAS[module].find((area) => area.topics.includes(topic));
+  if (defined) return defined;
 
-  const selected: TopicScore[] = [];
-  const usedPerModule = new Map<string, number>();
+  return { id: "foundations", ...FALLBACK_FOCUS[module], topics: [] };
+}
 
-  // First pass: spread across modules to avoid monotony.
-  for (const topic of pool) {
-    if (selected.length >= count) break;
-    const used = usedPerModule.get(topic.module) ?? 0;
-    if (used < moduleCap) {
-      selected.push(topic);
-      usedPerModule.set(topic.module, used + 1);
+function focusAreaComparator(a: FocusAreaScore, b: FocusAreaScore): number {
+  return (
+    Number(b.hasWeakTopic) - Number(a.hasWeakTopic) ||
+    a.accuracy - b.accuracy ||
+    b.total - a.total ||
+    a.moduleName.localeCompare(b.moduleName) ||
+    a.focus.localeCompare(b.focus)
+  );
+}
+
+/** Condense raw scored topics into broad, reviewable study areas. */
+function groupFocusAreas(result: DiagnosticResult): FocusAreaScore[] {
+  const weakTopicKeys = new Set(
+    result.weakTopics.map((topic) => `${topic.module}:${topic.topic}`),
+  );
+
+  return result.modules.flatMap((moduleScore) => {
+    const groups = new Map<string, { definition: FocusAreaDefinition; topics: TopicScore[] }>();
+
+    for (const topic of moduleScore.topics) {
+      const definition = focusAreaFor(moduleScore.module, topic.topic);
+      const existing = groups.get(definition.id);
+      if (existing) {
+        existing.topics.push(topic);
+      } else {
+        groups.set(definition.id, { definition, topics: [topic] });
+      }
     }
-  }
 
-  // Second pass: fill remaining slots from the pool in order (allow repeats of
-  // the most urgent topics if there are not enough distinct ones).
-  let i = 0;
-  while (selected.length < count && pool.length > 0) {
-    selected.push(pool[i % pool.length]);
-    i += 1;
-  }
+    return [...groups.values()].map(({ definition, topics }) => {
+      const correct = topics.reduce((sum, topic) => sum + topic.correct, 0);
+      const total = topics.reduce((sum, topic) => sum + topic.total, 0);
 
-  return selected.slice(0, count);
+      return {
+        ...definition,
+        module: moduleScore.module,
+        moduleName: MODULES[moduleScore.module].name,
+        correct,
+        total,
+        accuracy: total === 0 ? 0 : Math.round((correct / total) * 100),
+        hasWeakTopic: topics.some((topic) => weakTopicKeys.has(`${topic.module}:${topic.topic}`)),
+      };
+    });
+  });
 }
 
 /**
- * Split a day's budget across its topics in 5-minute steps, proportional to
- * how weak each topic is. Topics must be ordered weakest first; leftover steps
- * go to the weakest topics, so a weaker topic never gets fewer minutes than a
- * stronger one. Minutes always sum exactly to the budget.
+ * Keep every tested section visible in the plan, then spend remaining slots
+ * on the weakest broad areas. This stops one-item weak topics from crowding
+ * out an entire UPCAT subtest.
  */
-function allocateMinutes(topics: TopicScore[], budget: number): number[] {
-  if (topics.length === 0) return [];
-  const weights = topics.map((t) => Math.max(100 - t.accuracy, 20));
-  const totalWeight = weights.reduce((sum, w) => sum + w, 0);
+function selectFocusAreas(
+  result: DiagnosticResult,
+  count: number,
+  perDay: number,
+): FocusAreaScore[] {
+  const areas = groupFocusAreas(result).sort(focusAreaComparator);
+  if (areas.length === 0) return [];
+
+  const coverage = result.modules
+    .map((moduleScore) => areas.find((area) => area.module === moduleScore.module))
+    .filter((area): area is FocusAreaScore => area !== undefined)
+    .sort(focusAreaComparator)
+    .slice(0, count);
+
+  const priorityPool = areas.filter((area) => area.hasWeakTopic);
+  const pool = priorityPool.length > 0 ? priorityPool : areas;
+  const selected = [...coverage];
+  let poolIndex = 0;
+
+  while (selected.length < count) {
+    const dayStart = Math.floor(selected.length / perDay) * perDay;
+    const currentDay = selected.slice(dayStart);
+    let candidate = pool[poolIndex % pool.length];
+    let attempts = 0;
+
+    // Avoid showing an identical area twice on a day whenever another fits.
+    while (
+      attempts < pool.length &&
+      currentDay.some((area) => area.module === candidate.module && area.id === candidate.id)
+    ) {
+      poolIndex += 1;
+      candidate = pool[poolIndex % pool.length];
+      attempts += 1;
+    }
+
+    selected.push(candidate);
+    poolIndex += 1;
+  }
+
+  return selected;
+}
+
+/**
+ * Split a day's budget across its areas in 5-minute steps, proportional to
+ * weakness. Leftover steps go to the weakest areas, so a weaker area never
+ * gets fewer minutes than a stronger one.
+ */
+function allocateMinutes(areas: FocusAreaScore[], budget: number): number[] {
+  if (areas.length === 0) return [];
+  const weights = areas.map((area) => Math.max(100 - area.accuracy, 20));
+  const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
   const totalSteps = Math.round(budget / MINUTE_STEP);
 
-  const steps = weights.map((w) => Math.floor((totalSteps * w) / totalWeight));
-  let leftover = totalSteps - steps.reduce((sum, s) => sum + s, 0);
+  const steps = weights.map((weight) => Math.floor((totalSteps * weight) / totalWeight));
+  let leftover = totalSteps - steps.reduce((sum, step) => sum + step, 0);
   for (let i = 0; leftover > 0; i = (i + 1) % steps.length) {
     steps[i] += 1;
     leftover -= 1;
   }
 
-  return steps.map((s) => s * MINUTE_STEP);
+  return steps.map((step) => step * MINUTE_STEP);
 }
 
 export function generateStudyPlan(
@@ -115,34 +375,32 @@ export function generateStudyPlan(
   dailyMinutes: number = DEFAULT_STUDY_MINUTES,
 ): StudyDay[] {
   const perDay = topicsPerDay(dailyMinutes);
-  const selected = selectFocusTopics(result, PLAN_LENGTH * perDay);
+  const selected = selectFocusAreas(result, PLAN_LENGTH * perDay, perDay);
   if (selected.length === 0) return [];
 
   return Array.from({ length: PLAN_LENGTH }, (_, dayIdx) => {
-    // Deal topics out day by day, weakest days first.
     const chunk = selected.slice(dayIdx * perDay, (dayIdx + 1) * perDay);
-
-    // Drop duplicates within a day (possible when few topics repeat to fill
-    // the week), then order weakest first for allocation and display.
     const seen = new Set<string>();
-    const dayTopics = chunk.filter((t) => {
-      const key = `${t.module}:${t.topic}`;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
-    dayTopics.sort((a, b) => a.accuracy - b.accuracy);
-
-    const minutes = allocateMinutes(dayTopics, dailyMinutes);
+    const dayAreas = chunk
+      .filter((area) => {
+        const key = `${area.module}:${area.id}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .sort(focusAreaComparator);
+    const minutes = allocateMinutes(dayAreas, dailyMinutes);
 
     return {
       day: dayIdx + 1,
       totalMinutes: dailyMinutes,
-      topics: dayTopics.map((topic, i) => ({
-        module: topic.module,
-        moduleName: MODULES[topic.module].name,
-        topic: topic.topic,
-        accuracy: topic.accuracy,
+      topics: dayAreas.map((area, i) => ({
+        id: area.id,
+        module: area.module,
+        moduleName: area.moduleName,
+        focus: area.focus,
+        questionTypes: [...area.questionTypes],
+        accuracy: area.accuracy,
         minutes: minutes[i],
       })),
     };
