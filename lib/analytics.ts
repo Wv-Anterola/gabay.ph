@@ -19,6 +19,7 @@ export type AnalyticsEventName =
   | "results_viewed"
   | "weak_topic_viewed"
   | "study_plan_viewed"
+  | "study_time_set"
   | "practice_started"
   | "practice_completed"
   | "waitlist_clicked"

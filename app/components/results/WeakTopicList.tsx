@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { Target, ArrowRight, Sparkles } from "lucide-react";
+import { Target, Sparkles } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -11,7 +10,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MODULES } from "@/lib/questions";
-import { trackEvent } from "@/lib/analytics";
 import type { TopicScore } from "@/lib/types";
 
 export default function WeakTopicList({
@@ -52,21 +50,9 @@ export default function WeakTopicList({
                     <span className="tabular flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-berry text-xs font-bold text-white">
                       {i + 1}
                     </span>
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-bold text-foreground">
-                        {MODULES[t.module].shortName} · {t.topic}
-                      </p>
-                      <Link
-                        href={`/practice/${t.module}`}
-                        onClick={() =>
-                          trackEvent("weak_topic_viewed", { module: t.module, topic: t.topic })
-                        }
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-berry hover:text-berry-deep"
-                      >
-                        Practice this topic
-                        <ArrowRight aria-hidden className="size-3.5" strokeWidth={2} />
-                      </Link>
-                    </div>
+                    <p className="truncate text-sm font-bold text-foreground">
+                      {MODULES[t.module].shortName} · {t.topic}
+                    </p>
                   </div>
                   <Badge variant="berry" className="tabular">
                     {t.accuracy}%
