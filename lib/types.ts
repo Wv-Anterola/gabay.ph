@@ -119,13 +119,19 @@ export interface DiagnosticResult {
   strengths: TopicScore[];
 }
 
-export interface StudyDay {
-  day: number; // 1-7
+/** One topic slot inside a study day, with its minute allotment. */
+export interface StudyTopicPlan {
   module: ModuleId;
   moduleName: string;
   topic: string;
-  focus: string; // short study instruction
-  practiceHref: string; // deep link into /practice/[module]
+  accuracy: number; // 0-100 mock accuracy, shown as context next to the topic
+  minutes: number; // minutes to spend on this topic today (multiple of 5)
+}
+
+export interface StudyDay {
+  day: number; // 1-7
+  totalMinutes: number; // daily review-time budget the day was planned against
+  topics: StudyTopicPlan[]; // weakest topic first; minutes sum to totalMinutes
 }
 
 /** What we persist locally per module attempt. */

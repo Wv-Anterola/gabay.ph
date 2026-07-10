@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ClipboardList, Eye, History, RotateCcw } from "lucide-react";
@@ -25,7 +25,6 @@ import {
   saveMockAttempt,
   setCurrentMockAttemptId,
 } from "@/lib/storage";
-import { generateStudyPlan } from "@/lib/studyPlan";
 import { ensureUpg } from "@/lib/upg";
 import {
   formatDuration,
@@ -33,7 +32,7 @@ import {
   getMockQuestionIdsBySection,
 } from "@/lib/mockExam";
 import { trackEvent } from "@/lib/analytics";
-import type { DiagnosticResult, MockExamResult, ModuleId } from "@/lib/types";
+import type { DiagnosticResult, MockExamResult } from "@/lib/types";
 
 function isMockResult(result: DiagnosticResult): result is MockExamResult {
   return "attemptId" in result && "questionReviews" in result;
@@ -57,8 +56,6 @@ export default function ResultsView() {
       trackEvent("study_plan_viewed");
     }
   }, [searchParams]);
-
-  const plan = useMemo(() => (result ? generateStudyPlan(result) : []), [result]);
 
   if (!loaded) {
     return (
@@ -86,9 +83,6 @@ export default function ResultsView() {
     );
   }
 
-  // Weakest module = lowest accuracy among taken modules (for the practice CTA).
-  const weakestModule: ModuleId =
-    [...result.modules].sort((a, b) => a.accuracy - b.accuracy)[0]?.module ?? "math";
   const mockResult = isMockResult(result) ? result : null;
   const upg = mockResult ? ensureUpg(mockResult) : null;
 
@@ -203,11 +197,11 @@ export default function ResultsView() {
       </Reveal>
 
       <Reveal>
-        <StudyPlan7Day plan={plan} />
+        <StudyPlan7Day result={result} />
       </Reveal>
 
       <Reveal>
-        <ResultActions weakestModule={weakestModule} />
+        <ResultActions />
       </Reveal>
 
       <Disclaimer />

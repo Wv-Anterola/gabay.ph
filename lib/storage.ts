@@ -1,6 +1,7 @@
 "use client";
 
 import { MODULE_ORDER, getActiveBank } from "@/lib/questions";
+import { STUDY_TIME_OPTIONS, type StudyMinutes } from "@/lib/studyPlan";
 import type {
   AnswerMap,
   DiagnosticResult,
@@ -23,6 +24,7 @@ const ATTEMPT_PREFIX = "tero-attempt-";
 const RESULT_KEY = "tero-result";
 const CLIENT_ID_KEY = "tero-client-id";
 const MOCK_ATTEMPTS_KEY = "tero-mock-attempts";
+const STUDY_MINUTES_KEY = "tero-study-minutes";
 const MOCK_RESULT_PREFIX = "tero-mock-result-";
 const CURRENT_MOCK_ATTEMPT_KEY = "tero-current-mock-attempt";
 
@@ -126,6 +128,25 @@ export function clearDiagnostic(): void {
   migrateStorageKeys();
   MODULE_ORDER.forEach((m) => window.localStorage.removeItem(ATTEMPT_PREFIX + m));
   window.localStorage.removeItem(RESULT_KEY);
+}
+
+/** Daily review-time preference for the study plan; null if never set. */
+export function loadStudyMinutes(): StudyMinutes | null {
+  if (!hasWindow()) return null;
+  const raw = window.localStorage.getItem(STUDY_MINUTES_KEY);
+  const value = raw === null ? NaN : Number(raw);
+  return (STUDY_TIME_OPTIONS as readonly number[]).includes(value)
+    ? (value as StudyMinutes)
+    : null;
+}
+
+export function saveStudyMinutes(minutes: StudyMinutes): void {
+  if (!hasWindow()) return;
+  try {
+    window.localStorage.setItem(STUDY_MINUTES_KEY, String(minutes));
+  } catch {
+    /* ignore quota errors */
+  }
 }
 
 function createId(prefix: string): string {
